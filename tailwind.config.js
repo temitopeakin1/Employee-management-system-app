@@ -1,4 +1,4 @@
-/** @type {import('tailwindcss').Config} */
+ //@type {import('tailwindcss').Config} 
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   darkMode: "class",
@@ -9,10 +9,10 @@ module.exports = {
     },
     extend: {
       fontSize: {
-        14: "14px",
+        14: "12px",
       },
       backgroundColor: {
-        "main-bg": "#FAFBFB",
+        "main-bg": "#EEF5F5",
         "main-dark-bg": "#20232A",
         "secondary-dark-bg": "#33373E",
         "light-gray": "#F7F7F7",
@@ -20,6 +20,9 @@ module.exports = {
       },
       borderWidth: {
         1: "1px",
+      },
+      borderRadius: {
+        '1xl': '.5rem',
       },
       borderColor: {
         color: "rgba(0, 0, 0, 0.1)",
@@ -39,10 +42,10 @@ module.exports = {
       minHeight: {
         590: "590px",
       },
-      backgroundImage: {
-        "hero-pattern":
-          "url('https://demos.wrappixel.com/premium-admin-templates/react/flexy-react/main/static/media/welcome-bg-2x-svg.25338f53.svg')",
-      },
+      // backgroundImage: {
+      //   'hero-pattern':
+      //     "url('https://i.ibb.co/MkvLDfb/Rectangle-4389.png')",
+      // },
     },
   },
   plugins: [],
