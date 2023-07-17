@@ -1,27 +1,62 @@
-import React from 'react';
-import { AccumulationChartComponent, AccumulationSeriesCollectionDirective, AccumulationSeriesDirective, AccumulationLegend, PieSeries, AccumulationDataLabel, Inject, AccumulationTooltip } from '@syncfusion/ej2-react-charts';
+import React from "react";
+import {
+  AccumulationChartComponent,
+  AccumulationSeriesCollectionDirective,
+  AccumulationSeriesDirective,
+  AccumulationLegend,
+  PieSeries,
+  AccumulationDataLabel,
+  Inject,
+  AccumulationTooltip,
+  AccumulationSelection,
+  Selection,
+  ChartAnnotation,
+  AccumulationAnnotation
+} from "@syncfusion/ej2-react-charts";
 
-import { useStateContext } from '../../contexts/ContextProvider';
+import { useStateContext } from "../../contexts/ContextProvider";
 
-const Doughnut = ({ id, data, legendVisiblity, height }) => {
+const Doughnut = ({ id, data, legendVisibility, height }) => {
   const { currentMode } = useStateContext();
 
   return (
     <AccumulationChartComponent
       id={id}
-      legendSettings={{ visible: legendVisiblity, background: 'white' }}
+      legendSettings={{
+        visible: legendVisibility,
+        toggleVisibility: false,
+        position: "Right",
+        height: "50%",
+        width: "20%",
+        textWrap: "Wrap",
+        MaximumLabelWidth: 100,
+      }}
+      enableSmartLabels={false}
+      selectionMode={'Point'}
+      enableBorderOnMouseMove={false}
       height={height}
-      background={currentMode === 'Dark' ? '#33373E' : '#fff'}
-      tooltip={{ enable: true }}
+      background={currentMode === "Dark" ? "#33373E" : "#fff"}
+      tooltip={{ enable: false }}
     >
-      <Inject services={[AccumulationLegend, PieSeries, AccumulationDataLabel, AccumulationTooltip]} />
+      <Inject
+        services={[
+          AccumulationLegend,
+          PieSeries,
+          AccumulationDataLabel,
+          AccumulationTooltip,
+          AccumulationSelection,
+          Selection,
+          ChartAnnotation,
+          AccumulationAnnotation
+        ]}
+      />
       <AccumulationSeriesCollectionDirective>
         <AccumulationSeriesDirective
-          name="Sale"
+          name="Departments"
           dataSource={data}
           xName="x"
           yName="y"
-          innerRadius="40%"
+          innerRadius="80%"
           startAngle={0}
           endAngle={360}
           radius="70%"
@@ -29,12 +64,13 @@ const Doughnut = ({ id, data, legendVisiblity, height }) => {
           explodeOffset="10%"
           explodeIndex={2}
           dataLabel={{
-            visible: true,
-            name: 'text',
-            position: 'Inside',
+            visible: false,
+            name: "text",
+            position: "Inside",
             font: {
-              fontWeight: '600',
-              color: '#fff',
+              fontWeight: "600",
+              color: "white",
+              size: 14,
             },
           }}
         />

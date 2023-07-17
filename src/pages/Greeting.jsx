@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
+
 const Greeting = () => {
   const [greeting, setGreeting] = useState("");
 
@@ -13,7 +14,7 @@ const Greeting = () => {
       } else if (hours >= 12 && hours < 17) {
         setGreeting("Good Afternoon");
       } else {
-        setGreeting("Good Evening");
+        setGreeting("Good Night");
       }
     };
 

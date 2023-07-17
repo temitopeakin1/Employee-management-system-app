@@ -1,4 +1,4 @@
-export { default as Button } from './Button';
+export { default as Button } from './shared/Button';
 export { default as ThemeSettings } from './ThemeSettings';
 export { default as Sidebar } from './Sidebar';
 export { default as Navbar } from './Navbar';
@@ -12,4 +12,5 @@ export { default as Stacked } from './Charts/Stacked';
 export { default as Pie } from './Charts/Pie';
 export { default as ChartsHeader } from './ChartsHeader';
 export { default as Header } from './Header';
+export {default as Greeting} from '../pages/Greeting';
 

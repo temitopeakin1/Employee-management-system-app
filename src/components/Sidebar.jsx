@@ -5,6 +5,7 @@ import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import { links } from '../data/dummy';
 import { useStateContext } from '../contexts/ContextProvider';
 import logo from '../assets/logo.png';
+// import footer from './footer';
 
 const Sidebar = () => {
   const { currentColor, activeMenu, setActiveMenu, screenSize } = useStateContext();
@@ -15,8 +16,8 @@ const Sidebar = () => {
     }
   };
 
-  const activeLink = 'flex items-center gap-5 pl-2 pt-3 pb-2.5 rounded-lg  text-white  text-md m-2';
-  const normalLink = 'flex items-center gap-5 pl-2 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2';
+  const activeLink = 'flex items-center gap-5 pl-2 pt-3 pb-2 rounded-lg  text-white  text-md m-2';
+  const normalLink = 'flex items-center gap-5 pl-2 pt-3 pb-2 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-hover m-2';
 
   return (
     <div className="ml-4 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto">
@@ -37,10 +38,10 @@ const Sidebar = () => {
               </button>
             </TooltipComponent>
           </div>
-          <div className="mt-10 ">
+          <div className="mt-5 ">
             {links.map((item) => (
               <div key={item.title}>
-                <p className="text-gray-400 dark:text-gray-400 m-3 mt-4 uppercase">
+                <p className="text-gray-400 dark:text-gray-400 m-3 mt-10 uppercase">
                   {item.title}
                 </p>
                 {item.links.map((link) => (
@@ -60,6 +61,9 @@ const Sidebar = () => {
               </div>
             ))}
           </div>
+          <p className="text-white-400 white:text--400 mt-20 text-white">
+          <a href='https://hhgcl.com'>© Hampshire heights 2023</a>
+        </p>
         </>
       )}
     </div>
