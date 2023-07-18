@@ -30,14 +30,23 @@ const DropDown = ({ currentMode }) => (
   </div>
 );
 
-const Dashboard = () => {
+const Dashboard = ({ averageSalary, kpis }) => {
   // const { currentColor, currentMode } = useStateContext();
   const toolbarOptions = ["Search"];
   const editing = { allowediting: true, allowDeleting: true };
-
+  const selectionsettings = { persistSelection: true };
   // Retrieve employee data from local storage
   const storedEmployeesData = localStorage.getItem("employeesData");
-  const employeesData = storedEmployeesData ? JSON.parse(storedEmployeesData) : [];
+  const employeesData = storedEmployeesData
+    ? JSON.parse(storedEmployeesData)
+    : [];
+
+  // Calculate total employees and contract employees
+  const totalEmployees = employeesData.length;
+  const totalContractEmployees = employeesData.filter(
+    (employee) => employee.empType === "Contract"
+  ).length;
+  const kpisFigure = kpis && kpis.figure;
 
   return (
     <div className="justify-center">
@@ -57,32 +66,34 @@ const Dashboard = () => {
           <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-32 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
             <div className="flex justify-between items-center">
               <div>
-                <p className="font-bold text-gray-400">Total Employees</p>
-                <p className="text">figure</p>
+                <p className="font-bold text-gray-400 pb-3">Total Employees</p>
+                <p className="text font-semibold">{totalEmployees}</p>
               </div>
             </div>
           </div>
           <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-32 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
             <div className="flex justify-between items-center">
               <div>
-                <p className="font-bold text-gray-400">Contract Employees</p>
-                <p className="text">figure</p>
+                <p className="font-bold text-gray-400 pb-3">
+                  Contract Employees
+                </p>
+                <p className="text font-semibold">{totalContractEmployees}</p>
               </div>
             </div>
           </div>
           <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-32 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
             <div className="flex justify-between items-center">
               <div>
-                <p className="font-bold text-gray-400">Avg. Salary</p>
-                <p className="text">figure</p>
+                <p className="font-bold text-gray-400 pb-3">Avg. Salary</p>
+                <p className="text font-semibold">{averageSalary}</p>
               </div>
             </div>
           </div>
           <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-32 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
             <div className="flex justify-between items-center">
               <div>
-                <p className="font-bold text-gray-400">Kpi's</p>
-                <p className="text">figure</p>
+                <p className="font-bold text-gray-400 pb-3">Kpi's</p>
+                <p className="text font-semibold">{kpisFigure}</p>
               </div>
             </div>
           </div>
@@ -120,19 +131,37 @@ const Dashboard = () => {
         <div className="h-300 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg mt-3 ml-4 mr-4 p-4 rounded-1xll">
           <GridComponent
             dataSource={employeesData}
+            enableHover={false}
             width="auto"
             allowPaging
             allowSorting
             pageSettings={{ pageCount: 5 }}
             editSettings={editing}
+            selectionSettings={selectionsettings}
             toolbar={toolbarOptions}
           >
-          <ColumnsDirective>
-          {employeesData.length > 0 &&
-            Object.keys(employeesData[0]).map((key) => (
-              <ColumnDirective key={key} field={key} headerText={key} />
-            ))}
-        </ColumnsDirective>
+            <ColumnsDirective>
+              <ColumnDirective field="id" headerText="ID" width="200" />
+              <ColumnDirective
+                field="fullName"
+                headerText="Name"
+                width="300"
+                template={(rowData) => (
+                  <div>
+                    {rowData.firstName} {rowData.lastName}
+                    <div>{rowData.email}</div>
+                  </div>
+                )}
+              />
+              <ColumnDirective
+                field="designation"
+                headerText="Position"
+                width="300"
+              />
+              <ColumnDirective field="department" headerText="department" />
+              <ColumnDirective field="phoneNumber" headerText="Phone Number" />
+              <ColumnDirective field="empType" headerText="Status" />
+            </ColumnsDirective>
             <Inject services={[Search, Page, Toolbar]} />
           </GridComponent>
         </div>

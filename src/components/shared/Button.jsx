@@ -17,7 +17,7 @@ const Button = ({
       type="button"
       onClick={() => setIsClicked(initialState)}
       style={{ backgroundColor: bgColor, color, borderRadius }}
-      className="bg-orange-500 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded"
+      className={` text-${size} p-3 w-${width} hover:drop-shadow-xl hover:bg-${bgHoverColor}`}
     >
       {icon} {text}
     </button>

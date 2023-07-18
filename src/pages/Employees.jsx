@@ -6,6 +6,7 @@ import {
   ColumnDirective,
   Search,
   Page,
+  Group,
   Toolbar,
   Resize,
   Sort,
@@ -15,7 +16,8 @@ import {
 } from "@syncfusion/ej2-react-grids";
 import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
 import { DropDownListComponent } from "@syncfusion/ej2-react-dropdowns";
-import { AiOutlineUpload, AiOutlineClose, AiOutlinePaperClip } from "react-icons/ai";
+import { AiOutlineUpload, AiOutlinePaperClip } from "react-icons/ai";
+import { MdOutlineCancel } from "react-icons/md";
 
 const Employees = () => {
   const selectionsettings = { persistSelection: true };
@@ -35,6 +37,12 @@ const Employees = () => {
   const [contractEndDate, setContractEndDate] = useState("");
   const [salary, setSalary] = useState("");
   const [employeesData, setEmployeesData] = useState([]);
+  const [designationId, setDesignationId] = useState("");
+  const [statusId, setStatusId] = useState("");
+  const [totalEmployees, setTotalEmployees] = useState(0);
+  const [totalContractEmployees, setTotalContractEmployees] = useState(0);
+  const [averageSalary, setAverageSalary] = useState(0);
+  const [kpis, setKPIs] = useState({});
 
   useEffect(() => {
     const storedEmployeesData = localStorage.getItem("employeesData");
@@ -90,7 +98,6 @@ const Employees = () => {
     setEmail("");
     setAddress("");
     setPhoneNumber("");
-    setCV("");
     setClient("");
     setSalary("");
     setCurrentStep(1);
@@ -118,19 +125,44 @@ const Employees = () => {
   };
 
   const handleSubmit = () => {
-    // console.log("Form submitted");
-    // console.log("First Name:", firstName);
-    // console.log("Last Name:", lastName);
-    // console.log("CV:", cv);
-    // console.log("Address:", address);
-    // console.log("Phone Number:", phoneNumber);
+    const employeeId = `HH${Math.floor(Math.random() * 10000)}`;
+
+    // Increment the total employees count
+    setTotalEmployees(totalEmployees + 1);
+
+    // Increment the total contract employees count if empType is "Contract"
+    if (statusId === "2") {
+      setTotalContractEmployees(totalContractEmployees + 1);
+    }
+
+    // Calculate average salary
+    const totalSalary = employeesData.reduce(
+      (total, employee) => total + parseInt(employee.salary),
+      0
+    );
+    const avgSalary = totalSalary / employeesData.length;
+    setAverageSalary(avgSalary);
+
+    // Calculate KPIs
+    // ... Perform calculations to determine the KPIs
+    // Set the KPIs state variable
+    //   setKPIs({
+    //     kpi1: ...,
+    //     kpi2: ...,
+    //     // Add more KPIs as needed
+    //   });
+    // }, [employeesData]);
 
     const newEmployee = {
+      id: employeeId,
       firstName: firstName,
       lastName: lastName,
       email: email,
-      cv: cv,
-      address: address,
+      designation:
+        designation.find((item) => item.Id === designationId)?.Role || "",
+      empType: empType.find((item) => item.type === statusId)?.Emp || "",
+      // cv: cv,
+      // address: address,
       phoneNumber: phoneNumber,
       contractStartDate: contractStartDate,
       contractEndDate: contractEndDate,
@@ -140,6 +172,7 @@ const Employees = () => {
     const updatedEmployeesData = [...employeesData, newEmployee];
 
     setEmployeesData(updatedEmployeesData);
+    
 
     // Resetting the form state
     setFirstName("");
@@ -158,6 +191,7 @@ const Employees = () => {
   };
 
   return (
+    
     <div>
       <div className="justify-center">
         <div className="dark:text-gray-200 dark:bg-secondary-dark-bg ml-4 mr-4 mt-10 mb-10">
@@ -179,21 +213,26 @@ const Employees = () => {
             toolbar={toolbarOptions}
           >
             <ColumnsDirective>
-              <ColumnDirective field="firstName" headerText="First Name" />
-              <ColumnDirective field="lastName" headerText="Last Name" />
-              <ColumnDirective field="email" headerText="Email" />
-              <ColumnDirective field="cv" headerText="CV" />
-              <ColumnDirective field="address" headerText="Address" />
+              <ColumnDirective field="id" headerText="ID" width="200" />
+              <ColumnDirective
+                field="fullName"
+                headerText="Name"
+                width="300"
+                template={(rowData) => (
+                  <div>
+                    {rowData.firstName} {rowData.lastName}
+                    <div>{rowData.email}</div>
+                  </div>
+                )}
+              />
+              <ColumnDirective
+                field="designation"
+                headerText="Position"
+                width="300"
+              />
+              <ColumnDirective field="department" headerText="department" />
               <ColumnDirective field="phoneNumber" headerText="Phone Number" />
-              <ColumnDirective
-                field="contractStartDate"
-                headerText="Contract Start Date"
-              />
-              <ColumnDirective
-                field="contractEndDate"
-                headerText="Contract End Date"
-              />
-              <ColumnDirective field="salary" headerText="Salary" />
+              <ColumnDirective field="empType" headerText="Status" />
             </ColumnsDirective>
 
             <Inject
@@ -206,6 +245,7 @@ const Employees = () => {
                 Search,
                 Page,
                 Toolbar,
+                Group,
               ]}
             />
           </GridComponent>
@@ -217,10 +257,10 @@ const Employees = () => {
           <div class="modal-content">
             {currentStep === 1 && (
               <div>
-                <h2>Add Employee</h2>
-                <button className="cancel-button" onClick={handleCancel}>
-                  <AiOutlineClose />
-                </button>
+                <h2 className="modal-heading">
+                  Add Employee
+                  <MdOutlineCancel onClick={handleCancel} />
+                </h2>
                 <div className="form-row">
                   <label htmlFor="firstname">
                     First Name
@@ -331,6 +371,8 @@ const Employees = () => {
                     dataSource={designation}
                     fields={{ text: "Role", value: "Id" }}
                     placeholder="Select a designation"
+                    value={designationId}
+                    change={(args) => setDesignationId(args.value)}
                   />
                 </label>
                 <label htmlFor="salary">
@@ -342,12 +384,14 @@ const Employees = () => {
                     onChange={handleSalaryChange}
                   />
                 </label>
-                <label>
+                <label htmlFor="empType">
                   Employment Type
                   <DropDownListComponent
                     dataSource={empType}
                     fields={{ text: "Emp", value: "type" }}
-                    placeholder="Select an Employment Type"
+                    placeholder="Select an Status Type"
+                    value={statusId}
+                    change={(args) => setStatusId(args.value)}
                   />
                 </label>
                 <button type="button" onClick={handleSubmit}>

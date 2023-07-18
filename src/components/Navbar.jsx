@@ -4,7 +4,7 @@ import { RiNotification3Line } from "react-icons/ri";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import avatar4 from "../data/avatar4.jpg";
-import { BsChatLeft } from "react-icons/bs";
+// import { BsChatLeft } from "react-icons/bs";
 import { ThemeSettings, Notification, UserProfile } from ".";
 import { useStateContext } from "../contexts/ContextProvider";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -74,6 +74,7 @@ const Navbar = () => {
   }, [screenSize, setActiveMenu]);
 
   const handleActiveMenu = () => setActiveMenu(!activeMenu);
+
   const isEmployeesPage = location.pathname === "/Employees";
 
   return (
@@ -89,7 +90,6 @@ const Navbar = () => {
       <div className="flex">
         {isEmployeesPage && (
           <Button text="Add Employees" onClick={toggleModal} className="mt-4" />
-         
         )}
 
         <NavButton
