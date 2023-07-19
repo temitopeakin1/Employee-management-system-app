@@ -144,6 +144,17 @@ span {
   color: #000000;
 }
 
+.phone-number {
+  display: flex;
+  align-items: center;
+}
+
+.phone-icon {
+  display: flex;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
 .nav-item,
 .navbar {
   z-index: 10000;

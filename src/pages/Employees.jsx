@@ -18,6 +18,8 @@ import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
 import { DropDownListComponent } from "@syncfusion/ej2-react-dropdowns";
 import { AiOutlineUpload, AiOutlinePaperClip } from "react-icons/ai";
 import { MdOutlineCancel } from "react-icons/md";
+import { FiPhone } from "react-icons/fi";
+
 
 const Employees = () => {
   const selectionsettings = { persistSelection: true };
@@ -143,15 +145,15 @@ const Employees = () => {
     const avgSalary = totalSalary / employeesData.length;
     setAverageSalary(avgSalary);
 
-    // Calculate KPIs
-    // ... Perform calculations to determine the KPIs
-    // Set the KPIs state variable
-    //   setKPIs({
-    //     kpi1: ...,
-    //     kpi2: ...,
-    //     // Add more KPIs as needed
-    //   });
-    // }, [employeesData]);
+      // Calculate KPIs
+  // ... Perform calculations to determine the KPIs
+  // Set the KPIs state variable
+//   setKPIs({
+//     kpi1: ...,
+//     kpi2: ...,
+//     // Add more KPIs as needed
+//   });
+// }, [employeesData]);
 
     const newEmployee = {
       id: employeeId,
@@ -172,7 +174,6 @@ const Employees = () => {
     const updatedEmployeesData = [...employeesData, newEmployee];
 
     setEmployeesData(updatedEmployeesData);
-    
 
     // Resetting the form state
     setFirstName("");
@@ -191,7 +192,6 @@ const Employees = () => {
   };
 
   return (
-    
     <div>
       <div className="justify-center">
         <div className="dark:text-gray-200 dark:bg-secondary-dark-bg ml-4 mr-4 mt-10 mb-10">
@@ -231,7 +231,12 @@ const Employees = () => {
                 width="300"
               />
               <ColumnDirective field="department" headerText="department" />
-              <ColumnDirective field="phoneNumber" headerText="Phone Number" />
+              <ColumnDirective field="phoneNumber" headerText="Phone Number" template={(rowData) => (
+                <div>
+                  <FiPhone className="phone-icon" flex  />
+                  {rowData.phoneNumber}
+                </div>
+              )} />
               <ColumnDirective field="empType" headerText="Status" />
             </ColumnsDirective>
 
@@ -300,6 +305,7 @@ const Employees = () => {
                   />
                 </label>
                 <label htmlFor="phonenumber">
+              
                   Phone Number
                   <input
                     type="number"
