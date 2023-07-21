@@ -135,8 +135,7 @@ span {
   display: flex;
   flex-direction: row;
   background: #e6dcdc;
-  padding-right: 4px;
-  
+  padding-right: 4px;  
   border-radius: 5px;
 }
 
@@ -144,15 +143,35 @@ span {
   color: #000000;
 }
 
-.phone-number {
-  display: flex;
-  align-items: center;
+.custom-grid .e-headercell .e-headertext{
+  color:#000000;
+  font-size: 1rem;
 }
 
-.phone-icon {
-  display: flex;
-  margin-left: 5px;
-  vertical-align: middle;
+.custom-grid .e-gridheader .e-headercell.department-column {
+  text-align: right;
+  padding-right: -4rem; /* Adjust the left padding as needed */
+}
+
+.search-input-container {
+  position: relative;
+}
+
+.search-input {
+  padding-left: 30px; 
+  width: 300px; 
+  height: 30px; 
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.search-icon {
+  position: absolute;
+  top: 40%;
+  left: 85px; 
+  transform: translateY(-50%);
+  pointer-events: none; 
 }
 
 .nav-item,

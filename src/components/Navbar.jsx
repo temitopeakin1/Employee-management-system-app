@@ -75,7 +75,7 @@ const Navbar = () => {
 
   const handleActiveMenu = () => setActiveMenu(!activeMenu);
 
-  const isEmployeesPage = location.pathname === "/Employees";
+  // const isEmployeesPage = location.pathname === "/Employees";
 
   return (
     <div className="flex justify-between p-2 md:ml-2 md:mr-6 relative">
@@ -88,9 +88,7 @@ const Navbar = () => {
         />
       />
       <div className="flex">
-        {isEmployeesPage && (
-          <Button text="Add Employees" onClick={toggleModal} className="mt-4" />
-        )}
+        
 
         <NavButton
           title="Settings"

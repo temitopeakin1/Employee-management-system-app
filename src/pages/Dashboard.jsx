@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 // import Greeting from "./Greeting";
 import { DropDownListComponent } from "@syncfusion/ej2-react-dropdowns";
 import {
@@ -14,6 +14,7 @@ import {
 // import { employeesData } from "../data/dummy";
 import { Pie } from "../components";
 import { dropdownData, deptData } from "../data/dummy";
+import { FiPhone } from "react-icons/fi";
 import Greeting from "./Greeting";
 
 const DropDown = ({ currentMode }) => (
@@ -139,17 +140,31 @@ const Dashboard = ({ averageSalary, kpis }) => {
             editSettings={editing}
             selectionSettings={selectionsettings}
             toolbar={toolbarOptions}
+            className="custom-grid"
           >
             <ColumnsDirective>
-              <ColumnDirective field="id" headerText="ID" width="200" />
+              <ColumnDirective
+                field="id"
+                headerText="ID"
+                width="100"
+                template={(rowData) => (
+                  <div>
+                    <div className="text font-semibold">{rowData.id}</div>
+                  </div>
+                )}
+              />
               <ColumnDirective
                 field="fullName"
                 headerText="Name"
                 width="300"
                 template={(rowData) => (
                   <div>
-                    {rowData.firstName} {rowData.lastName}
-                    <div>{rowData.email}</div>
+                    <div className="text font-semibold">
+                      {rowData.firstName} {rowData.lastName}
+                    </div>
+                    <div className="font-bold text-gray-400">
+                      {rowData.email}
+                    </div>
                   </div>
                 )}
               />
@@ -158,9 +173,22 @@ const Dashboard = ({ averageSalary, kpis }) => {
                 headerText="Position"
                 width="300"
               />
-              <ColumnDirective field="department" headerText="department" />
-              <ColumnDirective field="phoneNumber" headerText="Phone Number" />
-              <ColumnDirective field="empType" headerText="Status" />
+              <ColumnDirective field="department" headerText="Department" />
+              <ColumnDirective
+                field="phoneNumber"
+                headerText="Phone Number"
+                template={(rowData) => (
+                  <div className="flex items-center">
+                    <FiPhone className="phone-icon mr-2" />
+                    {rowData.phoneNumber}
+                  </div>
+                )}
+              />
+              <ColumnDirective
+                field="empType"
+                headerText="Status"
+                textAlign="left"
+              />
             </ColumnsDirective>
             <Inject services={[Search, Page, Toolbar]} />
           </GridComponent>

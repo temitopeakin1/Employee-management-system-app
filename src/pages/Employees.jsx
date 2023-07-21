@@ -4,7 +4,7 @@ import {
   Inject,
   ColumnsDirective,
   ColumnDirective,
-  Search,
+  // Search,
   Page,
   Group,
   Toolbar,
@@ -14,16 +14,20 @@ import {
   Edit,
   Selection,
 } from "@syncfusion/ej2-react-grids";
+// import { RiSearchLine } from 'react-icons/ri';
 import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
 import { DropDownListComponent } from "@syncfusion/ej2-react-dropdowns";
-import { AiOutlineUpload, AiOutlinePaperClip } from "react-icons/ai";
+import {
+  AiOutlineUpload,
+  AiOutlinePaperClip,
+  AiOutlineSearch,
+} from "react-icons/ai";
 import { MdOutlineCancel } from "react-icons/md";
 import { FiPhone } from "react-icons/fi";
 
-
 const Employees = () => {
   const selectionsettings = { persistSelection: true };
-  const toolbarOptions = ["Search", "Delete"];
+  const toolbarOptions = ["Delete"];
   const editing = { allowDeleting: true, allowEditing: true };
 
   const [isModalVisible, setModalVisible] = useState(false);
@@ -45,6 +49,7 @@ const Employees = () => {
   const [totalContractEmployees, setTotalContractEmployees] = useState(0);
   const [averageSalary, setAverageSalary] = useState(0);
   const [kpis, setKPIs] = useState({});
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const storedEmployeesData = localStorage.getItem("employeesData");
@@ -91,6 +96,26 @@ const Employees = () => {
 
   const handleSalaryChange = (e) => {
     setSalary(e.target.value);
+  };
+
+  // const getFilteredData = () => {
+  //   return employeesData.filter(
+  //     (employee) =>
+  //       employeesData.firstName
+  //         .toLowerCase()
+  //         .includes(searchQuery.toLowerCase()) ||
+  //       employeesData.lastName
+  //         .toLowerCase()
+  //         .includes(searchQuery.toLowerCase())
+  //   );
+  // };
+
+  const getFilteredData = () => {
+    return employeesData.filter(
+      (employee) =>
+        employee.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        employee.lastName.toLowerCase().includes(searchQuery.toLowerCase())
+    );
   };
 
   const handleCancel = () => {
@@ -145,15 +170,15 @@ const Employees = () => {
     const avgSalary = totalSalary / employeesData.length;
     setAverageSalary(avgSalary);
 
-      // Calculate KPIs
-  // ... Perform calculations to determine the KPIs
-  // Set the KPIs state variable
-//   setKPIs({
-//     kpi1: ...,
-//     kpi2: ...,
-//     // Add more KPIs as needed
-//   });
-// }, [employeesData]);
+    // Calculate KPIs
+    // ... Perform calculations to determine the KPIs
+    // Set the KPIs state variable
+    //   setKPIs({
+    //     kpi1: ...,
+    //     kpi2: ...,
+    //     // Add more KPIs as needed
+    //   });
+    // }, [employeesData]);
 
     const newEmployee = {
       id: employeeId,
@@ -193,35 +218,70 @@ const Employees = () => {
 
   return (
     <div>
+      <div className="flex justify-end mr-80 -mt-1">
+        <button
+          onClick={toggleModal}
+          className="bg-orange-500 text-white font-bold py-1 px-8 -mt-14 pt-1 rounded"
+          style={{ zIndex: 100 }}
+        >
+          Add Employee
+        </button>
+      </div>
       <div className="justify-center">
-        <div className="dark:text-gray-200 dark:bg-secondary-dark-bg ml-4 mr-4 mt-10 mb-10">
-          <div className="justify-left -mt-5">
+        <div className="dark:text-gray-200 dark:bg-secondary-dark-bg ml-4 mr-4 mt-20 mb-10">
+          <div className="flex items-center mb-2 ">
             <p className="font-bold text-3xl">Employees</p>
+            <div className="search-input-container">
+              <input
+                type="text"
+                placeholder="Search..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="mb-3 ml-20 py-2 pl-8 pr-40 rounded border border-gray-300 focus:outline-none"
+              />
+              <div className="search-icon">
+                <AiOutlineSearch size={18} className="text-gray-500" />
+              </div>
+            </div>
           </div>
         </div>
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-          <button onClick={toggleModal}>Add Employee</button>
           <GridComponent
-            dataSource={employeesData}
+            dataSource={getFilteredData()}
             enableHover={false}
             width="auto"
             allowPaging
             allowSorting
+            // allowSearching={true}
             pageSettings={{ pageCount: 5 }}
             editSettings={editing}
             selectionSettings={selectionsettings}
             toolbar={toolbarOptions}
+            className="custom-grid"
           >
             <ColumnsDirective>
-              <ColumnDirective field="id" headerText="ID" width="200" />
+              <ColumnDirective
+                field="id"
+                headerText="ID"
+                width="100"
+                template={(rowData) => (
+                  <div>
+                    <div className="text font-semibold">{rowData.id}</div>
+                  </div>
+                )}
+              />
               <ColumnDirective
                 field="fullName"
                 headerText="Name"
                 width="300"
                 template={(rowData) => (
                   <div>
-                    {rowData.firstName} {rowData.lastName}
-                    <div>{rowData.email}</div>
+                    <div className="text font-semibold">
+                      {rowData.firstName} {rowData.lastName}
+                    </div>
+                    <div className="font-bold text-gray-400">
+                      {rowData.email}
+                    </div>
                   </div>
                 )}
               />
@@ -230,14 +290,22 @@ const Employees = () => {
                 headerText="Position"
                 width="300"
               />
-              <ColumnDirective field="department" headerText="department" />
-              <ColumnDirective field="phoneNumber" headerText="Phone Number" template={(rowData) => (
-                <div>
-                  <FiPhone className="phone-icon" flex  />
-                  {rowData.phoneNumber}
-                </div>
-              )} />
-              <ColumnDirective field="empType" headerText="Status" />
+              <ColumnDirective field="department" headerText="Department" cssClass="department-column" />
+              <ColumnDirective
+                field="phoneNumber"
+                headerText="Phone Number"
+                template={(rowData) => (
+                  <div className="flex items-center">
+                    <FiPhone className="phone-icon mr-2" />
+                    {rowData.phoneNumber}
+                  </div>
+                )}
+              />
+              <ColumnDirective
+                field="empType"
+                headerText="Status"
+                textAlign="left"
+              />
             </ColumnsDirective>
 
             <Inject
@@ -247,7 +315,7 @@ const Employees = () => {
                 Sort,
                 Filter,
                 Edit,
-                Search,
+                // Search,
                 Page,
                 Toolbar,
                 Group,
@@ -259,7 +327,7 @@ const Employees = () => {
 
       {isModalVisible && (
         <div className="modal">
-          <div class="modal-content">
+          <div className="modal-content">
             {currentStep === 1 && (
               <div>
                 <h2 className="modal-heading">
@@ -305,7 +373,6 @@ const Employees = () => {
                   />
                 </label>
                 <label htmlFor="phonenumber">
-              
                   Phone Number
                   <input
                     type="number"

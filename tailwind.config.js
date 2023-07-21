@@ -11,6 +11,9 @@ module.exports = {
       fontSize: {
         12: "12px",
       },
+      fontWeight: {
+        bold: "700"
+      },
       backgroundColor: {
         "main-bg": "#EEF5F5",
         "main-dark-bg": "#20232A",
