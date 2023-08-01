@@ -23,6 +23,7 @@ import {
   AiOutlineSearch,
 } from "react-icons/ai";
 import { MdOutlineCancel } from "react-icons/md";
+import Dashboard from "../pages/Dashboard"; 
 import { FiPhone } from "react-icons/fi";
 
 const Employees = () => {
@@ -48,8 +49,8 @@ const Employees = () => {
   const [totalEmployees, setTotalEmployees] = useState(0);
   const [totalContractEmployees, setTotalContractEmployees] = useState(0);
   const [averageSalary, setAverageSalary] = useState(0);
-  const [kpis, setKPIs] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
+  const [departmentId, setDepartmentId] = useState("")
 
   useEffect(() => {
     const storedEmployeesData = localStorage.getItem("employeesData");
@@ -88,7 +89,7 @@ const Employees = () => {
 
   const handlePhoneNumberChange = (e) => {
     setPhoneNumber(e.target.value);
-  };
+  }
 
   const handleClientChange = (e) => {
     setClient(e.target.value);
@@ -97,18 +98,6 @@ const Employees = () => {
   const handleSalaryChange = (e) => {
     setSalary(e.target.value);
   };
-
-  // const getFilteredData = () => {
-  //   return employeesData.filter(
-  //     (employee) =>
-  //       employeesData.firstName
-  //         .toLowerCase()
-  //         .includes(searchQuery.toLowerCase()) ||
-  //       employeesData.lastName
-  //         .toLowerCase()
-  //         .includes(searchQuery.toLowerCase())
-  //   );
-  // };
 
   const getFilteredData = () => {
     return employeesData.filter(
@@ -127,6 +116,8 @@ const Employees = () => {
     setPhoneNumber("");
     setClient("");
     setSalary("");
+    setDesignationId("");
+    setDepartmentId("");
     setCurrentStep(1);
     toggleModal();
   };
@@ -139,13 +130,23 @@ const Employees = () => {
     { Id: "5", Role: "Product Designer" },
     { Id: "6", Role: "Scrum Master" },
     { Id: "7", Role: "Product Owner" },
+    { Id: "8", Role: "HR Manager"},
+    { Id: "9", Role: "Administrative Officer"}
   ];
 
+  const department = [
+    { Id: "1", Dept: "Software Engineering" },
+    { Id: "2", Dept: "Administrative" },
+    { Id: "3", Dept: "Human Resources" }
+  ]
+
   const empType = [
-    { type: "1", Emp: "Ful-Time" },
+    { type: "1", Emp: "Full-Time" },
     { type: "2", Emp: "Contract" },
     { type: "3", Emp: "Part-Time" },
   ];
+
+ 
 
   const handleNext = () => {
     setCurrentStep(currentStep + 1);
@@ -170,16 +171,6 @@ const Employees = () => {
     const avgSalary = totalSalary / employeesData.length;
     setAverageSalary(avgSalary);
 
-    // Calculate KPIs
-    // ... Perform calculations to determine the KPIs
-    // Set the KPIs state variable
-    //   setKPIs({
-    //     kpi1: ...,
-    //     kpi2: ...,
-    //     // Add more KPIs as needed
-    //   });
-    // }, [employeesData]);
-
     const newEmployee = {
       id: employeeId,
       firstName: firstName,
@@ -187,15 +178,16 @@ const Employees = () => {
       email: email,
       designation:
         designation.find((item) => item.Id === designationId)?.Role || "",
+      department: department.find((item) => item.Id === departmentId)?.Dept || "", 
       empType: empType.find((item) => item.type === statusId)?.Emp || "",
-      // cv: cv,
+      cv: cv,
       // address: address,
       phoneNumber: phoneNumber,
       contractStartDate: contractStartDate,
       contractEndDate: contractEndDate,
       salary: salary,
     };
-
+// updates an employee data
     const updatedEmployeesData = [...employeesData, newEmployee];
 
     setEmployeesData(updatedEmployeesData);
@@ -290,7 +282,8 @@ const Employees = () => {
                 headerText="Position"
                 width="300"
               />
-              <ColumnDirective field="department" headerText="Department" cssClass="department-column" />
+              <ColumnDirective field="department" 
+              headerText="Department" cssClass="department-column" />
               <ColumnDirective
                 field="phoneNumber"
                 headerText="Phone Number"
@@ -322,6 +315,7 @@ const Employees = () => {
               ]}
             />
           </GridComponent>
+         
         </div>
       </div>
 
@@ -411,6 +405,7 @@ const Employees = () => {
             {currentStep === 2 && (
               <div>
                 <h2>Add Employee</h2>
+                <MdOutlineCancel onClick={handleCancel} />
                 <label htmlFor="client">
                   Client
                   <input
@@ -448,6 +443,16 @@ const Employees = () => {
                     change={(args) => setDesignationId(args.value)}
                   />
                 </label>
+                <label htmlFor="department">
+                Department
+                <DropDownListComponent
+                  dataSource={department}
+                  fields={{ text: "Dept", value: "Id" }}
+                  placeholder="Select a department"
+                  value={departmentId}
+                  change={(args) => setDepartmentId(args.value)}
+                />
+              </label>
                 <label htmlFor="salary">
                   Salary Renumeration
                   <input
@@ -468,7 +473,7 @@ const Employees = () => {
                   />
                 </label>
                 <button type="button" onClick={handleSubmit}>
-                  Submit
+                  Add Employee
                 </button>
               </div>
             )}

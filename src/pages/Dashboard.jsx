@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 // import Greeting from "./Greeting";
 import { DropDownListComponent } from "@syncfusion/ej2-react-dropdowns";
 import {
@@ -11,7 +11,7 @@ import {
   Toolbar,
 } from "@syncfusion/ej2-react-grids";
 // import { useStateContext } from "../contexts/ContextProvider";
-// import { employeesData } from "../data/dummy";
+
 import { Pie } from "../components";
 import { dropdownData, deptData } from "../data/dummy";
 import { FiPhone } from "react-icons/fi";
@@ -31,23 +31,38 @@ const DropDown = ({ currentMode }) => (
   </div>
 );
 
-const Dashboard = ({ averageSalary, kpis }) => {
-  // const { currentColor, currentMode } = useStateContext();
+const Dashboard = () => {
+  const [averageSalary, setAverageSalary] = useState(0);
   const toolbarOptions = ["Search"];
   const editing = { allowediting: true, allowDeleting: true };
   const selectionsettings = { persistSelection: true };
-  // Retrieve employee data from local storage
-  const storedEmployeesData = localStorage.getItem("employeesData");
-  const employeesData = storedEmployeesData
-    ? JSON.parse(storedEmployeesData)
-    : [];
+
+  // Retrieve employee data from local storage using useMemo to
+  const employeesData = useMemo(() => {
+    const storedData = localStorage.getItem("employeesData");
+    return storedData ? JSON.parse(storedData) : [];
+  }, []);
 
   // Calculate total employees and contract employees
   const totalEmployees = employeesData.length;
   const totalContractEmployees = employeesData.filter(
     (employee) => employee.empType === "Contract"
   ).length;
-  const kpisFigure = kpis && kpis.figure;
+
+  // Calculate average salary
+  useEffect(() => {
+    const totalSalary = employeesData.reduce(
+      (total, employee) => total + parseInt(employee.salary),
+      0
+    );
+    const avgSalary = totalSalary / employeesData.length;
+    setAverageSalary(avgSalary);
+  }, [employeesData]);
+
+// calculate the kpi's
+  const targetTotalEmployees = 80;
+  const presentTotalEmployees = totalEmployees;
+  const totalEmployeesKPI = (presentTotalEmployees / targetTotalEmployees) * 100; 
 
   return (
     <div className="justify-center">
@@ -94,7 +109,9 @@ const Dashboard = ({ averageSalary, kpis }) => {
             <div className="flex justify-between items-center">
               <div>
                 <p className="font-bold text-gray-400 pb-3">Kpi's</p>
-                <p className="text font-semibold">{kpisFigure}</p>
+                <p className={`text font-semibold ${totalEmployeesKPI >= 100 ? 'text-green-500' : 'text-red-500'}`}>
+              {totalEmployeesKPI.toFixed(2)}%
+            </p>
               </div>
             </div>
           </div>
