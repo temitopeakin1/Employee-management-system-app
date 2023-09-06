@@ -9,5 +9,5 @@ ReactDOM.render(
     <App />
   </ContextProvider>,
 
-  document.getElementById("root")
-);
+  document.getElementById("root"));
+  // registerServiceWorker();

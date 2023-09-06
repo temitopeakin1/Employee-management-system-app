@@ -8,7 +8,7 @@ import avatar4 from "../data/avatar4.jpg";
 import { ThemeSettings, Notification, UserProfile } from ".";
 import { useStateContext } from "../contexts/ContextProvider";
 import { AiOutlineMenu } from "react-icons/ai";
-import Button from "./shared/Button";
+// import Button from "./shared/Button";
 import { useLocation } from "react-router-dom";
 import Employees from "../pages/Employees";
 
@@ -75,7 +75,7 @@ const Navbar = () => {
 
   const handleActiveMenu = () => setActiveMenu(!activeMenu);
 
-  // const isEmployeesPage = location.pathname === "/Employees";
+  const isEmployeesPage = location.pathname === "/Employees";
 
   return (
     <div className="flex justify-between p-2 md:ml-2 md:mr-6 relative">

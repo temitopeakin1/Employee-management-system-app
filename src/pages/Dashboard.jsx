@@ -17,7 +17,7 @@ import Greeting from "./Greeting";
 
 
 
-const Dashboard = () => {
+const Dashboard = ({Dashboard }) => {
   const [averageSalary, setAverageSalary] = useState(0);
   const toolbarOptions = ["Search"];
   const editing = { allowediting: true, allowDeleting: true };
@@ -36,14 +36,29 @@ const Dashboard = () => {
   ).length;
 
   // Calculate average salary
-  useEffect(() => {
-    const totalSalary = employeesData.reduce(
-      (total, employee) => total + parseInt(employee.salary),
-      0
-    );
-    const avgSalary = totalSalary / employeesData.length;
-    setAverageSalary(avgSalary);
-  }, [employeesData]);
+useEffect(() => {
+  const totalSalary = employeesData.reduce((total, employee) => {
+    const employeeSalary = parseFloat(employee.salary);
+    if (!isNaN(employeeSalary)) {
+      return total + employeeSalary;
+    }
+    return total;
+  }, 0);
+
+  const validEmployeesCount = employeesData.filter((employee) => {
+    const employeeSalary = parseFloat(employee.salary);
+    return !isNaN(employeeSalary);
+  }).length;
+
+  if (validEmployeesCount > 0) {
+    const avgSalary = totalSalary / validEmployeesCount;
+    setAverageSalary(avgSalary.toFixed(2)); // Convert to fixed decimal places if needed
+  } else {
+    // Handle the case when there are no valid salaries
+    setAverageSalary("N/A");
+  }
+}, [employeesData]);
+
 
 // calculate the kpi's
   const targetTotalEmployees = 80;
@@ -51,50 +66,50 @@ const Dashboard = () => {
   const totalEmployeesKPI = (presentTotalEmployees / targetTotalEmployees) * 100; 
 
   return (
-    <div className="justify-center">
+    <div className="justify-center mt-2">
       <div className="dark:text-gray-200 dark:bg-secondary-dark-bg ml-4 mr-4 mt-5 mb-10">
         <div className="justify-left">
-          <p className="font-bold text-3xl mb-10">Dashboard</p>
-          <div className="font-semibold text-5xl">
+          <p className="font-semibold text-2xl mb-10">{Dashboard}</p>
+          <div className="font-semibold text-5xl ">
             <Greeting />
           </div>
-          <p className="font-bold text-gray-400 mt-2">
+          <p className="font-semibold text-gray-400 text-sm mt-2">
             Here's what is going on at Hampshire Heights
           </p>
         </div>
       </div>
-      <div className="mt-5">
-        <div className="flex flex-wrap lg:flex-nowrap gap-2 justify-center ">
-          <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-32 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
+      <div className="-mt-5">
+        <div className="flex flex-wrap lg:flex-nowrap gap-.5 justify-center ">
+          <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-32 rounded-xl w-full lg:w-60 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
             <div className="flex justify-between items-center">
               <div>
-                <p className="font-bold text-gray-400 pb-3">Total Employees</p>
+                <p className="font-semibold text-gray-400 text-sm pb-3">Total Employees</p>
                 <p className="text font-semibold">{totalEmployees}</p>
               </div>
             </div>
           </div>
-          <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-32 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
+          <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-32 rounded-xl w-full lg:w-60 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
             <div className="flex justify-between items-center">
               <div>
-                <p className="font-bold text-gray-400 pb-3">
+                <p className="font-semibold text-gray-400 text-sm pb-3">
                   Contract Employees
                 </p>
                 <p className="text font-semibold">{totalContractEmployees}</p>
               </div>
             </div>
           </div>
-          <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-32 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
+          <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-32 rounded-xl w-full lg:w-60 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
             <div className="flex justify-between items-center">
               <div>
-                <p className="font-bold text-gray-400 pb-3">Avg. Salary</p>
+                <p className="font-semibold text-gray-400 text-sm pb-3">Avg. Salary</p>
                 <p className="text font-semibold">{averageSalary}</p>
               </div>
             </div>
           </div>
-          <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-32 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
+          <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-32 rounded-xl w-full lg:w-60 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
             <div className="flex justify-between items-center">
               <div>
-                <p className="font-bold text-gray-400 pb-3">Kpi's</p>
+                <p className="font-semibold text-gray-400 text-sm pb-3">Kpi's</p>
                 <p className={`text font-semibold ${totalEmployeesKPI >= 100 ? 'text-green-500' : 'text-red-500'}`}>
               {totalEmployeesKPI.toFixed(2)}%
             </p>
@@ -104,8 +119,8 @@ const Dashboard = () => {
         </div>
 
         <div className="flex justify-center">
-          <div className="flex-grow ml-auto">
-            <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg ml-4 mr-4 p-4 rounded-1xl md:w-1500">
+          <div className="flex-grow ml-100">
+            <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg ml-4 mr-4 p-4 rounded-1xl">
               <div className="flex justify-between">
                 <p className="font-semibold text-l">Mancount Per Department</p>
               </div>

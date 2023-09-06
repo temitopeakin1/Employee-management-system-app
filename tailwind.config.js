@@ -10,6 +10,8 @@ module.exports = {
     extend: {
       fontSize: {
         12: "12px",
+        sm: "0.85rem",
+        
       },
       fontWeight: {
         bold: "700"

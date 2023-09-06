@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react'
 import {
   GridComponent,
   Inject,
@@ -13,163 +13,161 @@ import {
   Filter,
   Edit,
   Selection,
-} from "@syncfusion/ej2-react-grids";
+} from '@syncfusion/ej2-react-grids'
 // import { RiSearchLine } from 'react-icons/ri';
-import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
-import { DropDownListComponent } from "@syncfusion/ej2-react-dropdowns";
+import { DatePickerComponent } from '@syncfusion/ej2-react-calendars'
+import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns'
 import {
   AiOutlineUpload,
   AiOutlinePaperClip,
   AiOutlineSearch,
-} from "react-icons/ai";
-import { MdOutlineCancel } from "react-icons/md";
-import Dashboard from "../pages/Dashboard"; 
-import { FiPhone } from "react-icons/fi";
+} from 'react-icons/ai'
+import { MdOutlineCancel } from 'react-icons/md'
+import { FiPhone } from 'react-icons/fi'
 
 const Employees = () => {
-  const selectionsettings = { persistSelection: true };
-  const toolbarOptions = ["Delete"];
-  const editing = { allowDeleting: true, allowEditing: true };
+  const selectionsettings = { persistSelection: true }
+  const toolbarOptions = ['Delete']
+  const editing = { allowDeleting: true, allowEditing: true }
 
-  const [isModalVisible, setModalVisible] = useState(false);
-  const [currentStep, setCurrentStep] = useState(1);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [cv, setCV] = useState("");
-  const [address, setAddress] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [client, setClient] = useState("");
-  const [contractStartDate, setContractStartDate] = useState("");
-  const [contractEndDate, setContractEndDate] = useState("");
-  const [salary, setSalary] = useState("");
-  const [employeesData, setEmployeesData] = useState([]);
-  const [designationId, setDesignationId] = useState("");
-  const [statusId, setStatusId] = useState("");
-  const [totalEmployees, setTotalEmployees] = useState(0);
-  const [totalContractEmployees, setTotalContractEmployees] = useState(0);
-  const [averageSalary, setAverageSalary] = useState(0);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [departmentId, setDepartmentId] = useState("")
+  const [isModalVisible, setModalVisible] = useState(false)
+  const [currentStep, setCurrentStep] = useState(1)
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [cv, setCV] = useState('')
+  const [address, setAddress] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
+  const [client, setClient] = useState('')
+  const [contractStartDate, setContractStartDate] = useState('')
+  const [contractEndDate, setContractEndDate] = useState('')
+  const [salary, setSalary] = useState('')
+  const [employeesData, setEmployeesData] = useState([])
+  const [designationId, setDesignationId] = useState('')
+  const [statusId, setStatusId] = useState('')
+  const [totalEmployees, setTotalEmployees] = useState(0)
+  const [totalContractEmployees, setTotalContractEmployees] = useState(0)
+  //const [averageSalary, setAverageSalary] = useState(0)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [departmentId, setDepartmentId] = useState('')
+  const [addEmployee, setAddEmployee] = useState(false)
 
   useEffect(() => {
-    const storedEmployeesData = localStorage.getItem("employeesData");
+    const storedEmployeesData = localStorage.getItem('employeesData')
     if (storedEmployeesData) {
-      setEmployeesData(JSON.parse(storedEmployeesData));
+      setEmployeesData(JSON.parse(storedEmployeesData))
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
-    localStorage.setItem("employeesData", JSON.stringify(employeesData));
-  }, [employeesData]);
+    localStorage.setItem('employeesData', JSON.stringify(employeesData))
+  }, [employeesData])
 
   const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
+    setModalVisible(!isModalVisible)
+  }
 
   const handleFirstNameChange = (e) => {
-    setFirstName(e.target.value);
-  };
+    setFirstName(e.target.value)
+  }
 
   const handleLastNameChange = (e) => {
-    setLastName(e.target.value);
-  };
+    setLastName(e.target.value)
+  }
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
+    setEmail(e.target.value)
+  }
 
   const handleCVChange = (e) => {
-    setCV(e.target.value);
-  };
+    setCV(e.target.value)
+  }
 
   const handleAddressChange = (e) => {
-    setAddress(e.target.value);
-  };
+    setAddress(e.target.value)
+  }
 
   const handlePhoneNumberChange = (e) => {
-    setPhoneNumber(e.target.value);
+    setPhoneNumber(e.target.value)
   }
 
   const handleClientChange = (e) => {
-    setClient(e.target.value);
-  };
+    setClient(e.target.value)
+  }
 
   const handleSalaryChange = (e) => {
-    setSalary(e.target.value);
-  };
+    setSalary(e.target.value)
+  }
 
   const getFilteredData = () => {
     return employeesData.filter(
       (employee) =>
         employee.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        employee.lastName.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  };
+        employee.lastName.toLowerCase().includes(searchQuery.toLowerCase()),
+    )
+  }
 
   const handleCancel = () => {
-    setFirstName("");
-    setLastName("");
-    setCV("");
-    setEmail("");
-    setAddress("");
-    setPhoneNumber("");
-    setClient("");
-    setSalary("");
-    setDesignationId("");
-    setDepartmentId("");
-    setCurrentStep(1);
-    toggleModal();
-  };
+    setFirstName('')
+    setLastName('')
+    setCV('')
+    setEmail('')
+    setAddress('')
+    setPhoneNumber('')
+    setClient('')
+    setSalary('')
+    setDesignationId('')
+    setDepartmentId('')
+    setCurrentStep(1)
+    toggleModal()
+  }
 
   const designation = [
-    { Id: "1", Role: "Software Developer" },
-    { Id: "2", Role: "Frontend Engineer" },
-    { Id: "3", Role: "Backend Engineer" },
-    { Id: "4", Role: "FullStack Developer" },
-    { Id: "5", Role: "Product Designer" },
-    { Id: "6", Role: "Scrum Master" },
-    { Id: "7", Role: "Product Owner" },
-    { Id: "8", Role: "HR Manager"},
-    { Id: "9", Role: "Administrative Officer"}
-  ];
+    { Id: '1', Role: 'Software Developer' },
+    { Id: '2', Role: 'Frontend Engineer' },
+    { Id: '3', Role: 'Backend Engineer' },
+    { Id: '4', Role: 'FullStack Developer' },
+    { Id: '5', Role: 'Product Designer' },
+    { Id: '6', Role: 'Scrum Master' },
+    { Id: '7', Role: 'Product Owner' },
+    { Id: '8', Role: 'HR Manager' },
+    { Id: '9', Role: 'Administrative Officer' },
+  ]
 
   const department = [
-    { Id: "1", Dept: "Software Engineering" },
-    { Id: "2", Dept: "Administrative" },
-    { Id: "3", Dept: "Human Resources" }
+    { Id: '1', Dept: 'Software Engineering' },
+    { Id: '2', Dept: 'Administrative' },
+    { Id: '3', Dept: 'Human Resources' },
   ]
 
   const empType = [
-    { type: "1", Emp: "Full-Time" },
-    { type: "2", Emp: "Contract" },
-    { type: "3", Emp: "Part-Time" },
-  ];
-
- 
+    { type: '1', Emp: 'Full-Time' },
+    { type: '2', Emp: 'Contract' },
+    { type: '3', Emp: 'Part-Time' },
+  ]
 
   const handleNext = () => {
-    setCurrentStep(currentStep + 1);
-  };
+    setCurrentStep(currentStep + 1)
+  }
 
   const handleSubmit = () => {
-    const employeeId = `HH${Math.floor(Math.random() * 10000)}`;
+    const employeeId = `HH${Math.floor(Math.random() * 10000)}`
 
     // Increment the total employees count
-    setTotalEmployees(totalEmployees + 1);
+    setTotalEmployees(totalEmployees + 1)
 
     // Increment the total contract employees count if empType is "Contract"
-    if (statusId === "2") {
-      setTotalContractEmployees(totalContractEmployees + 1);
+    if (statusId === '2') {
+      setTotalContractEmployees(totalContractEmployees + 1)
     }
 
     // Calculate average salary
-    const totalSalary = employeesData.reduce(
-      (total, employee) => total + parseInt(employee.salary),
-      0
-    );
-    const avgSalary = totalSalary / employeesData.length;
-    setAverageSalary(avgSalary);
+    // const totalSalary = employeesData.reduce(
+    //   (total, employee) => total + parseInt(employee.salary),
+    //   0,
+    // )
+    // const avgSalary = totalSalary / employeesData.length
+    // setAverageSalary(avgSalary)
 
     const newEmployee = {
       id: employeeId,
@@ -177,36 +175,39 @@ const Employees = () => {
       lastName: lastName,
       email: email,
       designation:
-        designation.find((item) => item.Id === designationId)?.Role || "",
-      department: department.find((item) => item.Id === departmentId)?.Dept || "", 
-      empType: empType.find((item) => item.type === statusId)?.Emp || "",
+        designation.find((item) => item.Id === designationId)?.Role || '',
+      department:
+        department.find((item) => item.Id === departmentId)?.Dept || '',
+      empType: empType.find((item) => item.type === statusId)?.Emp || '',
       cv: cv,
       // address: address,
       phoneNumber: phoneNumber,
       contractStartDate: contractStartDate,
       contractEndDate: contractEndDate,
       salary: salary,
-    };
-// updates an employee data
-    const updatedEmployeesData = [...employeesData, newEmployee];
+    }
+    // updates an employee data
+    const updatedEmployeesData = [...employeesData, newEmployee]
 
-    setEmployeesData(updatedEmployeesData);
+    setEmployeesData(updatedEmployeesData)
 
     // Resetting the form state
-    setFirstName("");
-    setLastName("");
-    setCV("");
-    setEmail("");
-    setAddress("");
-    setPhoneNumber("");
-    setCV("");
-    setClient("");
-    setSalary("");
-    setCurrentStep(1);
+    setFirstName('')
+    setLastName('')
+    setCV('')
+    setEmail('')
+    setAddress('')
+    setPhoneNumber('')
+    setCV('')
+    setClient('')
+    setSalary('')
+    setCurrentStep(1)
 
     // Close the modal
-    toggleModal();
-  };
+    toggleModal()
+    setAddEmployee(true)
+    console.log('add employee')
+  }
 
   return (
     <div>
@@ -222,7 +223,7 @@ const Employees = () => {
       <div className="justify-center">
         <div className="dark:text-gray-200 dark:bg-secondary-dark-bg ml-4 mr-4 mt-20 mb-10">
           <div className="flex items-center mb-2 ">
-            <p className="font-bold text-3xl">Employees</p>
+            <p className="font-semibold text-2xl">Employees</p>
             <div className="search-input-container">
               <input
                 type="text"
@@ -237,7 +238,7 @@ const Employees = () => {
             </div>
           </div>
         </div>
-        <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
+        <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-xl">
           <GridComponent
             dataSource={getFilteredData()}
             enableHover={false}
@@ -282,8 +283,11 @@ const Employees = () => {
                 headerText="Position"
                 width="300"
               />
-              <ColumnDirective field="department" 
-              headerText="Department" cssClass="department-column" />
+              <ColumnDirective
+                field="department"
+                headerText="Department"
+                cssClass="department-column"
+              />
               <ColumnDirective
                 field="phoneNumber"
                 headerText="Phone Number"
@@ -315,7 +319,6 @@ const Employees = () => {
               ]}
             />
           </GridComponent>
-         
         </div>
       </div>
 
@@ -328,160 +331,209 @@ const Employees = () => {
                   Add Employee
                   <MdOutlineCancel onClick={handleCancel} />
                 </h2>
-                <div className="form-row">
-                  <label htmlFor="firstname">
-                    First Name
-                    <input
-                      type="text"
-                      id="firstname"
-                      value={firstName}
-                      onChange={handleFirstNameChange}
-                    />
-                  </label>
-                  <label htmlFor="lastname">
-                    Last Name
-                    <input
-                      type="text"
-                      id="lastname"
-                      value={lastName}
-                      onChange={handleLastNameChange}
-                    />
-                  </label>
-                </div>
-                <label htmlFor="email">
-                  Email
-                  <input
-                    type="text"
-                    id="email"
-                    value={email}
-                    onChange={handleEmailChange}
-                  />
-                </label>
-                <label htmlFor="address">
-                  Address
-                  <input
-                    type="text"
-                    id="address"
-                    value={address}
-                    onChange={handleAddressChange}
-                  />
-                </label>
-                <label htmlFor="phonenumber">
-                  Phone Number
-                  <input
-                    type="number"
-                    id="phonenumber"
-                    value={phoneNumber}
-                    placeholder="phonenumber"
-                    onChange={handlePhoneNumberChange}
-                  />
-                </label>
-                <label>Upload CV</label>
-                <label htmlFor="uploadcv" className="file-upload-label">
-                  <div className="file-upload-box">
-                    <div className="file-upload-icon">
-                      <AiOutlineUpload />
+                <div className="w-full max-w-lg">
+                  <div className="flex flex-wrap -mx-3 mb-6">
+                    <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0">
+                      <label htmlFor="firstname">
+                        First Name
+                        <input
+                          type="text"
+                          id="firstname"
+                          value={firstName}
+                          placeholder="employees firstname"
+                          onChange={handleFirstNameChange}
+                        />
+                      </label>
                     </div>
-                    <div className="file-upload-text">Select or Drop file</div>
+                    <div className="w-full md:w-1/2 px-3">
+                      <label htmlFor="lastname">
+                        Last Name
+                        <input
+                          type="text"
+                          id="lastname"
+                          value={lastName}
+                          placeholder="employees lastname"
+                          onChange={handleLastNameChange}
+                        />
+                      </label>
+                    </div>
                   </div>
-                  <input
-                    type="file"
-                    id="uploadcv"
-                    accept=".pdf,.doc,.docx"
-                    onChange={handleCVChange}
-                  />
-                </label>
-                <div className="file-input-icon">
-                  <AiOutlinePaperClip className="upload-icon" />
-                  <span>Select Files</span>
+                  <div className="flex flex-wrap -mx-3 mb-12">
+                    <div className="w-full px-3 -mt-6">
+                      <label htmlFor="email">
+                        Email
+                        <input
+                          type="text"
+                          id="email"
+                          value={email}
+                          placeholder="employees email"
+                          onChange={handleEmailChange}
+                        />
+                      </label>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap -mx-3 mb-12">
+                    <div className="w-full px-3 -mt-12">
+                      <label htmlFor="address">
+                        Address
+                        <input
+                          type="text"
+                          id="address"
+                          value={address}
+                          placeholder="employees address"
+                          onChange={handleAddressChange}
+                        />
+                      </label>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap -mx-3 mb-12">
+                    <div className="w-full px-3 -mt-12">
+                      <label htmlFor="phonenumber">
+                        Phone Number
+                        <input
+                          type="number"
+                          id="phonenumber"
+                          value={phoneNumber}
+                          placeholder="employees's Phonenumber"
+                          onChange={handlePhoneNumberChange}
+                        />
+                      </label>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap -mx-3 mb-12">
+                    <div className="w-full px-3 -mt-12">
+                      <label>Upload CV</label>
+                      <label htmlFor="uploadcv" className="file-upload-label">
+                        <div className="file-upload-box">
+                          <div className="file-upload-icon">
+                            <AiOutlineUpload />
+                          </div>
+                          <div className="file-upload-text">
+                            Select or Drop file
+                          </div>
+                        </div>
+                        <input
+                          type="file"
+                          id="uploadcv"
+                          accept=".pdf,.doc,.docx"
+                          onChange={handleCVChange}
+                        />
+                      </label>
+                    </div>
+                  </div>
+                  <div className="file-input-icon">
+                    <AiOutlinePaperClip className="upload-icon" />
+                    <span>Select Files</span>
+                  </div>
+                  <button onClick={handleNext}>Next</button>
                 </div>
-
-                <button type="button" onClick={handleNext}>
-                  Next
-                </button>
               </div>
             )}
 
             {currentStep === 2 && (
               <div>
-                <h2>Add Employee</h2>
-                <MdOutlineCancel onClick={handleCancel} />
-                <label htmlFor="client">
-                  Client
-                  <input
-                    type="text"
-                    id="client"
-                    value={client}
-                    onChange={handleClientChange}
-                  />
-                </label>
-                <div className="form-row">
-                  <label htmlFor="datepicker">Contract Start Date </label>
-                  <DatePickerComponent
-                    id="datepicker"
-                    placeholder="Select a date"
-                    format="yyyy-MM-dd"
-                    value={contractStartDate}
-                    onChange={(args) => setContractStartDate(args.value)}
-                  />
-                  <label htmlFor="datepicker">Contract End Date </label>
-                  <DatePickerComponent
-                    id="datepicker"
-                    placeholder="Select a date"
-                    format="yyyy-MM-dd"
-                    value={contractEndDate}
-                    onChange={(args) => setContractEndDate(args.value)}
-                  />
+                <h2 className="modal-heading">Add Employee</h2>
+                <div className="flex flex-wrap -mx-3 mb-12">
+                  <div className="w-full px-8 mb-3 md:mb-0">
+                    <label htmlFor="client" className="form-label">
+                      Client
+                      <input
+                        type="text"
+                        id="client"
+                        value={client}
+                        placeholder="Client"
+                        onChange={handleClientChange}
+                      />
+                    </label>
+                  </div>
                 </div>
-                <label htmlFor="designation">
-                  Designation
-                  <DropDownListComponent
-                    dataSource={designation}
-                    fields={{ text: "Role", value: "Id" }}
-                    placeholder="Select a designation"
-                    value={designationId}
-                    change={(args) => setDesignationId(args.value)}
-                  />
-                </label>
-                <label htmlFor="department">
-                Department
-                <DropDownListComponent
-                  dataSource={department}
-                  fields={{ text: "Dept", value: "Id" }}
-                  placeholder="Select a department"
-                  value={departmentId}
-                  change={(args) => setDepartmentId(args.value)}
-                />
-              </label>
-                <label htmlFor="salary">
-                  Salary Renumeration
-                  <input
-                    type="text"
-                    id="salary"
-                    value={salary}
-                    onChange={handleSalaryChange}
-                  />
-                </label>
-                <label htmlFor="empType">
-                  Employment Type
-                  <DropDownListComponent
-                    dataSource={empType}
-                    fields={{ text: "Emp", value: "type" }}
-                    placeholder="Select an Status Type"
-                    value={statusId}
-                    change={(args) => setStatusId(args.value)}
-                  />
-                </label>
-                <button type="button" onClick={handleSubmit}>
-                  Add Employee
-                </button>
+                <div className="form-row -mt-12">
+                  <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0">
+                    <label htmlFor="datepicker">Contract Start Date </label>
+                    <DatePickerComponent
+                      id="datepicker"
+                      placeholder="Select a date"
+                      format="yyyy-MM-dd"
+                      value={contractStartDate}
+                      onChange={(args) => setContractStartDate(args.value)}
+                    />
+                  </div>
+                  <div className="w-full md:w-1/2 px-3">
+                    <label htmlFor="datepicker">Contract End Date </label>
+                    <DatePickerComponent
+                      id="datepicker"
+                      placeholder="Select a date"
+                      format="yyyy-MM-dd"
+                      value={contractEndDate}
+                      onChange={(args) => setContractEndDate(args.value)}
+                    />
+                  </div>
+                </div>
+
+                <div className="w-full px-3 mt-6">
+                  <label htmlFor="designation">
+                    Designation
+                    <DropDownListComponent
+                      dataSource={designation}
+                      fields={{ text: 'Role', value: 'Id' }}
+                      placeholder="Select a designation"
+                      value={designationId}
+                      change={(args) => setDesignationId(args.value)}
+                    />
+                  </label>
+                </div>
+                <div className="w-full px-3 mt-6">
+                  <label htmlFor="department">
+                    Department
+                    <DropDownListComponent
+                      dataSource={department}
+                      fields={{ text: 'Dept', value: 'Id' }}
+                      placeholder="Select a department"
+                      value={departmentId}
+                      change={(args) => setDepartmentId(args.value)}
+                    />
+                  </label>
+                </div>
+                <div className="w-full px-3 mt-6">
+                  <label htmlFor="salary">
+                    Salary Renumeration
+                    <input
+                      type="text"
+                      id="salary"
+                      value={salary}
+                      onChange={handleSalaryChange}
+                    />
+                  </label>
+                </div>
+                <div className="w-full px-3 mb-6">
+                  <label htmlFor="empType">
+                    Employment Type
+                    <DropDownListComponent
+                      dataSource={empType}
+                      fields={{ text: 'Emp', value: 'type' }}
+                      placeholder="Select an Status Type"
+                      value={statusId}
+                      change={(args) => setStatusId(args.value)}
+                    />
+                  </label>
+                </div>
+                <button onClick={handleSubmit}>Add Employee</button>
               </div>
             )}
           </div>
         </div>
       )}
+      {addEmployee && (
+        <div className="success-dialog -mt-12 " >
+          <h1>Employee Added Successfully</h1>
+          <p>You have succesfully added {firstName}{lastName} as an Hampshire Heights Employee</p>
+          <button onClick={() => setAddEmployee(false)}>Send Acceptance Letter</button>
+          <button onClick={() => setAddEmployee(false)}>View Profile</button>
+          <button onClick={() => setAddEmployee(false)}>x</button>
+        </div>
+      )}
     </div>
-  );
-};
+  )
+}
 
-export default Employees;
+export default Employees

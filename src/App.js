@@ -12,7 +12,6 @@ import {
   Pyramid,
   Kanban,
   Bar,
-  ColorPicker,
   ColorMapping,
 } from "./pages";
 import "./App.css";

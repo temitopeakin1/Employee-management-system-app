@@ -23,7 +23,7 @@ const Greeting = () => {
 
   return (
     <div>
-      <h1>{greeting}, Admin</h1>
+      <h1 className="font-bold text-2xl">{greeting}, Admin</h1>
     </div>
   );
 };
