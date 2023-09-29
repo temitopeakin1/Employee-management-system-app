@@ -9,7 +9,6 @@ import { ThemeSettings, Notification, UserProfile } from '.'
 import { useStateContext } from '../contexts/ContextProvider'
 import { AiOutlineMenu } from 'react-icons/ai'
 // import Button from "./shared/Button";
-import { useLocation } from 'react-router-dom'
 import Employees from '../pages/Employees'
 
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
@@ -42,7 +41,6 @@ const Navbar = () => {
     screenSize,
   } = useStateContext()
 
-  const location = useLocation()
   const [isModalVisible, setModalVisible] = useState(false)
 
   const toggleModal = () => {
@@ -74,8 +72,6 @@ const Navbar = () => {
   }, [screenSize, setActiveMenu])
 
   const handleActiveMenu = () => setActiveMenu(!activeMenu)
-
-  const isEmployeesPage = location.pathname === '/Employees'
 
   return (
     <div className="flex justify-between p-2 md:ml-2 md:mr-6 relative">
