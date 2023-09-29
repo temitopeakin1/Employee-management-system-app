@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import logo from '../assets/logo.png'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -12,10 +12,14 @@ const Login = () => {
   const [errors, setErrors] = useState({})
 
   const handleChange = (event) => {
-    const { name, value } = event.target
+    const { name, value, type, checked } = event.target
+
+    // updating the check box
+    const newValue = type === 'checkbox' ? checked : value
+
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: newValue,
     })
   }
 
@@ -61,7 +65,7 @@ const Login = () => {
       <div className="flex-1 bg-white text-black p-10 flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl mb-4 mt-8">
-            <strong>Let's get started with creating an account</strong>
+            <strong>Let's Login to your Hampshire Heights Account</strong>
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
@@ -96,6 +100,25 @@ const Login = () => {
                 <div className="text-red-500 text-sm">{errors.password}</div>
               )}
             </div>
+            <div className="mb-4 flex items-center">
+              <input
+                type="checkbox"
+                name="rememberMe"
+                id="rememberMe"
+                checked={formData.rememberMe}
+                onChange={handleChange}
+                className="mr-2"
+              />
+              <label htmlFor="rememberMe" className="text-sm">
+                Remember me
+              </label>
+              <Link
+                to="/forgot-password"
+                className="text-orange-500 font-semibold"
+              >
+                Forgot password?
+              </Link>
+            </div>
 
             <div className="mb-4 flex flex-col">
               <button
@@ -106,9 +129,22 @@ const Login = () => {
               </button>
               <p className="text-sm mt-1 p-2 w-2/3">
                 Don't have an account?{' '}
-                <a href="/register" className="text-orange-500 text-sm font-semibold">
+                <a
+                  href="/register"
+                  className="text-orange-500 text-sm font-semibold"
+                >
                   Register here
                 </a>
+              </p>
+              <p className="text-sm mt-8 p-2 w-2/3 ">
+                &copy;Copyright 2023 All rights reserved,
+                <Link to="#" className="text-orange-500 text-sm font-semibold">
+                  Term & Condition{' '}
+                </Link>{' '}
+                |{' '}
+                <Link to="#" className="text-orange-500 text-sm font-semibold">
+                  Privacy & Policy
+                </Link>
               </p>
             </div>
           </form>

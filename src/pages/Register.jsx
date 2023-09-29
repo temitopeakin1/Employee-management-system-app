@@ -172,6 +172,8 @@ const Register = () => {
                   Login here
                 </Link>
               </p>
+              <p className='text-sm mt-3 p-2 w-2/3 '>
+              &copy;Copyright 2023 All rights reserved,<Link to="#" className='text-orange-500 text-sm font-semibold'>Term & Condition </Link>  |  <Link to= "#" className="text-orange-500 text-sm font-semibold">Privacy & Policy</Link></p>
             </div>
           </form>
         </div>
