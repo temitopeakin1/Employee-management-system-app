@@ -66,7 +66,7 @@ const Register = () => {
   }
 
   return (
-    <div className="flex">
+    <div className="flex h-screen">
       <div className="flex-1 bg-black text-white p-10 flex items-center justify-center">
         <div className="pl-18">
           <img src={logo} alt="Logo" style={{ height: '35px' }} />
