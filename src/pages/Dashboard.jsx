@@ -13,7 +13,7 @@ import {
 import { Pie } from "../components";
 import { deptData } from "../data/dummy";
 import { FiPhone } from "react-icons/fi";
-import Greeting from "./Greeting";
+import Greeting from "../components/Greeting";
 
 
 
@@ -58,7 +58,6 @@ useEffect(() => {
     setAverageSalary("N/A");
   }
 }, [employeesData]);
-
 
 // calculate the kpi's
   const targetTotalEmployees = 80;
@@ -164,7 +163,7 @@ useEffect(() => {
               <ColumnDirective
                 field="id"
                 headerText="ID"
-                width="100"
+                width="90"
                 template={(rowData) => (
                   <div>
                     <div className="text font-semibold">{rowData.id}</div>
@@ -174,7 +173,7 @@ useEffect(() => {
               <ColumnDirective
                 field="fullName"
                 headerText="Name"
-                width="300"
+                width="150"
                 template={(rowData) => (
                   <div>
                     <div className="text font-semibold">
@@ -189,7 +188,7 @@ useEffect(() => {
               <ColumnDirective
                 field="designation"
                 headerText="Position"
-                width="300"
+                width="200"
               />
               <ColumnDirective field="department" headerText="Department" />
               <ColumnDirective
@@ -205,6 +204,7 @@ useEffect(() => {
               <ColumnDirective
                 field="empType"
                 headerText="Status"
+                width="120"
                 textAlign="left"
               />
             </ColumnsDirective>

@@ -1,37 +1,24 @@
-import React, { useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { FiSettings } from "react-icons/fi";
-import { TooltipComponent } from "@syncfusion/ej2-react-popups";
-
-import { Navbar, Sidebar, ThemeSettings } from "./components";
+import React, { useEffect } from 'react';
 import {
-  Dashboard,
-  Calendar,
-  Employees,
-  Stacked,
-  Pyramid,
-  Kanban,
-  Bar,
-  ColorMapping,
-} from "./pages";
-import "./App.css";
-
-import { useStateContext } from "./contexts/ContextProvider";
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation,
+} from 'react-router-dom';
+import { Navbar, Sidebar } from './components';
+import LandingPage from './pages/LandingPage';
+import Register from './pages/Register';
+import Login from './pages/Login';
+import { Dashboard, Calendar, Employees } from './pages';
+import './App.css';
+import { useStateContext } from './contexts/ContextProvider';
 
 const App = () => {
-  const {
-    setCurrentColor,
-    setCurrentMode,
-    currentMode,
-    activeMenu,
-    currentColor,
-    themeSettings,
-    setThemeSettings,
-  } = useStateContext();
+  const { setCurrentColor, setCurrentMode, currentMode } = useStateContext();
 
   useEffect(() => {
-    const currentThemeColor = localStorage.getItem("colorMode");
-    const currentThemeMode = localStorage.getItem("themeMode");
+    const currentThemeColor = localStorage.getItem('colorMode');
+    const currentThemeMode = localStorage.getItem('themeMode');
     if (currentThemeColor && currentThemeMode) {
       setCurrentColor(currentThemeColor);
       setCurrentMode(currentThemeMode);
@@ -39,67 +26,69 @@ const App = () => {
   }, [setCurrentColor, setCurrentMode]);
 
   return (
-    <div className={currentMode === "Dark" ? "dark" : ""}>
-      <BrowserRouter>
-        <div className="flex relative dark:bg-main-dark-bg">
-          <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
-            <TooltipComponent content="Settings" position="top">
-              <button
-                type="button"
-                onClick={() => setThemeSettings(true)}
-                style={{ background: currentColor, borderRadius: "50%" }}
-                className="text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray"
-              >
-                <FiSettings />
-              </button>
-            </TooltipComponent>
-          </div>
-          {activeMenu ? (
-            <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-brown ">
-              <Sidebar />
-            </div>
-          ) : (
-            <div className="w-0 dark:bg-secondary-dark-bg">
-              <Sidebar />
-            </div>
-          )}
-          <div
-            className={
-              activeMenu
-                ? "dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full  "
-                : "bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 "
-            }
-          >
-            <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
+    <BrowserRouter>
+      <AppContent currentMode={currentMode} />
+    </BrowserRouter>
+  );
+}
+
+const AppContent = ({ currentMode }) => {
+  const location = useLocation();
+
+  // Check if the current route is the landing page, register, or login
+  const isLandingPage = location.pathname === '/';
+  const isRegister = location.pathname === '/register';
+  const isLogin = location.pathname === '/login';
+
+  return (
+    <div className={currentMode === 'Dark' ? 'dark' : ''}>
+      <div className="flex relative dark:bg-main-dark-bg">
+        <div
+          className="fixed right-4 bottom-4"
+          style={{ zIndex: '1000' }}
+        ></div>
+        <div
+          className={
+            isLandingPage || isRegister || isLogin
+              ? 'w-0 dark:bg-secondary-dark-bg'
+              : 'w-72 fixed sidebar dark:bg-secondary-dark-bg bg-brown'
+          }
+        >
+          {!isLandingPage && !isRegister && !isLogin && <Sidebar />} 
+        </div>
+        <div
+          className={
+            isLandingPage
+              ? 'bg-main-bg dark:bg-main-dark-bg w-full min-h-screen flex-2'
+              : 'dark:bg-main-dark-bg bg-main-bg min-h-screen md:ml-72 w-full'
+          }
+        >
+          {!isLandingPage && !isRegister && !isLogin && (
+            <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
               <Navbar />
             </div>
-            <div>
-              {themeSettings && <ThemeSettings />}
+          )}
 
-              <Routes>
-                {/* dashboard  */}
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/dashboard" element={<Dashboard />} />
+          <div>
+            <Routes>
+              {/* Landing Page (default route) */}
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              {/* dashboard */}
+              <Route path="/dashboard" element={<Dashboard />} />
+              {/* pages */}
+              <Route path="/employees" element={<Employees />} />
 
-                {/* pages  */}
-                <Route path="/employees" element={<Employees />} />
-
-                {/* apps  */}
-                <Route path="/kanban" element={<Kanban />} />
-                <Route path="/calendar" element={<Calendar />} />
-
-                {/* charts  */}
-                <Route path="/bar" element={<Bar />} />
-                <Route path="/color-mapping" element={<ColorMapping />} />
-                <Route path="/pyramid" element={<Pyramid />} />
-                <Route path="/stacked" element={<Stacked />} />
-              </Routes>
-            </div>
+              {/* apps */}
+              <Route path="/calendar" element={<Calendar />} />
+            </Routes>
           </div>
         </div>
-      </BrowserRouter>
+      </div>
     </div>
   );
-};
+}
 
 export default App;
+

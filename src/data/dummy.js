@@ -476,7 +476,7 @@ export const links = [
         icon: <SiStopstalk/>
       },
       {
-        name: 'Calender',
+        name: 'Calendar',
         icon: <AiOutlineCalendar />,
       },
       {

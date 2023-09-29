@@ -43,14 +43,16 @@ span {
   font-size: 1rem;
 }
 
-.modal-heading 
+.custom-header-text {
+  font-size: 5px; 
+}
 
 .modal h2 {
   margin-left: 2px;
   margin-top: 2px;
   margin-bottom: 10px;
   font-weight: 600;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .modal-content {
@@ -74,7 +76,7 @@ span {
 
 .modal-content label {
   margin-bottom: 1rem;
-  color: #000000;
+  color: #675858;
   font-size: 12px;
 }
 
@@ -88,16 +90,16 @@ span {
   margin-bottom: 1rem;
 }
 
-.modal-content button {
-  padding: .4rem 15rem;
+button {
+  padding: .3rem 15rem;
   border: none;
-  border-radius: 7px;
+  border-radius: 5px;
   align-items: center;
-  margin-bottom: 1em;
+  margin-bottom: .5em;
   background: #ec5c28;
   color: #ffff;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 800;
   white-space: nowrap;
 }
 
@@ -109,7 +111,18 @@ span {
   padding: .4rem;
   border: 1px solid #ccc;
   border-radius: 7px;
-  font-size: 16px;
+  font-size: 12px;
+}
+
+label {
+  text-align: left;
+  margin-right: 50px;
+  width: 30%; /* Adjust the width as needed */
+  display: inline-block;
+}
+input {
+  margin: 0;
+  display: block;
 }
 
 .file-upload-label {
@@ -118,7 +131,7 @@ span {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  border: 3px dashed #ec5c28;;
+  border: 1px dashed #ec5c28;;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -230,3 +243,23 @@ span {
 .e-input-group:not(.e-float-icon-left), .e-input-group.e-success:not(.e-float-icon-left), .e-input-group.e-warning:not(.e-float-icon-left), .e-input-group.e-error:not(.e-float-icon-left), .e-input-group.e-control-wrapper:not(.e-float-icon-left), .e-input-group.e-control-wrapper.e-success:not(.e-float-icon-left), .e-input-group.e-control-wrapper.e-warning:not(.e-float-icon-left), .e-input-group.e-control-wrapper.e-error:not(.e-float-icon-left){
   border: none;
 }
+
+/* Add Employee notification */
+ .btn-primary {
+  background: #ec5c28;
+  z-index: 9999;
+  color: #fff;
+  border: 1px solid #f00;
+  border-radius: 5px;
+  padding: 8px 8px;
+ }
+
+ .btn-primary:hover {
+  color: #ec5c28;
+  background: #fff;
+ }
+
+ 
+
+
+ 
