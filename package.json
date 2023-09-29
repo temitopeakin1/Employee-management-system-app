@@ -1,6 +1,7 @@
 {
   "name": "hampshire-crm",
   "version": "0.1.0",
+  "homepage": "http://hampshire-crm.com",
   "private": true,
   "dependencies": {
     "@supabase/supabase-js": "^2.33.2",
