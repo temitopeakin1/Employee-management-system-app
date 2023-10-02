@@ -1,44 +1,39 @@
-import React, { useEffect } from 'react';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  useLocation,
-} from 'react-router-dom';
-import { Navbar, Sidebar } from './components';
-import LandingPage from './pages/LandingPage';
-import Register from './pages/Register';
-import Login from './pages/Login';
-import { Dashboard, Calendar, Employees } from './pages';
-import './App.css';
-import { useStateContext } from './contexts/ContextProvider';
+import React, { useEffect } from 'react'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { Sidebar } from './components'
+import LandingPage from './pages/LandingPage'
+import Register from './pages/Register'
+import Login from './pages/Login'
+import { Dashboard, Calendar, Employees } from './pages'
+import './App.css'
+import { useStateContext } from './contexts/ContextProvider'
 
 const App = () => {
-  const { setCurrentColor, setCurrentMode, currentMode } = useStateContext();
+  const { setCurrentColor, setCurrentMode, currentMode } = useStateContext()
 
   useEffect(() => {
-    const currentThemeColor = localStorage.getItem('colorMode');
-    const currentThemeMode = localStorage.getItem('themeMode');
+    const currentThemeColor = localStorage.getItem('colorMode')
+    const currentThemeMode = localStorage.getItem('themeMode')
     if (currentThemeColor && currentThemeMode) {
-      setCurrentColor(currentThemeColor);
-      setCurrentMode(currentThemeMode);
+      setCurrentColor(currentThemeColor)
+      setCurrentMode(currentThemeMode)
     }
-  }, [setCurrentColor, setCurrentMode]);
+  }, [setCurrentColor, setCurrentMode])
 
   return (
     <BrowserRouter>
       <AppContent currentMode={currentMode} />
     </BrowserRouter>
-  );
+  )
 }
 
 const AppContent = ({ currentMode }) => {
-  const location = useLocation();
+  const location = useLocation()
 
   // Check if the current route is the landing page, register, or login
-  const isLandingPage = location.pathname === '/';
-  const isRegister = location.pathname === '/register';
-  const isLogin = location.pathname === '/login';
+  const isLandingPage = location.pathname === '/'
+  const isRegister = location.pathname === '/register'
+  const isLogin = location.pathname === '/login'
 
   return (
     <div className={currentMode === 'Dark' ? 'dark' : ''}>
@@ -54,21 +49,15 @@ const AppContent = ({ currentMode }) => {
               : 'w-72 fixed sidebar dark:bg-secondary-dark-bg bg-brown'
           }
         >
-          {!isLandingPage && !isRegister && !isLogin && <Sidebar />} 
+          {!isLandingPage && !isRegister && !isLogin && <Sidebar />}
         </div>
         <div
           className={
-            isLandingPage || isRegister || isLogin 
+            isLandingPage || isRegister || isLogin
               ? 'bg-main-bg dark:bg-main-dark-bg w-full min-h-screen flex-2'
               : 'dark:bg-main-dark-bg bg-main-bg min-h-screen md:ml-72 w-full'
           }
         >
-          {!isLandingPage && !isRegister && !isLogin && (
-            <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
-              <Navbar />
-            </div>
-          )}
-
           <div>
             <Routes>
               {/* Landing Page (default route) */}
@@ -87,8 +76,7 @@ const AppContent = ({ currentMode }) => {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
-
+export default App

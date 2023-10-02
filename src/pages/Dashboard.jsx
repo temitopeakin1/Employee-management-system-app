@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect } from 'react'
 import {
   GridComponent,
   Inject,
@@ -7,65 +7,64 @@ import {
   Search,
   Page,
   Toolbar,
-} from "@syncfusion/ej2-react-grids";
+} from '@syncfusion/ej2-react-grids'
 // import { useStateContext } from "../contexts/ContextProvider";
+import Navbar from '../components/Navbar'
+import { Pie } from '../components'
+import { deptData } from '../data/dummy'
+import { FiPhone } from 'react-icons/fi'
+import Greeting from '../components/Greeting'
 
-import { Pie } from "../components";
-import { deptData } from "../data/dummy";
-import { FiPhone } from "react-icons/fi";
-import Greeting from "../components/Greeting";
-
-
-
-const Dashboard = ({Dashboard }) => {
-  const [averageSalary, setAverageSalary] = useState(0);
-  const toolbarOptions = ["Search"];
-  const editing = { allowediting: true, allowDeleting: true };
-  const selectionsettings = { persistSelection: true };
+const Dashboard = ({ Dashboard }) => {
+  const [averageSalary, setAverageSalary] = useState(0)
+  const toolbarOptions = ['Search']
+  const editing = { allowediting: true, allowDeleting: true }
+  const selectionsettings = { persistSelection: true }
 
   // Retrieve employee data from local storage using useMemo to
   const employeesData = useMemo(() => {
-    const storedData = localStorage.getItem("employeesData");
-    return storedData ? JSON.parse(storedData) : [];
-  }, []);
+    const storedData = localStorage.getItem('employeesData')
+    return storedData ? JSON.parse(storedData) : []
+  }, [])
 
   // Calculate total employees and contract employees
-  const totalEmployees = employeesData.length;
+  const totalEmployees = employeesData.length
   const totalContractEmployees = employeesData.filter(
-    (employee) => employee.empType === "Contract"
-  ).length;
+    (employee) => employee.empType === 'Contract',
+  ).length
 
   // Calculate average salary
-useEffect(() => {
-  const totalSalary = employeesData.reduce((total, employee) => {
-    const employeeSalary = parseFloat(employee.salary);
-    if (!isNaN(employeeSalary)) {
-      return total + employeeSalary;
+  useEffect(() => {
+    const totalSalary = employeesData.reduce((total, employee) => {
+      const employeeSalary = parseFloat(employee.salary)
+      if (!isNaN(employeeSalary)) {
+        return total + employeeSalary
+      }
+      return total
+    }, 0)
+
+    const validEmployeesCount = employeesData.filter((employee) => {
+      const employeeSalary = parseFloat(employee.salary)
+      return !isNaN(employeeSalary)
+    }).length
+
+    if (validEmployeesCount > 0) {
+      const avgSalary = totalSalary / validEmployeesCount
+      setAverageSalary(avgSalary.toFixed(2)) // Convert to fixed decimal places if needed
+    } else {
+      // Handle the case when there are no valid salaries
+      setAverageSalary('N/A')
     }
-    return total;
-  }, 0);
+  }, [employeesData])
 
-  const validEmployeesCount = employeesData.filter((employee) => {
-    const employeeSalary = parseFloat(employee.salary);
-    return !isNaN(employeeSalary);
-  }).length;
-
-  if (validEmployeesCount > 0) {
-    const avgSalary = totalSalary / validEmployeesCount;
-    setAverageSalary(avgSalary.toFixed(2)); // Convert to fixed decimal places if needed
-  } else {
-    // Handle the case when there are no valid salaries
-    setAverageSalary("N/A");
-  }
-}, [employeesData]);
-
-// calculate the kpi's
-  const targetTotalEmployees = 80;
-  const presentTotalEmployees = totalEmployees;
-  const totalEmployeesKPI = (presentTotalEmployees / targetTotalEmployees) * 100; 
+  // calculate the kpi's
+  const targetTotalEmployees = 80
+  const presentTotalEmployees = totalEmployees
+  const totalEmployeesKPI = (presentTotalEmployees / targetTotalEmployees) * 100
 
   return (
-    <div className="justify-center mt-2">
+    <div className="justify-center">
+    <Navbar pageTitle="Dashboard" />
       <div className="dark:text-gray-200 dark:bg-secondary-dark-bg ml-4 mr-4 mt-5 mb-10">
         <div className="justify-left">
           <p className="font-semibold text-2xl mb-10">{Dashboard}</p>
@@ -82,7 +81,9 @@ useEffect(() => {
           <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-32 rounded-xl w-full lg:w-60 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
             <div className="flex justify-between items-center">
               <div>
-                <p className="font-semibold text-gray-400 text-sm pb-3">Total Employees</p>
+                <p className="font-semibold text-gray-400 text-sm pb-3">
+                  Total Employees
+                </p>
                 <p className="text font-semibold">{totalEmployees}</p>
               </div>
             </div>
@@ -100,7 +101,9 @@ useEffect(() => {
           <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-32 rounded-xl w-full lg:w-60 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
             <div className="flex justify-between items-center">
               <div>
-                <p className="font-semibold text-gray-400 text-sm pb-3">Avg. Salary</p>
+                <p className="font-semibold text-gray-400 text-sm pb-3">
+                  Avg. Salary
+                </p>
                 <p className="text font-semibold">{averageSalary}</p>
               </div>
             </div>
@@ -108,10 +111,16 @@ useEffect(() => {
           <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-32 rounded-xl w-full lg:w-60 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
             <div className="flex justify-between items-center">
               <div>
-                <p className="font-semibold text-gray-400 text-sm pb-3">Kpi's</p>
-                <p className={`text font-semibold ${totalEmployeesKPI >= 100 ? 'text-green-500' : 'text-red-500'}`}>
-              {totalEmployeesKPI.toFixed(2)}%
-            </p>
+                <p className="font-semibold text-gray-400 text-sm pb-3">
+                  Kpi's
+                </p>
+                <p
+                  className={`text font-semibold ${
+                    totalEmployeesKPI >= 100 ? 'text-green-500' : 'text-red-500'
+                  }`}
+                >
+                  {totalEmployeesKPI.toFixed(2)}%
+                </p>
               </div>
             </div>
           </div>
@@ -213,7 +222,7 @@ useEffect(() => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Dashboard;
+export default Dashboard

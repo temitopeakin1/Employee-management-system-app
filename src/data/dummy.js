@@ -22,25 +22,6 @@ import avatar2 from './avatar2.jpg';
 import avatar3 from './avatar3.png';
 import avatar4 from './avatar4.jpg';
 
-
-
-
-//  const designation = [
-//   { Id: "1", Role: "Software Developer" },
-//   { Id: "2", Role: "Frontend Engineer" },
-//   { Id: "3", Role: "Backend Engineer" },
-//   { Id: "4", Role: "FullStack Developer" },
-//   { Id: "5", Role: "Product Designer" },
-//   { Id: "6", Role: "Scrum Master" },
-//   { Id: "7", Role: "Product Owner" },
-// ];
-
-// export const empType = [
-//   { type: "1", Emp:"Ful-Time"},
-//   { type: "2", Emp:"Contract"},
-//   { type: "3", Emp: "Part-Time" }
-// ]
-
 export const gridOrderImage = (props) => (
   <div>
     <img
@@ -494,7 +475,7 @@ export const links = [
     title: 'SUPPORT',
     links: [
       {
-        name: 'Need Help',
+        name: 'Need Help ?',
         icon: <MdOutlineHelp/>
       },
       {

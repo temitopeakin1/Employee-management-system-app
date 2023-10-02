@@ -7,7 +7,7 @@ import avatar4 from '../data/avatar4.jpg'
 // import { BsChatLeft } from "react-icons/bs";
 import { ThemeSettings, Notification, UserProfile } from '.'
 import { useStateContext } from '../contexts/ContextProvider'
-import { AiOutlineMenu } from 'react-icons/ai'
+// import { AiOutlineMenu } from 'react-icons/ai'
 // import Button from "./shared/Button";
 import Employees from '../pages/Employees'
 
@@ -19,21 +19,17 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
       style={{ color }}
       className="relative text-3xl rounded-full p-3 hover:bg-light-gray"
     >
-      <span
-        style={{ background: dotColor }}
-        className="absolute inline-flex rounded-full h-2 w-2 right-2 top-2"
-      />
-      {icon}
+      <div className="darker-icon bold-icon">{icon}</div>
     </button>
   </TooltipComponent>
 )
 
-const Navbar = () => {
+const Navbar = ({pageTitle}) => {
   const {
     setCurrentColor,
     setCurrentMode,
     currentColor,
-    activeMenu,
+    // activeMenu,
     setActiveMenu,
     handleClick,
     isClicked,
@@ -71,48 +67,35 @@ const Navbar = () => {
     }
   }, [screenSize, setActiveMenu])
 
-  const handleActiveMenu = () => setActiveMenu(!activeMenu)
-
   return (
-    <div className="flex justify-between p-2 md:ml-2 md:mr-6 relative">
-      <NavButton
-        title="Menu"
-        customFunc={handleActiveMenu}
-        color={currentColor}
-        icon=<AiOutlineMenu
-          style={{ transform: 'scale(1.5)', paddingTop: '1px' }}
-        />
-      />
+    <div className="bg-white w-full flex justify-between p-1 px-4 py-4md:ml-2 md:mr-6 relative">
       <div className="flex">
+        <p className="font-semibold text-2xl mr-5 mt-4">{pageTitle}</p>
+      </div>
+      <div className="flex ml-auto mt-3">
         <NavButton
           title="Settings"
-          dotColor="#000000"
           customFunc={() => handleClick('themeSettings')}
           color={currentColor}
           icon={<FiSettings />}
         />
         <NavButton
           title="Notification"
-          dotColor="#000000"
           customFunc={() => handleClick('notification')}
           color={currentColor}
           icon={<RiNotification3Line />}
         />
-        <TooltipComponent content="Profile" position="BottomCenter">
+        <TooltipComponent content="Profile">
           <div
             className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
             onClick={() => handleClick('userProfile')}
           >
             <img
-              className="rounded-full w-10 h-10"
+              className="rounded-full w-8 h-8"
               src={avatar4}
               alt="user-profile"
             />
-            <p>
-              <span className="text-gray-800 text-14">Hello, </span>{' '}
-              <span className="text-gray-800 text-14">Admin</span>
-            </p>
-            <MdKeyboardArrowDown className="text-gray-800 text-14" />
+            <MdKeyboardArrowDown className="text-gray-800 text-sm" />
           </div>
         </TooltipComponent>
 

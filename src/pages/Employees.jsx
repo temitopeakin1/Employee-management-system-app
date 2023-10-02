@@ -21,6 +21,7 @@ import {
   AiOutlinePaperClip,
   AiOutlineSearch,
 } from 'react-icons/ai'
+import Navbar from '../components/Navbar'
 import { MdOutlineCancel } from 'react-icons/md'
 import { FiPhone } from 'react-icons/fi'
 import dialog from '../assets/dialog.png'
@@ -232,34 +233,36 @@ const Employees = () => {
 
   return (
     <div>
-      <div className="flex justify-end mr-80 -mt-5">
-        <button
-          onClick={toggleModal}
-          className="bg-orange-500 text-white font-bold py-1 px-8 -mt-14 pt-1 rounded"
-          style={{ zIndex: 100 }}
-          disabled={addEmployee}
-        >
-          Add Employee
-        </button>
+      <div className="justify-center">
+        <Navbar
+          pageTitle={
+            <div className="flex items-center">
+              <p className="font-semibold text-2xl mr-5 -mt-4">Employees</p>
+              <div className="search-input-container">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="text-sm mb-3 ml-4 py-1 pl-8 pr-40 rounded focus:outline-none"
+                />
+                <div className="search-icon">
+                  <AiOutlineSearch size={22} className="text-gray-300" />
+                </div>
+              </div>
+              <button
+                onClick={toggleModal}
+                className="bg-orange-500 text-white font-bold py-1 px-8 -mt-2 ml-36 pt-1 rounded"
+                style={{ zIndex: 100 }}
+                disabled={addEmployee}
+              >
+                Add Employee
+              </button>
+            </div>
+          }
+        />
       </div>
       <div className="justify-center">
-        <div className="dark:text-gray-200 dark:bg-secondary-dark-bg ml-4 mr-4 mt-20 mb-10">
-          <div className="flex items-center mb-2 ">
-            <p className="font-semibold text-2xl">Employees</p>
-            <div className="search-input-container">
-              <input
-                type="text"
-                placeholder="Search..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="mb-3 ml-20 py-2 pl-8 pr-40 rounded border border-gray-300 focus:outline-none"
-              />
-              <div className="search-icon">
-                <AiOutlineSearch size={18} className="text-gray-500" />
-              </div>
-            </div>
-          </div>
-        </div>
         <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-xl">
           <GridComponent
             dataSource={getFilteredData()}
