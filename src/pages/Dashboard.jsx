@@ -8,7 +8,6 @@ import {
   Page,
   Toolbar,
 } from '@syncfusion/ej2-react-grids'
-// import { useStateContext } from "../contexts/ContextProvider";
 import Navbar from '../components/Navbar'
 import { Pie } from '../components'
 import { deptData } from '../data/dummy'
@@ -18,7 +17,6 @@ import Greeting from '../components/Greeting'
 const Dashboard = ({ Dashboard }) => {
   const [averageSalary, setAverageSalary] = useState(0)
   const toolbarOptions = ['Search']
-  const editing = { allowediting: true, allowDeleting: true }
   const selectionsettings = { persistSelection: true }
 
   // Retrieve employee data from local storage using useMemo to
@@ -53,7 +51,7 @@ const Dashboard = ({ Dashboard }) => {
       setAverageSalary(avgSalary.toFixed(2)) // Convert to fixed decimal places if needed
     } else {
       // Handle the case when there are no valid salaries
-      setAverageSalary('N/A')
+      setAverageSalary(0)
     }
   }, [employeesData])
 
@@ -78,7 +76,7 @@ const Dashboard = ({ Dashboard }) => {
       </div>
       <div className="-mt-5">
         <div className="flex flex-wrap lg:flex-nowrap gap-.5 justify-center ">
-          <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-32 rounded-xl w-full lg:w-60 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
+          <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-32 rounded-sm w-full lg:w-60 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
             <div className="flex justify-between items-center">
               <div>
                 <p className="font-semibold text-gray-400 text-sm pb-3">
@@ -88,7 +86,7 @@ const Dashboard = ({ Dashboard }) => {
               </div>
             </div>
           </div>
-          <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-32 rounded-xl w-full lg:w-60 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
+          <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-32 rounded-sm w-full lg:w-60 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
             <div className="flex justify-between items-center">
               <div>
                 <p className="font-semibold text-gray-400 text-sm pb-3">
@@ -98,7 +96,7 @@ const Dashboard = ({ Dashboard }) => {
               </div>
             </div>
           </div>
-          <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-32 rounded-xl w-full lg:w-60 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
+          <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-32 rounded-sm w-full lg:w-60 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
             <div className="flex justify-between items-center">
               <div>
                 <p className="font-semibold text-gray-400 text-sm pb-3">
@@ -108,7 +106,7 @@ const Dashboard = ({ Dashboard }) => {
               </div>
             </div>
           </div>
-          <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-32 rounded-xl w-full lg:w-60 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
+          <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-32 rounded-sm w-full lg:w-60 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
             <div className="flex justify-between items-center">
               <div>
                 <p className="font-semibold text-gray-400 text-sm pb-3">
@@ -128,7 +126,7 @@ const Dashboard = ({ Dashboard }) => {
 
         <div className="flex justify-center">
           <div className="flex-grow ml-100">
-            <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg ml-4 mr-4 p-4 rounded-1xl">
+            <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg ml-4 mr-4 p-4 rounded-sm">
               <div className="flex justify-between">
                 <p className="font-semibold text-l">Mancount Per Department</p>
               </div>
@@ -148,22 +146,22 @@ const Dashboard = ({ Dashboard }) => {
         </div>
 
         <div className="grid grid-cols-2 mt-3 gap-.2">
-          <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg ml-4 mr-4 p-4 rounded-1xl ">
+          <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg ml-4 mr-4 p-4 rounded-sm ">
             <p className="font-semibold text-l">Average Performance</p>
           </div>
-          <div className="h-300 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg ml-4 mr-4 p-4 rounded-1xl">
+          <div className="h-300 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg ml-4 mr-4 p-4 rounded-sm">
             <p className="font-semibold text-l">Salaries</p>
           </div>
         </div>
-        <div className="h-300 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg mt-3 ml-4 mr-4 p-4 rounded-1xll">
+        <div className="h-300 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg mt-3 ml-4 mr-4 p-4 rounded-sm">
           <GridComponent
             dataSource={employeesData}
             enableHover={false}
             width="auto"
             allowPaging
             allowSorting
+            allowSearching={true}
             pageSettings={{ pageCount: 5 }}
-            editSettings={editing}
             selectionSettings={selectionsettings}
             toolbar={toolbarOptions}
             className="custom-grid"

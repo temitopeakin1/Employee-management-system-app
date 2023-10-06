@@ -4,10 +4,8 @@ import {
   Inject,
   ColumnsDirective,
   ColumnDirective,
-  // Search,
   Page,
   Group,
-  Toolbar,
   Resize,
   Sort,
   Filter,
@@ -21,16 +19,16 @@ import {
   AiOutlinePaperClip,
   AiOutlineSearch,
 } from 'react-icons/ai'
+import { BsFillTelephoneFill } from 'react-icons/bs'
 import Navbar from '../components/Navbar'
 import { MdOutlineCancel } from 'react-icons/md'
-import { FiPhone } from 'react-icons/fi'
 import dialog from '../assets/dialog.png'
+import comfy from '../assets/comfy.png'
+import list from '../assets/list.png'
 // import Spinner from '../common/Spinner';
 
 const Employees = () => {
   const selectionsettings = { persistSelection: true }
-  const toolbarOptions = ['Delete']
-  const editing = { allowDeleting: true, allowEditing: true }
 
   const [isModalVisible, setModalVisible] = useState(false)
   const [currentStep, setCurrentStep] = useState(1)
@@ -55,6 +53,10 @@ const Employees = () => {
   const [addedFirstName, setAddedFirstName] = useState('')
   const [addedLastName, setAddedLastName] = useState('')
   const [cvFileData, setCVFileData] = useState(null)
+  const [selectedDepartment, setSelectedDepartment] = useState('All Employees')
+  const [isKebabMenuOpen, setKebabMenuOpen] = useState(false)
+  const [kebabMenuX, setKebabMenuX] = useState(0)
+  const [kebabMenuY, setKebabMenuY] = useState(0)
 
   // Define error states for form fields
   const [firstNameError, setFirstNameError] = useState('')
@@ -113,12 +115,108 @@ const Employees = () => {
     setSalary(e.target.value)
   }
 
+  // filter employee list
   const getFilteredData = () => {
-    return employeesData.filter(
-      (employee) =>
-        employee.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        employee.lastName.toLowerCase().includes(searchQuery.toLowerCase()),
-    )
+    // conditionals
+    if (selectedDepartment === 'All Employees') {
+      return employeesData.filter(
+        (employee) =>
+          employee.firstName
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase()) ||
+          employee.lastName.toLowerCase().includes(searchQuery.toLowerCase()),
+      )
+    } else {
+      return employeesData.filter(
+        (employee) =>
+          (employee.firstName
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase()) ||
+            employee.lastName
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase())) &&
+          employee.department === selectedDepartment,
+      )
+    }
+  }
+
+  const handleKebabMenuClick = (event, rowData) => {
+    event.preventDefault()
+    const cell = event.target.closest('.e-rowcell')
+    if (cell) {
+      const cellRect = cell.getBoundingClientRect()
+      setKebabMenuOpen((prevOpen) => !prevOpen) // Toggle the state
+      setKebabMenuX(cellRect.left - 200)
+      setKebabMenuY(cellRect.bottom)
+    }
+  }
+
+  // Function to handle closing the kebab menu
+  const closeKebabMenu = () => {
+    setKebabMenuOpen(false)
+  }
+
+  // Render the kebab menu when it's open
+  const renderKebabMenu = () => {
+    if (isKebabMenuOpen) {
+      return (
+        <div
+          className="kebab-menu-card absolute py-2 bg-white border rounded shadow-lg"
+          style={{
+            top: kebabMenuY,
+            left: kebabMenuX,
+            padding: '8px',
+            zIndex: 100,
+          }}
+        >
+          <ul className="list-none">
+            <li>
+              <button
+                className="cursor-pointer bg-transparent text-black py-2 px-4 w-full text-left text-sm"
+                onClick={viewProfile}
+              >
+                View Profile
+              </button>
+            </li>
+            <li>
+              <button
+                className="cursor-pointer bg-transparent text-black py-2 px-4 w-full text-left text-sm"
+                onClick={editEmployeeDetails}
+              >
+                Edit Employee Details
+              </button>
+            </li>
+            <li>
+              <button
+                className="cursor-pointer bg-transparent text-black py-2 px-4 w-full text-left text-sm"
+                onClick={viewAllEmployees}
+              >
+                View Employees
+              </button>
+            </li>
+          </ul>
+        </div>
+      )
+    }
+    return null
+  }
+
+  // Function to handle "View Profile" option
+  const viewProfile = () => {
+    // Implement the logic for viewing the employee's profile
+    closeKebabMenu()
+  }
+
+  // Function to handle "Edit Employee Details" option
+  const editEmployeeDetails = () => {
+    // Implement the logic for editing the employee's details
+    closeKebabMenu()
+  }
+
+  // Function to handle "View Employees" option
+  const viewAllEmployees = () => {
+    // Implement the logic for viewing all employees
+    closeKebabMenu()
   }
 
   const handleCancel = () => {
@@ -136,6 +234,15 @@ const Employees = () => {
     toggleModal()
   }
 
+  const departmentFilters = [
+    'All Employees',
+    'Marketing',
+    'Accounting',
+    'Human Resources',
+    'IT Support',
+    'Software Engineering',
+  ]
+
   const designation = [
     { Id: '1', Role: 'Software Developer' },
     { Id: '2', Role: 'Frontend Engineer' },
@@ -149,16 +256,19 @@ const Employees = () => {
   ]
 
   const department = [
-    { Id: '1', Dept: 'Software Engineering' },
-    { Id: '2', Dept: 'Administrative' },
-    { Id: '3', Dept: 'Human Resources' },
+    { Id: '1', Dept: 'Software Engineering', Color: 'software' },
+    { Id: '2', Dept: 'Administrative', Color: 'administrative' },
+    { Id: '3', Dept: 'Human Resources', Color: 'hr' },
   ]
 
   const empType = [
-    { type: '1', Emp: 'Full-Time' },
+    { type: '1', Emp: 'FullTime' },
     { type: '2', Emp: 'Contract' },
-    { type: '3', Emp: 'Part-Time' },
+    { type: '3', Emp: 'PartTime' },
+    { type: '4', Emp: 'Intern' },
   ]
+
+  const handleSwitchView = (viewType) => {}
 
   const handleNext = () => {
     setCurrentStep(currentStep + 1)
@@ -237,7 +347,16 @@ const Employees = () => {
         <Navbar
           pageTitle={
             <div className="flex items-center">
-              <p className="font-semibold text-2xl mr-5 -mt-4">Employees</p>
+              <p
+                style={{
+                  fontFamily: 'Plus Jakarta Sans, sans-serif',
+                  fontWeight: 600,
+                  fontSize: '22px',
+                }}
+                className="font-semibold text-2xl mr-5 -mt-4"
+              >
+                Employees
+              </p>
               <div className="search-input-container">
                 <input
                   type="text"
@@ -250,9 +369,24 @@ const Employees = () => {
                   <AiOutlineSearch size={22} className="text-gray-300" />
                 </div>
               </div>
+              <div className="view-buttons border border-gray-200 rounded px-2 mb-2">
+                <button
+                  className="view-button md:w-8 md:h-8 w-6 h-6"
+                  onClick={() => handleSwitchView('grid')}
+                >
+                  <img src={list} alt="list" className="w-full h-full" />
+                </button>
+                <button
+                  className="view-button md:w-8 md:h-8 w-6 h-6"
+                  onClick={() => handleSwitchView('list')}
+                >
+                  {' '}
+                  <img src={comfy} alt="comfy" className="w-full h-full" />
+                </button>
+              </div>
               <button
                 onClick={toggleModal}
-                className="bg-orange-500 text-white font-bold py-1 px-8 -mt-2 ml-36 pt-1 rounded"
+                className="bg-orange-500 text-white font-bold py-1 px-8 -mt-2 ml-4 pt-1 rounded"
                 style={{ zIndex: 100 }}
                 disabled={addEmployee}
               >
@@ -262,20 +396,31 @@ const Employees = () => {
           }
         />
       </div>
+
       <div className="justify-center">
-        <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-xl">
+        <div className="m-10 md:m-5 pt-5 p-2 md:p-2 bg-white rounded-xl">
+          <div className="md:m-5 -mt-4 space-x-2">
+            {departmentFilters.map((department) => (
+              <button
+                key={department}
+                onClick={() => setSelectedDepartment(department)}
+                className="px-2 -py-24 bg-transparent font-semibold text-gray-400 text-sm department-filter"
+              >
+                {department}
+              </button>
+            ))}
+          </div>
           <GridComponent
             dataSource={getFilteredData()}
             enableHover={false}
             width="auto"
             allowPaging
             allowSorting
-            // allowSearching={true}
             pageSettings={{ pageCount: 5 }}
-            editSettings={editing}
             selectionSettings={selectionsettings}
-            toolbar={toolbarOptions}
+            // toolbar={toolbarOptions}
             className="custom-grid"
+            style={{ border: 'none' }}
           >
             <ColumnsDirective>
               <ColumnDirective
@@ -284,7 +429,7 @@ const Employees = () => {
                 width="90"
                 template={(rowData) => (
                   <div>
-                    <div className="text font-semibold">{rowData.id}</div>
+                    <div className="font-bold text-14">{rowData.id}</div>
                   </div>
                 )}
               />
@@ -294,12 +439,10 @@ const Employees = () => {
                 width="150"
                 template={(rowData) => (
                   <div>
-                    <div className="text font-semibold">
+                    <div className="text-sm font-semibold">
                       {rowData.firstName} {rowData.lastName}
                     </div>
-                    <div className="font-bold text-gray-400">
-                      {rowData.email}
-                    </div>
+                    <div className="text-gray-400 text-sm">{rowData.email}</div>
                   </div>
                 )}
               />
@@ -312,13 +455,26 @@ const Employees = () => {
                 field="department"
                 headerText="Department"
                 cssClass="department-column"
+                template={(rowData) => {
+                  const departmentItem = department.find(
+                    (item) => item.Dept === rowData.department,
+                  )
+                  const dotClass = `dot ${departmentItem?.Color}`
+                  return (
+                    <div>
+                      <span className={dotClass}></span>
+                      {rowData.department}
+                    </div>
+                  )
+                }}
               />
+
               <ColumnDirective
                 field="phoneNumber"
                 headerText="Phone Number"
                 template={(rowData) => (
                   <div className="flex items-center">
-                    <FiPhone className="phone-icon mr-2" />
+                    <BsFillTelephoneFill className="phone-icon mr-2" />
                     {rowData.phoneNumber}
                   </div>
                 )}
@@ -328,6 +484,33 @@ const Employees = () => {
                 headerText="Status"
                 width="120"
                 textAlign="left"
+                template={(rowData) => {
+                  let statusClass = ''
+                  if (rowData.empType === 'Contract') {
+                    statusClass = 'contract-status'
+                  } else if (rowData.empType === 'Intern') {
+                    statusClass = 'intern-status'
+                  } else if (rowData.empType === 'FullTime') {
+                    statusClass = 'fulltime-status'
+                  } else if (rowData.empType === 'PartTime') {
+                    statusClass = 'parttime-status'
+                  }
+                  return <div className={statusClass}>{rowData.empType}</div>
+                }}
+              />
+
+              <ColumnDirective
+                field="kebabMenu"
+                headerText=""
+                width="50"
+                template={(rowData) => (
+                  <div
+                    className="kebab-menu-trigger"
+                    onClick={(e) => handleKebabMenuClick(e, rowData)}
+                  >
+                    ⋮
+                  </div>
+                )}
               />
             </ColumnsDirective>
 
@@ -340,7 +523,7 @@ const Employees = () => {
                 Edit,
                 // Search,
                 Page,
-                Toolbar,
+                // Toolbar,
                 Group,
               ]}
             />
@@ -605,6 +788,7 @@ const Employees = () => {
           </div>
         </div>
       )}
+      {renderKebabMenu()}
     </div>
   )
 }

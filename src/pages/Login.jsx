@@ -10,6 +10,8 @@ const Login = () => {
 
   const navigate = useNavigate()
   const [errors, setErrors] = useState({})
+  // store image URL in a local storage
+  localStorage.setItem('userImage', 'path-to-user-image.jpg')
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target

@@ -1,4 +1,4 @@
-@import url('https://cdn.syncfusion.com/ej2/material.css');
+@import url("https://cdn.syncfusion.com/ej2/material.css");
 
 .sidebar {
   box-shadow: rgb(113 122 131 / 11%) 0px 7px 30px 0px;
@@ -25,7 +25,12 @@ span {
   padding-bottom: 5em;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.5); /* Adjust the background color and opacity as needed */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Adjust the background color and opacity as needed */
 }
 
 .modal-heading {
@@ -44,7 +49,7 @@ span {
 }
 
 .custom-header-text {
-  font-size: 5px; 
+  font-size: 5px;
 }
 
 .modal h2 {
@@ -65,7 +70,7 @@ span {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 3.5rem
+  margin-top: 3.5rem;
 }
 
 .form-row {
@@ -86,16 +91,108 @@ span {
 
 .modal-content input,
 .modal-content select {
-  padding: .2rem;
+  padding: 0.2rem;
   margin-bottom: 1rem;
 }
 
+.department-filter:hover {
+  border-bottom: 2px solid orange;
+  color: #000000;
+}
+
+.dot.software {
+  background-color: #ff5722; /* Define the color for the Software Engineering department */
+}
+
+.dot.administrative {
+  background-color: #2196f3; /* Define the color for the Administrative department */
+}
+
+.dot.hr {
+  background-color: #f44336; /* Define the color for the Human Resources department */
+}
+
+.contract-status {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px;
+  color: #00A5FF;
+  background-color: #ADD8E6;
+  width: fit-content;
+  padding-top: 2px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border: none;
+  border-radius: 3px;
+  font-weight: 600; 
+}
+
+.intern-status {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px;
+  color: #FC3400;
+  background-color: rgb(237, 199, 199);
+  width: fit-content;
+  padding-top: 2px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border: none;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+.fulltime-status {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px;
+  color: #5542F6;
+  background-color: #bfbcdc;
+  width: fit-content;
+  padding-top: 2px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border: none;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+.parttime-status {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px;
+  color: #5542F6;
+  background-color: #bfbcdc;
+  width: fit-content;
+  padding-top: 2px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border: none;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+.kebab-menu-trigger {
+  cursor: pointer;
+}
+
+.view-buttons {
+  display: flex;
+}
+.view-button {
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  cursor: pointer; 
+}
+
 button {
-  padding: .3rem 15rem;
+  padding: 0.3rem 15rem;
   border: none;
   border-radius: 5px;
   align-items: center;
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
   background: #ec5c28;
   color: #ffff;
   font-size: 1rem;
@@ -108,7 +205,7 @@ button {
 .modal-content input[type="file"],
 .modal-content input[type="email"] {
   width: 100%;
-  padding: .4rem;
+  padding: 0.4rem;
   border: 1px solid #ccc;
   border-radius: 7px;
   font-size: 12px;
@@ -131,7 +228,7 @@ input {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  border: 1px dashed #ec5c28;;
+  border: 1px dashed #ec5c28;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -153,11 +250,9 @@ input {
   color: #000000;
 }
 
-
 .file-upload-text {
   font-size: 14px;
   color: #ec5c28;
-  
 }
 
 .file-upload-label input[type="file"] {
@@ -166,13 +261,18 @@ input {
 
 .file-input-icon {
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   margin-top: -3.7em;
 }
 
-.custom-grid .e-headercell .e-headertext{
-  color:#000000;
-  font-size: 1rem;
+.custom-grid .e-gridheader th {
+  border: none;
+}
+
+.custom-grid .e-headercell .e-headertext {
+  color: gray;
+  font-size: 0.85rem;
+  font-weight: 800;
 }
 
 .custom-grid .e-gridheader .e-headercell.department-column {
@@ -185,9 +285,9 @@ input {
 }
 
 .search-input {
-  padding-left: 30px; 
-  width: 300px; 
-  height: 30px; 
+  padding-left: 30px;
+  width: 300px;
+  height: 30px;
   border: 1px solid #ccc;
   border-radius: 5px;
   outline: none;
@@ -196,22 +296,23 @@ input {
 .search-icon {
   position: absolute;
   top: 40%;
-  left: 18px; 
+  left: 18px;
   transform: translateY(-50%);
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 .nav-item,
 .navbar {
   z-index: 10000;
 }
-@media  screen and (max-width:800px) {
-  .sidebar{
+@media screen and (max-width: 800px) {
+  .sidebar {
     z-index: 10000000;
   }
 }
 
-.e-dlg-center-center, .e-quick-popup-wrapper.e-device{
+.e-dlg-center-center,
+.e-quick-popup-wrapper.e-device {
   z-index: 1000000 !important;
 }
 
@@ -228,9 +329,9 @@ input {
 
 /* color-picker style  */
 
- #preview {
+#preview {
   background: transparent
-    url('https://ej2.syncfusion.com/react/demos/src/color-picker/images/pen.png')
+    url("https://ej2.syncfusion.com/react/demos/src/color-picker/images/pen.png")
     no-repeat;
   display: inline-block;
   height: 80px;
@@ -240,24 +341,31 @@ input {
   background-color: #008000;
 }
 
-.e-input-group:not(.e-float-icon-left), .e-input-group.e-success:not(.e-float-icon-left), .e-input-group.e-warning:not(.e-float-icon-left), .e-input-group.e-error:not(.e-float-icon-left), .e-input-group.e-control-wrapper:not(.e-float-icon-left), .e-input-group.e-control-wrapper.e-success:not(.e-float-icon-left), .e-input-group.e-control-wrapper.e-warning:not(.e-float-icon-left), .e-input-group.e-control-wrapper.e-error:not(.e-float-icon-left){
+.e-input-group:not(.e-float-icon-left),
+.e-input-group.e-success:not(.e-float-icon-left),
+.e-input-group.e-warning:not(.e-float-icon-left),
+.e-input-group.e-error:not(.e-float-icon-left),
+.e-input-group.e-control-wrapper:not(.e-float-icon-left),
+.e-input-group.e-control-wrapper.e-success:not(.e-float-icon-left),
+.e-input-group.e-control-wrapper.e-warning:not(.e-float-icon-left),
+.e-input-group.e-control-wrapper.e-error:not(.e-float-icon-left) {
   border: none;
 }
 
 /* Add Employee notification */
- .btn-primary {
+.btn-primary {
   background: #ec5c28;
   z-index: 9999;
   color: #fff;
   border: 1px solid #f00;
   border-radius: 5px;
   padding: 8px 8px;
- }
+}
 
- .btn-primary:hover {
+.btn-primary:hover {
   color: #ec5c28;
   background: #fff;
- }
+}
 
 .darker-icon {
   color: #000000; /* Change to your desired darker color */
@@ -268,9 +376,3 @@ input {
 .bold-icon {
   font-weight: bold;
 }
-
-
- 
-
-
- 

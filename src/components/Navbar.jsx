@@ -4,14 +4,11 @@ import { RiNotification3Line } from 'react-icons/ri'
 import { MdKeyboardArrowDown } from 'react-icons/md'
 import { TooltipComponent } from '@syncfusion/ej2-react-popups'
 import avatar4 from '../data/avatar4.jpg'
-// import { BsChatLeft } from "react-icons/bs";
 import { ThemeSettings, Notification, UserProfile } from '.'
 import { useStateContext } from '../contexts/ContextProvider'
-// import { AiOutlineMenu } from 'react-icons/ai'
-// import Button from "./shared/Button";
 import Employees from '../pages/Employees'
 
-const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
+const NavButton = ({ title, customFunc, icon, color }) => (
   <TooltipComponent content={title} position="BottomCenter">
     <button
       type="button"
@@ -24,7 +21,7 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
   </TooltipComponent>
 )
 
-const Navbar = ({pageTitle}) => {
+const Navbar = ({pageTitle, userImage}) => {
   const {
     setCurrentColor,
     setCurrentMode,
@@ -38,6 +35,7 @@ const Navbar = ({pageTitle}) => {
   } = useStateContext()
 
   const [isModalVisible, setModalVisible] = useState(false)
+  // const userImage = localStorage.getItem('userImage')
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible)
@@ -70,12 +68,21 @@ const Navbar = ({pageTitle}) => {
   return (
     <div className="bg-white w-full flex justify-between p-1 px-4 py-4md:ml-2 md:mr-6 relative">
       <div className="flex">
-        <p className="font-semibold text-2xl mr-5 mt-4">{pageTitle}</p>
+      <p
+      style={{
+        fontFamily: "'Plus Jakarta Sans', sans-serif",
+        fontWeight: 600,
+        fontSize: '22px',
+      }}
+      className="font-semibold text-2xl mr-5 mt-4 pt-1"
+    >
+      {pageTitle}
+    </p>
       </div>
       <div className="flex ml-auto mt-3">
         <NavButton
           title="Settings"
-          customFunc={() => handleClick('themeSettings')}
+          customFunc={() => handleClick('')}
           color={currentColor}
           icon={<FiSettings />}
         />
@@ -90,18 +97,26 @@ const Navbar = ({pageTitle}) => {
             className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
             onClick={() => handleClick('userProfile')}
           >
+          {userImage ? (
+            <img
+              className="rounded-full w-8 h-8"
+              src={userImage}
+              alt="user-profile"
+            />
+          ) : (
             <img
               className="rounded-full w-8 h-8"
               src={avatar4}
               alt="user-profile"
             />
+          )}
             <MdKeyboardArrowDown className="text-gray-800 text-sm" />
           </div>
         </TooltipComponent>
 
         {isClicked.themeSettings && <ThemeSettings />}
         {isClicked.notification && <Notification />}
-        {isClicked.userProfile && <UserProfile />}
+        {isClicked.userProfile && <UserProfile userImage={userImage} />}
         {isModalVisible && <Employees toggleModal={toggleModal} />}
       </div>
     </div>

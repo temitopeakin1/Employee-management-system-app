@@ -1,31 +1,39 @@
-import React from "react";
-import { useState, useEffect } from "react";
-
+import React from 'react'
+import { useState, useEffect } from 'react'
 
 const Greeting = () => {
-  const [greeting, setGreeting] = useState("");
+  const [greeting, setGreeting] = useState('')
 
   useEffect(() => {
     const getCurrentTime = () => {
-      const date = new Date();
-      const hours = date.getHours();
+      const date = new Date()
+      const hours = date.getHours()
       if (hours >= 5 && hours < 12) {
-        setGreeting("Good Morning");
+        setGreeting('Good Morning')
       } else if (hours >= 12 && hours < 17) {
-        setGreeting("Good Afternoon");
+        setGreeting('Good Afternoon')
       } else {
-        setGreeting("Good Night");
+        setGreeting('Good Night')
       }
-    };
+    }
 
-    getCurrentTime();
-  }, []);
+    getCurrentTime()
+  }, [])
 
   return (
     <div>
-      <h1 className="font-bold text-4xl">{greeting}, Admin</h1>
+      <h1
+        style={{
+          fontFamily: 'satoshi, sans-serif',
+          fontWeight: 700,
+          fontSize: '36px',
+        }}
+        className="font-bold text-4xl"
+      >
+        {greeting}, Admin
+      </h1>
     </div>
-  );
-};
+  )
+}
 
-export default Greeting;
+export default Greeting

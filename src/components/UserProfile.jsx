@@ -5,7 +5,7 @@ import { userProfileData } from '../data/dummy';
 // import { useStateContext } from '../contexts/ContextProvider';
 
 
-const UserProfile = () => {
+const UserProfile = ({ userImage }) => {
   // const { currentColor } = useStateContext();
 
   return (
