@@ -2,7 +2,6 @@ import React from 'react';
  // eslint-disable-next-line
 import { AiOutlineCalendar, AiFillDashboard, AiOutlineShoppingCart, AiOutlineAreaChart, AiOutlineBarChart, AiOutlineStock } from 'react-icons/ai';
  // eslint-disable-next-line
-import { FiShoppingBag, FiEdit, FiPieChart, FiBarChart, FiCreditCard, FiStar, FiShoppingCart } from 'react-icons/fi';
  // eslint-disable-next-line
 import { BsKanban, BsBarChart, BsBoxSeam, BsCurrencyDollar, BsShield, BsChatLeft } from 'react-icons/bs';
 import {MdOutlinePerson, MdOutlineHelp, MdContactSupport} from 'react-icons/md';
@@ -494,32 +493,19 @@ export const links = [
 export const chatData = [
   {
     image:
-      avatar2,
-    message: 'Roman Joined the Team!',
-    desc: 'Congratulate him',
+      avatar4,
+    message: 'dummy message!',
+    desc: 'hampshire notifications',
     time: '9:08 AM',
   },
   {
     image:
-      avatar3,
-    message: 'New message received',
-    desc: 'Salma sent you new message',
-    time: '11:56 AM',
-  },
-  {
-    image:
       avatar4,
-    message: 'New Payment received',
-    desc: 'Check your earnings',
-    time: '4:39 AM',
+    message: 'dummy message!',
+    desc: 'hampshire notifications',
+    time: '9:08 AM',
   },
-  {
-    image:
-      avatar,
-    message: 'Jolly completed tasks',
-    desc: 'Assign her new tasks',
-    time: '1:12 AM',
-  },
+ 
 ];
 
 export const earningData = [
@@ -541,16 +527,7 @@ export const earningData = [
     iconBg: 'rgb(254, 201, 15)',
     pcColor: 'green-600',
   },
-  {
-    icon: <FiBarChart />,
-    amount: '423,39',
-    percentage: '+38%',
-    title: 'Sales',
-    iconColor: 'rgb(228, 106, 118)',
-    iconBg: 'rgb(255, 244, 229)',
-
-    pcColor: 'green-600',
-  },
+ 
   {
     icon: <HiOutlineRefresh />,
     amount: '39,354',
@@ -581,16 +558,7 @@ export const recentTransactions = [
     iconBg: 'rgb(235, 250, 242)',
     pcColor: 'red-600',
   },
-  {
-    icon: <FiCreditCard />,
-    amount: '+$350',
-    title: 'Credit Card',
-    desc: 'Money reversed',
-    iconColor: 'rgb(255, 244, 229)',
-    iconBg: 'rgb(254, 201, 15)',
-
-    pcColor: 'green-600',
-  },
+  
   {
     icon: <TiTick />,
     amount: '+$350',
@@ -614,22 +582,8 @@ export const recentTransactions = [
 ];
 
 export const weeklyStats = [
-  {
-    icon: <FiShoppingCart />,
-    amount: '-$560',
-    title: 'Top Sales',
-    desc: 'Johnathan Doe',
-    iconBg: '#FB9678',
-    pcColor: 'red-600',
-  },
-  {
-    icon: <FiStar />,
-    amount: '-$560',
-    title: 'Best Seller',
-    desc: 'MaterialPro Admin',
-    iconBg: 'rgb(254, 201, 15)',
-    pcColor: 'red-600',
-  },
+  
+
   {
     icon: <BsChatLeft />,
     amount: '+$560',
@@ -1608,15 +1562,6 @@ export const lineCustomSeries = [
 
 ];
 
-export const pieChartData = [
-  { x: 'Labour', y: 18, text: '18%' },
-  { x: 'Legal', y: 8, text: '8%' },
-  { x: 'Production', y: 15, text: '15%' },
-  { x: 'License', y: 11, text: '11%' },
-  { x: 'Facilities', y: 18, text: '18%' },
-  { x: 'Taxes', y: 14, text: '14%' },
-  { x: 'Insurance', y: 16, text: '16%' },
-];
 
 export const contextMenuItems = [
   'AutoFit',
@@ -1637,12 +1582,7 @@ export const contextMenuItems = [
   'NextPage',
 ];
 
-export const ecomPieChartData = [
-  { x: '2018', y: 18, text: '35%' },
-  { x: '2019', y: 18, text: '15%' },
-  { x: '2020', y: 18, text: '25%' },
-  { x: '2021', y: 18, text: '25%' },
-];
+
 
 export const stackedChartData = [
   [

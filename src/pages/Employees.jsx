@@ -57,6 +57,7 @@ const Employees = () => {
   const [isKebabMenuOpen, setKebabMenuOpen] = useState(false)
   const [kebabMenuX, setKebabMenuX] = useState(0)
   const [kebabMenuY, setKebabMenuY] = useState(0)
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
 
   // Define error states for form fields
   const [firstNameError, setFirstNameError] = useState('')
@@ -218,6 +219,9 @@ const Employees = () => {
     // Implement the logic for viewing all employees
     closeKebabMenu()
   }
+  const handleCancelSuccessDialog = () => {
+    setShowSuccessDialog(false);
+  };
 
   const handleCancel = () => {
     setFirstName('')
@@ -286,6 +290,7 @@ const Employees = () => {
     const employeeId = `HH${Math.floor(Math.random() * 10000)}`
     setAddedFirstName(firstName)
     setAddedLastName(lastName)
+    setShowSuccessDialog(true);
 
     // Increment the total employees count
     setTotalEmployees(totalEmployees + 1)
@@ -329,6 +334,7 @@ const Employees = () => {
     setCurrentStep(1)
 
     // Close the modal
+
     toggleModal()
     setAddEmployee(true)
     console.log('firstName: ' + firstName)
@@ -416,7 +422,7 @@ const Employees = () => {
             width="auto"
             allowPaging
             allowSorting
-            pageSettings={{ pageCount: 5 }}
+            pageSettings={{ pageCount: 12 }}
             selectionSettings={selectionsettings}
             // toolbar={toolbarOptions}
             className="custom-grid"
@@ -760,7 +766,7 @@ const Employees = () => {
           </div>
         </div>
       )}
-      {addEmployee && (
+      {showSuccessDialog && (
         <div className="modal fixed inset-0 flex items-center justify-center z-100">
           <div className="success-dialog bg-white p-8 w-96 h-64 rounded shadow-lg flex flex-col items-center justify-center ">
             <div className="flex items-center mt-4">
@@ -769,7 +775,7 @@ const Employees = () => {
                 alt="Dialog"
                 style={{ height: '80px', width: '120px' }}
               />
-              <MdOutlineCancel onClick={handleCancel} />
+               <MdOutlineCancel onClick={handleCancelSuccessDialog} />
             </div>
 
             <h1 className="text-xl font-bold pt-12 mb-4 -mt-12">

@@ -62,7 +62,7 @@ const Dashboard = ({ Dashboard }) => {
 
   return (
     <div className="justify-center">
-    <Navbar pageTitle="Dashboard" />
+      <Navbar pageTitle="Dashboard" />
       <div className="dark:text-gray-200 dark:bg-secondary-dark-bg ml-4 mr-4 mt-5 mb-10">
         <div className="justify-left">
           <p className="font-semibold text-2xl mb-10">{Dashboard}</p>
@@ -130,15 +130,12 @@ const Dashboard = ({ Dashboard }) => {
               <div className="flex justify-between">
                 <p className="font-semibold text-l">Mancount Per Department</p>
               </div>
-              <div className="flex justify-between items-center mt-2">
-                <div className="border-t border-gray-200 w-full mx-auto"></div>
-              </div>
               <div className="ml-auto">
                 <Pie
                   id="pie-chart"
                   data={deptData}
-                  legendVisiblity={false}
-                  height="300px"
+                  legendVisiblity={true}
+                  height="200px"
                 />
               </div>
             </div>

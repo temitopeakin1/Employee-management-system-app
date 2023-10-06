@@ -6,7 +6,7 @@ import { TooltipComponent } from '@syncfusion/ej2-react-popups'
 import avatar4 from '../data/avatar4.jpg'
 import { ThemeSettings, Notification, UserProfile } from '.'
 import { useStateContext } from '../contexts/ContextProvider'
-import Employees from '../pages/Employees'
+
 
 const NavButton = ({ title, customFunc, icon, color }) => (
   <TooltipComponent content={title} position="BottomCenter">
@@ -34,13 +34,13 @@ const Navbar = ({pageTitle, userImage}) => {
     screenSize,
   } = useStateContext()
 
-  const [isModalVisible, setModalVisible] = useState(false)
-  // const userImage = localStorage.getItem('userImage')
+  const [showNotification, setShowNotification] = useState(false);
 
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible)
-  }
-
+  const toggleNotification = () => {
+    // Toggle the visibility of the notification
+    setShowNotification(!showNotification);
+  };
+  
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth)
     window.addEventListener('resize', handleResize)
@@ -88,7 +88,7 @@ const Navbar = ({pageTitle, userImage}) => {
         />
         <NavButton
           title="Notification"
-          customFunc={() => handleClick('notification')}
+          customFunc={toggleNotification}
           color={currentColor}
           icon={<RiNotification3Line />}
         />
@@ -117,7 +117,8 @@ const Navbar = ({pageTitle, userImage}) => {
         {isClicked.themeSettings && <ThemeSettings />}
         {isClicked.notification && <Notification />}
         {isClicked.userProfile && <UserProfile userImage={userImage} />}
-        {isModalVisible && <Employees toggleModal={toggleModal} />}
+        {showNotification && <Notification />}
+        {isClicked.notification && <Notification />}
       </div>
     </div>
   )
