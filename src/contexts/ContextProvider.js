@@ -8,8 +8,6 @@ const initialState = {
   userProfile: false,
   notification: false,
   employeesData: [],
-  employees: false
-
 };
 
 export const ContextProvider = ({ children }) => {
