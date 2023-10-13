@@ -61,16 +61,16 @@ const AppContent = ({ currentMode }) => {
           <div>
             <Routes>
               {/* home Page (default route) */}
-              <Route path="/" element={<Homepage />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
+              <Route path='/' element={<Homepage />} />
+              <Route path='/register' element={<Register />} />
+              <Route path='/login' element={<Login />} />
               {/* dashboard */}
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path='/dashboard' element={<Dashboard />} />
               {/* pages */}
-              <Route path="/employees" element={<Employees />} />
+              <Route path='/employees' element={<Employees />} />
 
               {/* apps */}
-              <Route path="/calendar" element={<Calendar />} />
+              <Route path='/calendar' element={<Calendar />} />
             </Routes>
           </div>
         </div>
