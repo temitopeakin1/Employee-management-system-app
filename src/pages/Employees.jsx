@@ -25,6 +25,7 @@ import { MdOutlineCancel } from 'react-icons/md'
 import dialog from '../assets/dialog.png'
 import comfy from '../assets/comfy.png'
 import list from '../assets/list.png'
+import { supabase } from '../supabaseClient'
 // import Spinner from '../common/Spinner';
 
 const Employees = () => {
@@ -60,7 +61,7 @@ const Employees = () => {
   const [showSuccessDialog, setShowSuccessDialog] = useState(false)
 
   // Define error states for form fields
-  const [firstNameError, setFirstNameError] = useState('')
+  // const [firstNameError, setFirstNameError] = useState('')
 
   useEffect(() => {
     const storedEmployeesData = localStorage.getItem('employeesData')
@@ -72,6 +73,26 @@ const Employees = () => {
   useEffect(() => {
     localStorage.setItem('employeesData', JSON.stringify(employeesData))
   }, [employeesData])
+
+  useEffect(() => {
+    getEmployeesData()
+  }, [])
+
+  async function getEmployeesData() {
+    try {
+      const { data, error } = await supabase
+        .from('employees')
+        .select('*')
+        .limit(10)
+      if (error) {
+        console.error('Error fetching employee data:', error)
+      } else if (data) {
+        setEmployeesData(data)
+      }
+    } catch (error) {
+      console.error('Error fetching employee data:', error)
+    }
+  }
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible)
@@ -274,12 +295,12 @@ const Employees = () => {
   const handleNext = () => {
     setCurrentStep(currentStep + 1)
     if (currentStep === 1) {
-      if (!firstName) {
-        setFirstNameError('Input first Name')
-        return
-      } else {
-        setFirstNameError('')
-      }
+      // if (!firstName) {
+      //   setFirstNameError('Input first Name')
+      //   return
+      // } else {
+      //   setFirstNameError('')
+      // }
     }
   }
 
@@ -287,8 +308,53 @@ const Employees = () => {
     setShowSuccessDialog(!showSuccessDialog)
   }
 
-  const handleSubmit = () => {
+  async function handleSubmit() {
     const employeeId = `HH${Math.floor(Math.random() * 10000)}`
+    try {
+      const { data, error } = await supabase.from('employees').insert({
+        employeeId: employeeId,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        designation:
+          designation.find((item) => item.Id === designationId)?.Role || '',
+        department:
+          department.find((item) => item.Id === departmentId)?.Dept || '',
+        empType: empType.find((item) => item.type === statusId)?.Emp || '',
+        cv: cv,
+        address: address,
+        phoneNumber: phoneNumber,
+        client: client,
+        contractStartDate: contractStartDate,
+        contractEndDate: contractEndDate,
+        salary: salary,
+      })
+      if (error) throw error
+      if (data != null) {
+        setEmployeesData(data)
+      }
+    } catch (error) {
+      alert(error.message)
+    }
+    const newEmployee = {
+      employeeId: employeeId,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      designation:
+        designation.find((item) => item.Id === designationId)?.Role || '',
+      department:
+        department.find((item) => item.Id === departmentId)?.Dept || '',
+      empType: empType.find((item) => item.type === statusId)?.Emp || '',
+      cv: cv,
+      address: address,
+      phoneNumber: phoneNumber,
+      client: client,
+      contractStartDate: contractStartDate,
+      contractEndDate: contractEndDate,
+      salary: salary,
+    }
+
     setAddedFirstName(firstName)
     setAddedLastName(lastName)
     handleCancelDialog()
@@ -301,23 +367,6 @@ const Employees = () => {
       setTotalContractEmployees(totalContractEmployees + 1)
     }
 
-    const newEmployee = {
-      id: employeeId,
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      designation:
-        designation.find((item) => item.Id === designationId)?.Role || '',
-      department:
-        department.find((item) => item.Id === departmentId)?.Dept || '',
-      empType: empType.find((item) => item.type === statusId)?.Emp || '',
-      cv: cv,
-      // address: address,
-      phoneNumber: phoneNumber,
-      contractStartDate: contractStartDate,
-      contractEndDate: contractEndDate,
-      salary: salary,
-    }
     // updates an employee data
     const updatedEmployeesData = [...employeesData, newEmployee]
     setEmployeesData(updatedEmployeesData)
@@ -436,7 +485,7 @@ const Employees = () => {
                 width="90"
                 template={(rowData) => (
                   <div>
-                    <div className="font-bold text-14">{rowData.id}</div>
+                    <div className="font-bold text-14">{rowData.employeeId}</div>
                   </div>
                 )}
               />
@@ -549,8 +598,8 @@ const Employees = () => {
                 </h2>
                 <div className="w-full max-w-lg">
                   <div className="flex flex-wrap -mx-3 mb-6">
-                    <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0">
-                      <label htmlFor="firstname">
+                    <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                      <label class="firstname">
                         First Name
                         <input
                           type="text"
@@ -560,9 +609,6 @@ const Employees = () => {
                           onChange={handleFirstNameChange}
                         />
                       </label>
-                      {firstNameError && (
-                        <p className="text-red-500">{firstNameError}</p>
-                      )}
                     </div>
                     <div className="w-full md:w-1/2 px-3">
                       <label htmlFor="lastname">
@@ -670,8 +716,8 @@ const Employees = () => {
                   <MdOutlineCancel onClick={handleCancel} />
                 </h2>
                 <div className="w-full max-w-lg">
-                  <div className="flex flex-wrap -mx-3 mb-12">
-                    <div className="w-full px-6 mb-3 md:mb-0">
+                  <div className="flex flex-wrap -mx-3 mb-6">
+                    <div className="w-full px-3 -mt-6">
                       <label htmlFor="client">
                         Client
                         <input
@@ -770,20 +816,20 @@ const Employees = () => {
       {showSuccessDialog && (
         <div className="modal fixed inset-0 flex items-center justify-center z-100">
           <div className="success-dialog bg-white p-8 w-96 h-72 rounded-lg shadow-lg flex flex-col items-center justify-center ">
-          <div className="flex items-center mt-2">
-          <img
-            src={dialog}
-            alt="Dialog"
-            style={{ height: '80px', width: '120px' }}
-          />
-          <button
-            className="btn-primary text-12 bg-"
-            style={{ marginLeft: '13.5rem', marginTop: '-80px' }}
-            onClick={handleCancelDialog}
-          >
-            X
-          </button>
-        </div>
+            <div className="flex items-center mt-2">
+              <img
+                src={dialog}
+                alt="Dialog"
+                style={{ height: '80px', width: '120px' }}
+              />
+              <button
+                className="btn-primary text-12 bg-"
+                style={{ marginLeft: '13.5rem', marginTop: '-80px' }}
+                onClick={handleCancelDialog}
+              >
+                X
+              </button>
+            </div>
 
             <h1 className="text-xl font-bold pt-12 mb-4 -mt-12">
               Employee Successfully Added

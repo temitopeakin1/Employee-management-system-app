@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 import logo from '../assets/logo.png'
 import { Link, useNavigate } from 'react-router-dom'
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 
 const Login = () => {
+  const [passwordVisibility, setPasswordVisibility] = useState(false)
+ 
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -16,13 +20,19 @@ const Login = () => {
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target
 
+  
+
     // updating the check box
     const newValue = type === 'checkbox' ? checked : value
-
     setFormData({
       ...formData,
       [name]: newValue,
     })
+  }
+
+  const handlePasswordVisibility = () => {
+    setPasswordVisibility(!passwordVisibility)
+    console.log('setpassword')
   }
 
   const handleSubmit = (event) => {
@@ -90,14 +100,29 @@ const Login = () => {
               <label htmlFor="password" className="block font-semibold">
                 Password
               </label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                value={formData.password}
-                onChange={handleChange}
-                className="border border-gray-300 p-2 w-2/3 rounded-md"
-              />
+              <div className="flex">
+                <input
+                type={passwordVisibility ? 'text' : 'password'}
+                  name="password"
+                  id="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="border border-gray-300 p-2 w-2/3 rounded-md pr-10"
+                />
+
+                <button
+                  type="button"
+                  onClick={handlePasswordVisibility}
+                  className="absolute p-2 mt-1 ml-80"
+                  style={{ color: 'black' }}
+                >
+                  {passwordVisibility ? (
+                    <AiOutlineEye />
+                  ) : (
+                    <AiOutlineEyeInvisible />
+                  )}
+                </button>
+              </div>
               {errors.password && (
                 <div className="text-red-500 text-sm">{errors.password}</div>
               )}

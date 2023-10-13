@@ -170,7 +170,7 @@ const Dashboard = ({ Dashboard }) => {
                 width="90"
                 template={(rowData) => (
                   <div>
-                    <div className="text font-semibold">{rowData.id}</div>
+                    <div className="text font-semibold">{rowData.employeeId}</div>
                   </div>
                 )}
               />

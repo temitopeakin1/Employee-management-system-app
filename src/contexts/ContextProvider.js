@@ -21,7 +21,7 @@ export const ContextProvider = ({ children }) => {
   const [employeesData, setEmployeesData] = useState([]);
 
 
-  const setMode = (e) => {
+  const setMode = (e) => {  
     setCurrentMode(e.target.value);
     localStorage.setItem("themeMode", e.target.value);
   };

@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import logo from '../assets/logo.png'
 import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 
 const Register = () => {
+  const [passwordVisibility, setPasswordVisibility] = useState(false)
+  const [repeatPasswordVisibility, setRepeatPasswordVisibility] = useState(false)
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -22,6 +25,14 @@ const Register = () => {
     })
   }
 
+  const handlePasswordVisibility = () => {
+    setPasswordVisibility(!passwordVisibility)
+  }
+
+  const handleRepeatPasswordVisibility = () => {
+    setRepeatPasswordVisibility(!repeatPasswordVisibility)
+  }
+// validations for register page 
   const handleSubmit = (e) => {
     e.preventDefault()
     const newErrors = {}
@@ -49,20 +60,6 @@ const Register = () => {
     }
 
     setErrors(newErrors)
-    if (
-      newErrors.name === '' &&
-      newErrors.email === '' &&
-      newErrors.password === '' &&
-      newErrors.repeatPassword === ''
-    ) {
-      axios
-        .post('http://localhost:8081/hampshirecrm', formData)
-        .then((res) => {
-          navigate('/login')
-        })
-
-        .catch((err) => console.log(err))
-    }
   }
 
   return (
@@ -127,15 +124,30 @@ const Register = () => {
               <label htmlFor="password" className="block font-semibold">
                 Password
               </label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="password"
-                value={formData.password}
-                onChange={handleChange}
-                className="border border-gray-300 p-2 w-2/3 rounded-md"
-              />
+              <div className="flex">
+                <input
+                  type={passwordVisibility ? 'text' : 'password'}
+                  name="password"
+                  id="password"
+                  placeholder="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="border border-gray-300 p-2 w-2/3 rounded-md pr-10"
+                />
+
+                <button
+                  type="button"
+                  onClick={handlePasswordVisibility}
+                  className="absolute p-2 mt-1 ml-80"
+                  style={{ color: 'black' }}
+                >
+                  {passwordVisibility ? (
+                    <AiOutlineEye />
+                  ) : (
+                    <AiOutlineEyeInvisible />
+                  )}
+                </button>
+              </div>
               {errors.password && (
                 <div className="text-red-500 text-sm">{errors.password}</div>
               )}
@@ -144,20 +156,34 @@ const Register = () => {
               <label htmlFor="repeatPassword" className="block font-semibold">
                 Repeat Password
               </label>
-              <input
-                type="password"
-                name="repeatPassword"
-                id="repeatPassword"
-                placeholder="Repeat Password"
-                value={formData.repeatPassword}
-                onChange={handleChange}
-                className="border border-gray-300 p-2 w-2/3 rounded-md"
-              />
+              <div className="flex">
+                <input
+                  type={repeatPasswordVisibility ? 'text' : 'password'}
+                  name="repeatPassword"
+                  id="repeatPassword"
+                  placeholder="Repeat Password"
+                  value={formData.repeatPassword}
+                  onChange={handleChange}
+                  className="border border-gray-300 p-2 w-2/3 rounded-md"
+                />
+                <button
+                  type="button"
+                  onClick={handleRepeatPasswordVisibility}
+                  className='absolute p-2 mt-1 ml-80'
+                  style={{ color: 'black' }}
+                >
+                  {passwordVisibility ? (
+                    <AiOutlineEye />
+                  ) : (
+                    <AiOutlineEyeInvisible />
+                  )}
+                </button>
+              </div>
               {errors.repeatPassword && (
                 <div className="text-red-500 text-sm">
                   {errors.repeatPassword}
                 </div>
-              )}
+              )},
             </div>
             <div className="mb-4 flex flex-col">
               <button
@@ -168,12 +194,23 @@ const Register = () => {
               </button>
               <p className="text-sm mt-1 p-2 w-2/3">
                 Already have an account?{' '}
-                <Link to="/login" className="text-orange-500 text-sm font-semibold">
+                <Link
+                  to="/login"
+                  className="text-orange-500 text-sm font-semibold"
+                >
                   Login here
                 </Link>
               </p>
-              <p className='text-sm mt-3 p-2 w-2/3 '>
-              &copy;Copyright 2023 All rights reserved,<Link to="#" className='text-orange-500 text-sm font-semibold'>Term & Condition </Link>  |  <Link to= "#" className="text-orange-500 text-sm font-semibold">Privacy & Policy</Link></p>
+              <p className="text-sm mt-3 p-2 w-2/3 ">
+                &copy;Copyright 2023 All rights reserved,
+                <Link to="#" className="text-orange-500 text-sm font-semibold">
+                  Term & Condition{' '}
+                </Link>{' '}
+                |{' '}
+                <Link to="#" className="text-orange-500 text-sm font-semibold">
+                  Privacy & Policy
+                </Link>
+              </p>
             </div>
           </form>
         </div>

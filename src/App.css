@@ -65,7 +65,7 @@ span {
   padding-left: 100px;
   padding-right: 100px;
   padding-bottom: 5px;
-  max-width: 600px;
+  max-width: 550px;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -89,7 +89,6 @@ span {
   font-size: 12px;
 }
 
-.modal-content input,
 .modal-content select {
   padding: 0.2rem;
   margin-bottom: 1rem;
@@ -204,19 +203,20 @@ button {
 .modal-content input[type="number"],
 .modal-content input[type="file"],
 .modal-content input[type="email"] {
-  width: 100%;
+  width: 100% !important; 
   padding: 0.4rem;
   border: 1px solid #ccc;
-  border-radius: 7px;
+  border-radius: 5px;
   font-size: 12px;
 }
 
 label {
   text-align: left;
   margin-right: 50px;
-  width: 30%; /* Adjust the width as needed */
+  width: 100%; 
   display: inline-block;
 }
+
 input {
   margin: 0;
   display: block;
