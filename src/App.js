@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { Sidebar } from './components'
-import LandingPage from './pages/LandingPage'
+import Homepage from './pages/Homepage'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import { Dashboard, Calendar, Employees } from './pages'
@@ -30,8 +30,8 @@ const App = () => {
 const AppContent = ({ currentMode }) => {
   const location = useLocation()
 
-  // Check if the current route is the landing page, register, or login
-  const isLandingPage = location.pathname === '/'
+  // Check if the current route is the home page, register, or login
+  const isHomepage = location.pathname === '/'
   const isRegister = location.pathname === '/register'
   const isLogin = location.pathname === '/login'
 
@@ -44,24 +44,24 @@ const AppContent = ({ currentMode }) => {
         ></div>
         <div
           className={
-            isLandingPage || isRegister || isLogin
+            isHomepage || isRegister || isLogin
               ? 'w-0 dark:bg-secondary-dark-bg'
               : 'w-72 fixed sidebar dark:bg-secondary-dark-bg bg-brown'
           }
         >
-          {!isLandingPage && !isRegister && !isLogin && <Sidebar />}
+          {!isHomepage && !isRegister && !isLogin && <Sidebar />}
         </div>
         <div
           className={
-            isLandingPage || isRegister || isLogin
+            isHomepage || isRegister || isLogin
               ? 'bg-main-bg dark:bg-main-dark-bg w-full min-h-screen flex-2'
               : 'dark:bg-main-dark-bg bg-main-bg min-h-screen md:ml-72 w-full'
           }
         >
           <div>
             <Routes>
-              {/* Landing Page (default route) */}
-              <Route path="/" element={<LandingPage />} />
+              {/* home Page (default route) */}
+              <Route path="/" element={<Homepage />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
               {/* dashboard */}

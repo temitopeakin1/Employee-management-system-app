@@ -6,7 +6,7 @@ import user from '../assets/user.png'
 import { FaAngleRight } from 'react-icons/fa'
 
 
-const LandingPage = () => {
+const Homepage = () => {
   
   return (
     <div className="flex h-screen">
@@ -51,4 +51,4 @@ const LandingPage = () => {
   )
 }
 
-export default LandingPage
+export default Homepage
