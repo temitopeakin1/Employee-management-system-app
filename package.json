@@ -1,7 +1,7 @@
 {
   "name": "hampshire-crm",
   "version": "0.1.0",
-  "homepage": "https://hhgcl-crm.com",
+  "homepage": "https://hhgcl-crm.com/",
   "private": true,
   "dependencies": {
     "@supabase/supabase-js": "^2.38.0",
@@ -20,7 +20,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
-    "react-router-dom": "^6.16.0",
+    "react-router-dom": "^6.14.0",
     "react-scripts": "^5.0.1",
     "sass": "^1.63.2"
   },
