@@ -112,10 +112,10 @@ span {
 }
 
 .contract-status {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 12px;
-  color: #00A5FF;
-  background-color: #ADD8E6;
+  color: #00a5ff;
+  background-color: #add8e6;
   width: fit-content;
   padding-top: 2px;
   padding-bottom: 4px;
@@ -123,13 +123,13 @@ span {
   padding-right: 8px;
   border: none;
   border-radius: 3px;
-  font-weight: 600; 
+  font-weight: 600;
 }
 
 .intern-status {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 12px;
-  color: #FC3400;
+  color: #fc3400;
   background-color: rgb(237, 199, 199);
   width: fit-content;
   padding-top: 2px;
@@ -142,9 +142,9 @@ span {
 }
 
 .fulltime-status {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 12px;
-  color: #5542F6;
+  color: #5542f6;
   background-color: #bfbcdc;
   width: fit-content;
   padding-top: 2px;
@@ -157,9 +157,9 @@ span {
 }
 
 .parttime-status {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 12px;
-  color: #5542F6;
+  color: #5542f6;
   background-color: #bfbcdc;
   width: fit-content;
   padding-top: 2px;
@@ -183,7 +183,7 @@ span {
   margin: 0;
   background: none;
   border: none;
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 button {
@@ -199,11 +199,24 @@ button {
   white-space: nowrap;
 }
 
+.button {
+  padding: 0.3rem 12rem;
+  border: none;
+  border-radius: 5px;
+  align-items: center;
+  margin-bottom: 0.5em;
+  background: #ec5c28;
+  color: #ffff;
+  font-size: 1rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
 .modal-content input[type="text"],
 .modal-content input[type="number"],
 .modal-content input[type="file"],
 .modal-content input[type="email"] {
-  width: 100% !important; 
+  width: 100% !important;
   padding: 0.4rem;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -213,7 +226,7 @@ button {
 label {
   text-align: left;
   margin-right: 50px;
-  width: 100%; 
+  width: 100%;
   display: inline-block;
 }
 
@@ -365,6 +378,12 @@ input {
 .btn-primary:hover {
   color: #ec5c28;
   background: #fff;
+}
+
+.center-button {
+  display: block;
+  width: 100%;
+  align-items: center;
 }
 
 .darker-icon {

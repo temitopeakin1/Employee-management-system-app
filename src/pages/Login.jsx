@@ -61,12 +61,12 @@ const Login = () => {
       <div className="flex-1 bg-black text-white p-10 flex items-center justify-center">
         <div className="pl-18">
           <img src={logo} alt="Logo" style={{ height: '35px' }} />
-          <p className="text-lg font-semibold mt-4 pr-72">
+          <p className="text-45 font-semibold mt-4 pr-50">
             Artificial Intelligence
             <br />
             Solution for your
             <br />
-            business
+            Business
           </p>
           <p className="text-sm mt-4">
             Hampshire Heights creates products that let people do things
@@ -113,7 +113,7 @@ const Login = () => {
                 <button
                   type="button"
                   onClick={handlePasswordVisibility}
-                  className="absolute p-2 mt-1 ml-80"
+                  className="absolute mt-3 ml-80 pl-12"
                   style={{ color: 'black' }}
                 >
                   {passwordVisibility ? (
@@ -127,7 +127,7 @@ const Login = () => {
                 <div className="text-red-500 text-sm">{errors.password}</div>
               )}
             </div>
-            <div className="mb-4 flex items-center">
+            <div className="mb-4 flex md:items-center">
               <input
                 type="checkbox"
                 name="rememberMe"
@@ -141,7 +141,8 @@ const Login = () => {
               </label>
               <Link
                 to="/forgot-password"
-                className="text-orange-500 font-semibold"
+                className="text-orange-500 font-semibold inline-block mr-48"
+                style={{ whiteSpace: 'nowrap' }}
               >
                 Forgot password?
               </Link>

@@ -67,12 +67,12 @@ const Register = () => {
       <div className="flex-1 bg-black text-white p-10 flex items-center justify-center">
         <div className="pl-18">
           <img src={logo} alt="Logo" style={{ height: '35px' }} />
-          <p className="text-lg font-semibold mt-4 pr-72">
+          <p className="text-45 font-semibold mt-4 pr-50">
             Artificial Intelligence
             <br />
             Solution for your
             <br />
-            business
+            Business
           </p>
           <p className="text-sm mt-4">
             Hampshire Heights creates products that let people do things

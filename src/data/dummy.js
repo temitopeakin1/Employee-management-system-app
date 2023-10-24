@@ -1,25 +1,43 @@
-import React from 'react';
- // eslint-disable-next-line
-import { AiOutlineCalendar, AiFillDashboard, AiOutlineShoppingCart, AiOutlineAreaChart, AiOutlineBarChart, AiOutlineStock } from 'react-icons/ai';
- // eslint-disable-next-line
- // eslint-disable-next-line
-import { BsKanban, BsBarChart, BsBoxSeam, BsCurrencyDollar, BsShield, BsChatLeft } from 'react-icons/bs';
-import {MdOutlinePerson, MdOutlineHelp, MdContactSupport} from 'react-icons/md';
-import {FcDepartment} from 'react-icons/fc';
-import { IoIosContract} from 'react-icons/io'
+import React from 'react'
+// eslint-disable-next-line
+import {
+  AiOutlineCalendar,
+  AiFillDashboard,
+  AiOutlineShoppingCart,
+  AiOutlineAreaChart,
+  AiOutlineBarChart,
+  AiOutlineStock,
+} from 'react-icons/ai'
+// eslint-disable-next-line
+// eslint-disable-next-line
+import {
+  BsKanban,
+  BsBarChart,
+  BsBoxSeam,
+  BsCurrencyDollar,
+  BsShield,
+  BsChatLeft,
+} from 'react-icons/bs'
+import {
+  MdOutlinePerson,
+  MdOutlineHelp,
+  MdContactSupport,
+} from 'react-icons/md'
+import { FcDepartment } from 'react-icons/fc'
+import { IoIosContract } from 'react-icons/io'
 import { SiStopstalk } from 'react-icons/si'
-import { FaFileInvoice} from 'react-icons/fa'
-import { FiSettings} from 'react-icons/fi'
-import { SiKnowledgebase} from 'react-icons/si'
-import { MdOutlineSupervisorAccount } from 'react-icons/md';
-import { HiOutlineRefresh } from 'react-icons/hi';
-import {BiUserCircle, BiLogOut} from 'react-icons/bi'
-import { TiTick } from 'react-icons/ti';
- // eslint-disable-next-line
-import avatar from './avatar.jpg';
-import avatar2 from './avatar2.jpg';
-import avatar3 from './avatar3.png';
-import avatar4 from './avatar4.jpg';
+import { FaFileInvoice } from 'react-icons/fa'
+import { FiSettings } from 'react-icons/fi'
+import { SiKnowledgebase } from 'react-icons/si'
+import { MdOutlineSupervisorAccount } from 'react-icons/md'
+import { HiOutlineRefresh } from 'react-icons/hi'
+import { BiUserCircle, BiLogOut } from 'react-icons/bi'
+import { TiTick } from 'react-icons/ti'
+// eslint-disable-next-line
+import avatar from './avatar.jpg'
+import avatar2 from './avatar2.jpg'
+import avatar3 from './avatar3.png'
+import avatar4 from './avatar4.jpg'
 
 export const gridOrderImage = (props) => (
   <div>
@@ -29,7 +47,7 @@ export const gridOrderImage = (props) => (
       alt="order-item"
     />
   </div>
-);
+)
 
 export const gridOrderStatus = (props) => (
   <button
@@ -39,26 +57,22 @@ export const gridOrderStatus = (props) => (
   >
     {props.Status}
   </button>
-);
+)
 
 export const kanbanGrid = [
-  { headerText: 'To Do',
-    keyField: 'Open',
-    allowToggle: true },
+  { headerText: 'To Do', keyField: 'Open', allowToggle: true },
 
-  { headerText: 'In Progress',
-    keyField: 'InProgress',
-    allowToggle: true },
+  { headerText: 'In Progress', keyField: 'InProgress', allowToggle: true },
 
-  { headerText: 'Testing',
+  {
+    headerText: 'Testing',
     keyField: 'Testing',
     allowToggle: true,
-    isExpanded: false },
+    isExpanded: false,
+  },
 
-  { headerText: 'Done',
-    keyField: 'Close',
-    allowToggle: true },
-];
+  { headerText: 'Done', keyField: 'Close', allowToggle: true },
+]
 const gridEmployeeProfile = (props) => (
   <div className="flex items-center gap-2">
     <img
@@ -68,8 +82,7 @@ const gridEmployeeProfile = (props) => (
     />
     <p>{props.Name}</p>
   </div>
-);
-
+)
 
 const customerGridImage = (props) => (
   <div className="image flex gap-4">
@@ -83,14 +96,17 @@ const customerGridImage = (props) => (
       <p>{props.CustomerEmail}</p>
     </div>
   </div>
-);
+)
 
 const customerGridStatus = (props) => (
   <div className="flex gap-2 justify-center items-center text-gray-700 capitalize">
-    <p style={{ background: props.StatusBg }} className="rounded-full h-3 w-3" />
+    <p
+      style={{ background: props.StatusBg }}
+      className="rounded-full h-3 w-3"
+    />
     <p>{props.Status}</p>
   </div>
-);
+)
 export const areaPrimaryXAxis = {
   valueType: 'DateTime',
   labelFormat: 'y',
@@ -98,7 +114,7 @@ export const areaPrimaryXAxis = {
   intervalType: 'Years',
   edgeLabelPlacement: 'Shift',
   labelStyle: { color: 'gray' },
-};
+}
 
 export const areaPrimaryYAxis = {
   labelFormat: '{value}%',
@@ -108,19 +124,18 @@ export const areaPrimaryYAxis = {
   majorTickLines: { width: 0 },
   minorTickLines: { width: 0 },
   labelStyle: { color: 'gray' },
-
-};
+}
 export const barPrimaryXAxis = {
   valueType: 'Category',
   interval: 1,
   majorGridLines: { width: 0 },
-};
+}
 export const barPrimaryYAxis = {
   majorGridLines: { width: 0 },
   majorTickLines: { width: 0 },
   lineStyle: { width: 0 },
   labelStyle: { color: 'transparent' },
-};
+}
 const areaChartData = [
   [
     { x: new Date(2002, 0, 1), y: 2.2 },
@@ -158,7 +173,7 @@ const areaChartData = [
     { x: new Date(2010, 0, 1), y: 1.1 },
     { x: new Date(2011, 0, 1), y: 2.3 },
   ],
-];
+]
 
 export const areaCustomSeries = [
   {
@@ -169,7 +184,6 @@ export const areaCustomSeries = [
     opacity: '0.8',
     type: 'SplineArea',
     width: '2',
-
   },
   {
     dataSource: areaChartData[1],
@@ -189,7 +203,7 @@ export const areaCustomSeries = [
     type: 'SplineArea',
     width: '2',
   },
-];
+]
 
 export const barChartData = [
   [
@@ -207,7 +221,7 @@ export const barChartData = [
     { x: 'GBR', y: 17 },
     { x: 'CHN', y: 26 },
   ],
-];
+]
 
 export const barCustomSeries = [
   {
@@ -252,7 +266,7 @@ export const barCustomSeries = [
       },
     },
   },
-];
+]
 export const colorMappingData = [
   [
     { x: 'Jan', y: 6.96 },
@@ -271,41 +285,64 @@ export const colorMappingData = [
   ['#FFFF99'],
   ['#FFA500'],
   ['#FF4040'],
-];
+]
 
 export const rangeColorMapping = [
-  { label: '1°C to 10°C',
-    start: '1',
-    end: '10',
-    colors: colorMappingData[1] },
+  { label: '1°C to 10°C', start: '1', end: '10', colors: colorMappingData[1] },
 
-  { label: '11°C to 20°C',
+  {
+    label: '11°C to 20°C',
     start: '11',
     end: '20',
-    colors: colorMappingData[2] },
+    colors: colorMappingData[2],
+  },
 
-  { label: '21°C to 30°C',
+  {
+    label: '21°C to 30°C',
     start: '21',
     end: '30',
-    colors: colorMappingData[3] },
-
-];
+    colors: colorMappingData[3],
+  },
+]
 
 export const deptData = [
-  {'x': 'Accounting', 'y': 55.2, text: '55.2%' },
-  {'x': 'Developers', 'y': 75.2, text: '75.2%' },
-  {'x': 'Designers', 'y': 55.2, text: '55.2%' },
-  {'x': 'Admin', 'y': 55.2, text: '55.2%' },
-  {'x': 'Customer Support', 'y': 55.2, text: '55.2%' },
-  {'x': 'Product', 'y': 55.2, text: '55.2%' },
-  {'x': 'IT Support', 'y': 55.2, text: '73.5%' },
+  {'x': 'Software Engineering', employees: 20 },
+  {'x': 'Accounting', employees: 20 },
+  {'x': 'Marketing', employees: 20 },
+  {'x': 'Human Resources', employees: 20 },
+  {'x': 'IT Support',employees: 20 },
 ];
+
+// export const deptData = [
+//   { 'x': 'Software Engineering', 'y': '' },
+//   { 'x': 'Administrative', 'y': '' },
+//   { 'x': 'Human Resources', 'y': '' },
+//   { 'x': 'IT Support', 'y': '' },
+//   {'x': 'Accounting', 'y': '' },
+// ]
+
+export const donutData = {
+  labels: deptData.map((item) => item.department),
+  datasets: [
+    {
+      data: deptData.map((item) => item.count),
+      backgroundColor: [
+        '#FF5733',
+        '#FFBF33',
+        '#33FF49',
+        '#3377FF',
+        '#AA33FF',
+        '#FF33E3',
+      ],
+    },
+  ],
+};
 
 export const ColorMappingPrimaryXAxis = {
   valueType: 'Category',
   majorGridLines: { width: 0 },
   title: 'Months',
-};
+}
 
 export const ColorMappingPrimaryYAxis = {
   lineStyle: { width: 0 },
@@ -313,7 +350,7 @@ export const ColorMappingPrimaryYAxis = {
   minorTickLines: { width: 0 },
   labelFormat: '{value}°C',
   title: 'Temperature',
-};
+}
 
 export const FinancialPrimaryXAxis = {
   valueType: 'DateTime',
@@ -321,7 +358,7 @@ export const FinancialPrimaryXAxis = {
   maximum: new Date('2017, 9, 30'),
   crosshairTooltip: { enable: true },
   majorGridLines: { width: 0 },
-};
+}
 
 export const FinancialPrimaryYAxis = {
   title: 'Price',
@@ -330,7 +367,7 @@ export const FinancialPrimaryYAxis = {
   interval: 20,
   lineStyle: { width: 0 },
   majorTickLines: { width: 0 },
-};
+}
 
 export const LinePrimaryXAxis = {
   valueType: 'DateTime',
@@ -339,7 +376,7 @@ export const LinePrimaryXAxis = {
   edgeLabelPlacement: 'Shift',
   majorGridLines: { width: 0 },
   background: 'white',
-};
+}
 
 export const LinePrimaryYAxis = {
   labelFormat: '{value}%',
@@ -350,86 +387,98 @@ export const LinePrimaryYAxis = {
   lineStyle: { width: 0 },
   majorTickLines: { width: 0 },
   minorTickLines: { width: 0 },
-};
+}
 
 export const customersGrid = [
   { type: 'checkbox', width: '50' },
-  { headerText: 'Name',
+  {
+    headerText: 'Name',
     width: '150',
     template: customerGridImage,
-    textAlign: 'Center' },
-  { field: 'ProjectName',
+    textAlign: 'Center',
+  },
+  {
+    field: 'ProjectName',
     headerText: 'Project Name',
     width: '150',
-    textAlign: 'Center' },
-  { field: 'Status',
+    textAlign: 'Center',
+  },
+  {
+    field: 'Status',
     headerText: 'Status',
     width: '130',
     format: 'yMd',
     textAlign: 'Center',
-    template: customerGridStatus },
+    template: customerGridStatus,
+  },
   {
     field: 'Weeks',
     headerText: 'Weeks',
     width: '100',
     format: 'C2',
-    textAlign: 'Center' },
-  { field: 'Budget',
+    textAlign: 'Center',
+  },
+  {
+    field: 'Budget',
     headerText: 'Budget',
     width: '100',
     format: 'yMd',
-    textAlign: 'Center' },
+    textAlign: 'Center',
+  },
 
-  { field: 'Location',
+  {
+    field: 'Location',
     headerText: 'Location',
     width: '150',
-    textAlign: 'Center' },
+    textAlign: 'Center',
+  },
 
-  { field: 'CustomerID',
+  {
+    field: 'CustomerID',
     headerText: 'Customer ID',
     width: '120',
     textAlign: 'Center',
     isPrimaryKey: true,
   },
-
-];
-
+]
 
 export const employeesGrid = [
-  { field: 'EmployeeID',
+  {
+    field: 'EmployeeID',
     headerText: 'Employee ID',
     width: '50',
-    textAlign: 'Left' },
-    
-  { headerText:'Employee',
+    textAlign: 'Left',
+  },
+
+  {
+    headerText: 'Employee',
     width: '100',
     template: gridEmployeeProfile,
-    textAlign: 'left' },
-  { field: 'Name',
-    headerText: '',
-    width: '0',
     textAlign: 'left',
   },
-  { field: 'Position',
+  { field: 'Name', headerText: '', width: '0', textAlign: 'left' },
+  {
+    field: 'Position',
     headerText: 'Designation',
     width: '100',
     textAlign: 'Center',
   },
-  { field: 'PhoneNumber',
+  {
+    field: 'PhoneNumber',
     headerText: 'Phone Number',
     width: '100',
-    textAlign: 'Center' },
+    textAlign: 'Center',
+  },
 
-  { field: 'Department',
+  {
+    field: 'Department',
     headerText: 'Department',
     width: '100',
-    textAlign: 'Center' },
+    textAlign: 'Center',
+  },
 
-  { field: 'Status',
-    headerText: 'Status',
-    width: '80',
-    textAlign: 'Center' },
-];
+  { field: 'Status', headerText: 'Status', width: '80', textAlign: 'Center' },
+]
 
 export const links = [
   {
@@ -437,23 +486,23 @@ export const links = [
     links: [
       {
         name: 'dashboard',
-        icon: <AiFillDashboard />
+        icon: <AiFillDashboard />,
       },
       {
         name: 'Employees',
-        icon: <MdOutlinePerson />
+        icon: <MdOutlinePerson />,
       },
       {
         name: 'Departments',
-        icon: <FcDepartment />
+        icon: <FcDepartment />,
       },
       {
         name: 'Contracts',
-        icon: <IoIosContract />
+        icon: <IoIosContract />,
       },
       {
         name: 'Conversations',
-        icon: <SiStopstalk/>
+        icon: <SiStopstalk />,
       },
       {
         name: 'Calendar',
@@ -461,11 +510,11 @@ export const links = [
       },
       {
         name: 'Invoice',
-        icon: <FaFileInvoice/>
+        icon: <FaFileInvoice />,
       },
       {
         name: 'Settings',
-        icon:<FiSettings/>
+        icon: <FiSettings />,
       },
     ],
   },
@@ -475,38 +524,34 @@ export const links = [
     links: [
       {
         name: 'Need Help ?',
-        icon: <MdOutlineHelp/>
+        icon: <MdOutlineHelp />,
       },
       {
         name: 'Contact Us',
-        icon: <MdContactSupport/>
+        icon: <MdContactSupport />,
       },
       {
         name: 'Knowledge Base',
-        icon: <SiKnowledgebase/>
+        icon: <SiKnowledgebase />,
       },
     ],
-  }, 
-];
-
+  },
+]
 
 export const chatData = [
   {
-    image:
-      avatar4,
+    image: avatar4,
     message: 'dummy message!',
     desc: 'hampshire notifications',
     time: '9:08 AM',
   },
   {
-    image:
-      avatar4,
+    image: avatar4,
     message: 'dummy message!',
     desc: 'hampshire notifications',
     time: '9:08 AM',
   },
- 
-];
+]
 
 export const earningData = [
   {
@@ -527,7 +572,7 @@ export const earningData = [
     iconBg: 'rgb(254, 201, 15)',
     pcColor: 'green-600',
   },
- 
+
   {
     icon: <HiOutlineRefresh />,
     amount: '39,354',
@@ -537,7 +582,7 @@ export const earningData = [
     iconBg: 'rgb(235, 250, 242)',
     pcColor: 'red-600',
   },
-];
+]
 
 export const recentTransactions = [
   {
@@ -558,7 +603,7 @@ export const recentTransactions = [
     iconBg: 'rgb(235, 250, 242)',
     pcColor: 'red-600',
   },
-  
+
   {
     icon: <TiTick />,
     amount: '+$350',
@@ -579,11 +624,9 @@ export const recentTransactions = [
     iconBg: '#E5FAFB',
     pcColor: 'red-600',
   },
-];
+]
 
 export const weeklyStats = [
-  
-
   {
     icon: <BsChatLeft />,
     amount: '+$560',
@@ -592,7 +635,7 @@ export const weeklyStats = [
     iconBg: '#00C292',
     pcColor: 'green-600',
   },
-];
+]
 
 export const themeColors = [
   {
@@ -619,11 +662,11 @@ export const themeColors = [
     color: '#FB9678',
     name: 'orange-theme',
   },
-];
+]
 
 export const userProfileData = [
   {
-    icon: <BiUserCircle/>,
+    icon: <BiUserCircle />,
     title: 'My Profile',
     iconColor: 'rgb(0, 194, 146)',
     iconBg: 'rgb(235, 250, 242)',
@@ -640,7 +683,7 @@ export const userProfileData = [
     iconColor: 'rgb(0, 194, 146)',
     iconBg: 'rgb(235, 250, 242)',
   },
-];
+]
 
 export const ordersGrid = [
   {
@@ -656,7 +699,8 @@ export const ordersGrid = [
     editType: 'dropdownedit',
     textAlign: 'Center',
   },
-  { field: 'CustomerName',
+  {
+    field: 'CustomerName',
     headerText: 'Customer Name',
     width: '150',
     textAlign: 'Center',
@@ -689,15 +733,14 @@ export const ordersGrid = [
     width: '150',
     textAlign: 'Center',
   },
-];
+]
 
 export const customersData = [
   {
     CustomerID: 1001,
     CustomerName: 'Nirav Joshi',
     CustomerEmail: 'nirav@gmail.com',
-    CustomerImage:
-      avatar2,
+    CustomerImage: avatar2,
     ProjectName: 'Hosting Press HTML',
     Status: 'Active',
     StatusBg: '#8BE78B',
@@ -712,8 +755,7 @@ export const customersData = [
     CustomerEmail: 'sunil@gmail.com',
     ProjectName: 'Elite Admin',
     Status: 'Active',
-    CustomerImage:
-      avatar3,
+    CustomerImage: avatar3,
 
     StatusBg: '#8BE78B',
     Weeks: '11',
@@ -727,8 +769,7 @@ export const customersData = [
     CustomerEmail: 'andrew@gmail.com',
     ProjectName: 'Real Homes WP Theme',
     Status: 'Pending',
-    CustomerImage:
-      avatar4,
+    CustomerImage: avatar4,
     StatusBg: '#FEC90F',
     Weeks: '19',
     Budget: '$24.5k',
@@ -741,8 +782,7 @@ export const customersData = [
     CustomerEmail: 'jamil@gmail.com',
     ProjectName: 'MedicalPro WP Theme',
     Status: 'Completed',
-    CustomerImage:
-      avatar,
+    CustomerImage: avatar,
     StatusBg: '#8BE78B',
     Weeks: '34',
     Budget: '$16.5k',
@@ -755,8 +795,7 @@ export const customersData = [
     CustomerEmail: 'michael@gmail.com',
     ProjectName: 'Weekly WP Theme',
     Status: 'Cancel',
-    CustomerImage:
-      avatar2,
+    CustomerImage: avatar2,
     StatusBg: 'red',
     Weeks: '34',
     Budget: '$16.5k',
@@ -766,8 +805,7 @@ export const customersData = [
     CustomerID: 1006,
     CustomerName: 'Nirav Joshi',
     CustomerEmail: 'nirav@gmail.com',
-    CustomerImage:
-      avatar2,
+    CustomerImage: avatar2,
     ProjectName: 'Hosting Press HTML',
     Status: 'Active',
     StatusBg: '#8BE78B',
@@ -782,8 +820,7 @@ export const customersData = [
     CustomerEmail: 'sunil@gmail.com',
     ProjectName: 'Elite Admin',
     Status: 'Active',
-    CustomerImage:
-      avatar3,
+    CustomerImage: avatar3,
 
     StatusBg: '#8BE78B',
     Weeks: '11',
@@ -797,8 +834,7 @@ export const customersData = [
     CustomerEmail: 'andrew@gmail.com',
     ProjectName: 'Real Homes WP Theme',
     Status: 'Pending',
-    CustomerImage:
-      avatar4,
+    CustomerImage: avatar4,
     StatusBg: '#FEC90F',
     Weeks: '19',
     Budget: '$24.5k',
@@ -811,8 +847,7 @@ export const customersData = [
     CustomerEmail: 'jamil@gmail.com',
     ProjectName: 'MedicalPro WP Theme',
     Status: 'Completed',
-    CustomerImage:
-      avatar,
+    CustomerImage: avatar,
     StatusBg: '#8BE78B',
     Weeks: '34',
     Budget: '$16.5k',
@@ -825,8 +860,7 @@ export const customersData = [
     CustomerEmail: 'michael@gmail.com',
     ProjectName: 'Weekly WP Theme',
     Status: 'Cancel',
-    CustomerImage:
-      avatar2,
+    CustomerImage: avatar2,
     StatusBg: 'red',
     Weeks: '34',
     Budget: '$16.5k',
@@ -836,8 +870,7 @@ export const customersData = [
     CustomerID: 1011,
     CustomerName: 'Nirav Joshi',
     CustomerEmail: 'nirav@gmail.com',
-    CustomerImage:
-      avatar2,
+    CustomerImage: avatar2,
     ProjectName: 'Hosting Press HTML',
     Status: 'Active',
     StatusBg: '#8BE78B',
@@ -852,8 +885,7 @@ export const customersData = [
     CustomerEmail: 'sunil@gmail.com',
     ProjectName: 'Elite Admin',
     Status: 'Active',
-    CustomerImage:
-      avatar3,
+    CustomerImage: avatar3,
 
     StatusBg: '#8BE78B',
     Weeks: '11',
@@ -867,8 +899,7 @@ export const customersData = [
     CustomerEmail: 'andrew@gmail.com',
     ProjectName: 'Real Homes WP Theme',
     Status: 'Pending',
-    CustomerImage:
-      avatar4,
+    CustomerImage: avatar4,
     StatusBg: '#FEC90F',
     Weeks: '19',
     Budget: '$24.5k',
@@ -881,8 +912,7 @@ export const customersData = [
     CustomerEmail: 'jamil@gmail.com',
     ProjectName: 'MedicalPro WP Theme',
     Status: 'Completed',
-    CustomerImage:
-      avatar,
+    CustomerImage: avatar,
     StatusBg: '#8BE78B',
     Weeks: '34',
     Budget: '$16.5k',
@@ -895,8 +925,7 @@ export const customersData = [
     CustomerEmail: 'michael@gmail.com',
     ProjectName: 'Weekly WP Theme',
     Status: 'Cancel',
-    CustomerImage:
-      avatar2,
+    CustomerImage: avatar2,
     StatusBg: 'red',
     Weeks: '34',
     Budget: '$16.5k',
@@ -906,8 +935,7 @@ export const customersData = [
     CustomerID: 1016,
     CustomerName: 'Nirav Joshi',
     CustomerEmail: 'nirav@gmail.com',
-    CustomerImage:
-      avatar2,
+    CustomerImage: avatar2,
     ProjectName: 'Hosting Press HTML',
     Status: 'Active',
     StatusBg: '#8BE78B',
@@ -922,8 +950,7 @@ export const customersData = [
     CustomerEmail: 'sunil@gmail.com',
     ProjectName: 'Elite Admin',
     Status: 'Active',
-    CustomerImage:
-      avatar3,
+    CustomerImage: avatar3,
 
     StatusBg: '#8BE78B',
     Weeks: '11',
@@ -937,8 +964,7 @@ export const customersData = [
     CustomerEmail: 'andrew@gmail.com',
     ProjectName: 'Real Homes WP Theme',
     Status: 'Pending',
-    CustomerImage:
-      avatar4,
+    CustomerImage: avatar4,
     StatusBg: '#FEC90F',
     Weeks: '19',
     Budget: '$24.5k',
@@ -951,8 +977,7 @@ export const customersData = [
     CustomerEmail: 'jamil@gmail.com',
     ProjectName: 'MedicalPro WP Theme',
     Status: 'Completed',
-    CustomerImage:
-      avatar,
+    CustomerImage: avatar,
     StatusBg: '#8BE78B',
     Weeks: '34',
     Budget: '$16.5k',
@@ -965,8 +990,7 @@ export const customersData = [
     CustomerEmail: 'michael@gmail.com',
     ProjectName: 'Weekly WP Theme',
     Status: 'Cancel',
-    CustomerImage:
-      avatar2,
+    CustomerImage: avatar2,
     StatusBg: 'red',
     Weeks: '34',
     Budget: '$16.5k',
@@ -976,8 +1000,7 @@ export const customersData = [
     CustomerID: 1021,
     CustomerName: 'Nirav Joshi',
     CustomerEmail: 'nirav@gmail.com',
-    CustomerImage:
-      avatar2,
+    CustomerImage: avatar2,
     ProjectName: 'Hosting Press HTML',
     Status: 'Active',
     StatusBg: '#8BE78B',
@@ -992,8 +1015,7 @@ export const customersData = [
     CustomerEmail: 'sunil@gmail.com',
     ProjectName: 'Elite Admin',
     Status: 'Active',
-    CustomerImage:
-      avatar3,
+    CustomerImage: avatar3,
 
     StatusBg: '#8BE78B',
     Weeks: '11',
@@ -1007,8 +1029,7 @@ export const customersData = [
     CustomerEmail: 'andrew@gmail.com',
     ProjectName: 'Real Homes WP Theme',
     Status: 'Pending',
-    CustomerImage:
-      avatar4,
+    CustomerImage: avatar4,
     StatusBg: '#FEC90F',
     Weeks: '19',
     Budget: '$24.5k',
@@ -1021,8 +1042,7 @@ export const customersData = [
     CustomerEmail: 'jamil@gmail.com',
     ProjectName: 'MedicalPro WP Theme',
     Status: 'Completed',
-    CustomerImage:
-      avatar,
+    CustomerImage: avatar,
     StatusBg: '#8BE78B',
     Weeks: '34',
     Budget: '$16.5k',
@@ -1035,8 +1055,7 @@ export const customersData = [
     CustomerEmail: 'michael@gmail.com',
     ProjectName: 'Weekly WP Theme',
     Status: 'Cancel',
-    CustomerImage:
-      avatar2,
+    CustomerImage: avatar2,
     StatusBg: 'red',
     Weeks: '34',
     Budget: '$16.5k',
@@ -1046,8 +1065,7 @@ export const customersData = [
     CustomerID: 1026,
     CustomerName: 'Nirav Joshi',
     CustomerEmail: 'nirav@gmail.com',
-    CustomerImage:
-      avatar2,
+    CustomerImage: avatar2,
     ProjectName: 'Hosting Press HTML',
     Status: 'Active',
     StatusBg: '#8BE78B',
@@ -1062,8 +1080,7 @@ export const customersData = [
     CustomerEmail: 'sunil@gmail.com',
     ProjectName: 'Elite Admin',
     Status: 'Active',
-    CustomerImage:
-      avatar3,
+    CustomerImage: avatar3,
 
     StatusBg: '#8BE78B',
     Weeks: '11',
@@ -1077,8 +1094,7 @@ export const customersData = [
     CustomerEmail: 'andrew@gmail.com',
     ProjectName: 'Real Homes WP Theme',
     Status: 'Pending',
-    CustomerImage:
-      avatar4,
+    CustomerImage: avatar4,
     StatusBg: '#FEC90F',
     Weeks: '19',
     Budget: '$24.5k',
@@ -1091,8 +1107,7 @@ export const customersData = [
     CustomerEmail: 'jamil@gmail.com',
     ProjectName: 'MedicalPro WP Theme',
     Status: 'Completed',
-    CustomerImage:
-      avatar,
+    CustomerImage: avatar,
     StatusBg: '#8BE78B',
     Weeks: '34',
     Budget: '$16.5k',
@@ -1105,8 +1120,7 @@ export const customersData = [
     CustomerEmail: 'michael@gmail.com',
     ProjectName: 'Weekly WP Theme',
     Status: 'Cancel',
-    CustomerImage:
-      avatar2,
+    CustomerImage: avatar2,
     StatusBg: 'red',
     Weeks: '34',
     Budget: '$16.5k',
@@ -1116,8 +1130,7 @@ export const customersData = [
     CustomerID: 1031,
     CustomerName: 'Nirav Joshi',
     CustomerEmail: 'nirav@gmail.com',
-    CustomerImage:
-      avatar2,
+    CustomerImage: avatar2,
     ProjectName: 'Hosting Press HTML',
     Status: 'Active',
     StatusBg: '#8BE78B',
@@ -1132,8 +1145,7 @@ export const customersData = [
     CustomerEmail: 'sunil@gmail.com',
     ProjectName: 'Elite Admin',
     Status: 'Active',
-    CustomerImage:
-      avatar3,
+    CustomerImage: avatar3,
 
     StatusBg: '#8BE78B',
     Weeks: '11',
@@ -1147,8 +1159,7 @@ export const customersData = [
     CustomerEmail: 'andrew@gmail.com',
     ProjectName: 'Real Homes WP Theme',
     Status: 'Pending',
-    CustomerImage:
-      avatar4,
+    CustomerImage: avatar4,
     StatusBg: '#FEC90F',
     Weeks: '19',
     Budget: '$24.5k',
@@ -1161,8 +1172,7 @@ export const customersData = [
     CustomerEmail: 'jamil@gmail.com',
     ProjectName: 'MedicalPro WP Theme',
     Status: 'Completed',
-    CustomerImage:
-      avatar,
+    CustomerImage: avatar,
     StatusBg: '#8BE78B',
     Weeks: '34',
     Budget: '$16.5k',
@@ -1175,8 +1185,7 @@ export const customersData = [
     CustomerEmail: 'michael@gmail.com',
     ProjectName: 'Weekly WP Theme',
     Status: 'Cancel',
-    CustomerImage:
-      avatar2,
+    CustomerImage: avatar2,
     StatusBg: 'red',
     Weeks: '34',
     Budget: '$16.5k',
@@ -1186,8 +1195,7 @@ export const customersData = [
     CustomerID: 1036,
     CustomerName: 'Nirav Joshi',
     CustomerEmail: 'nirav@gmail.com',
-    CustomerImage:
-      avatar2,
+    CustomerImage: avatar2,
     ProjectName: 'Hosting Press HTML',
     Status: 'Active',
     StatusBg: '#8BE78B',
@@ -1202,8 +1210,7 @@ export const customersData = [
     CustomerEmail: 'sunil@gmail.com',
     ProjectName: 'Elite Admin',
     Status: 'Active',
-    CustomerImage:
-      avatar3,
+    CustomerImage: avatar3,
 
     StatusBg: '#8BE78B',
     Weeks: '11',
@@ -1217,8 +1224,7 @@ export const customersData = [
     CustomerEmail: 'andrew@gmail.com',
     ProjectName: 'Real Homes WP Theme',
     Status: 'Pending',
-    CustomerImage:
-      avatar4,
+    CustomerImage: avatar4,
     StatusBg: '#FEC90F',
     Weeks: '19',
     Budget: '$24.5k',
@@ -1230,8 +1236,7 @@ export const customersData = [
     CustomerEmail: 'jamil@gmail.com',
     ProjectName: 'MedicalPro WP Theme',
     Status: 'Completed',
-    CustomerImage:
-      avatar,
+    CustomerImage: avatar,
     StatusBg: '#8BE78B',
     Weeks: '34',
     Budget: '$16.5k',
@@ -1243,50 +1248,48 @@ export const customersData = [
     CustomerEmail: 'michael@gmail.com',
     ProjectName: 'Weekly WP Theme',
     Status: 'Cancel',
-    CustomerImage:
-      avatar2,
+    CustomerImage: avatar2,
     StatusBg: 'red',
     Weeks: '34',
     Budget: '$16.5k',
     Location: 'USA',
   },
-
-];
+]
 
 export const employeesData = [
-{
-  EmployeeImage: avatar4,
+  {
+    EmployeeImage: avatar4,
     City: 'Lagos',
     Position: 'Software Developer',
     EmployeeID: 'HH001',
     Name: 'Akinmegha Temitope',
     PhoneNumber: '08112785465',
-    Department: 'Software Engineering',   
-    Status: 'Contract' 
-  }, 
+    Department: 'Software Engineering',
+    Status: 'Contract',
+  },
 
   {
     EmployeeImage: avatar4,
-      City: 'Lagos',
-      Position: 'Software Developer',
-      EmployeeID: 'HH001',
-      Name: 'Akinmegha Temitope',
-      PhoneNumber: '08112785465',
-      Department: 'Software Engineering',   
-      Status: 'Full Time' 
-    }, 
+    City: 'Lagos',
+    Position: 'Software Developer',
+    EmployeeID: 'HH001',
+    Name: 'Akinmegha Temitope',
+    PhoneNumber: '08112785465',
+    Department: 'Software Engineering',
+    Status: 'Full Time',
+  },
 
-    {
-      EmployeeImage: avatar4,
-        City: 'Lagos',
-        Position: 'Software Developer',
-        EmployeeID: 'HH001',
-        Name: 'Akinmegha Temitope',
-        PhoneNumber: '08112785465',
-        Department: 'Software Engineering',   
-        Status: 'Contract' 
-      }, 
-];
+  {
+    EmployeeImage: avatar4,
+    City: 'Lagos',
+    Position: 'Software Developer',
+    EmployeeID: 'HH001',
+    Name: 'Akinmegha Temitope',
+    PhoneNumber: '08112785465',
+    Department: 'Software Engineering',
+    Status: 'Contract',
+  },
+]
 
 export const scheduleData = [
   {
@@ -1481,7 +1484,7 @@ export const scheduleData = [
     EndTime: '2021-01-16T09:00:00.000Z',
     CategoryColor: '#7fa900',
   },
-];
+]
 
 export const lineChartData = [
   [
@@ -1512,7 +1515,7 @@ export const lineChartData = [
     { x: new Date(2010, 0, 1), y: 70 },
     { x: new Date(2011, 0, 1), y: 100 },
   ],
-];
+]
 export const dropdownData = [
   {
     Id: '1',
@@ -1521,47 +1524,51 @@ export const dropdownData = [
   {
     Id: '2',
     Time: 'April 2021',
-  }, {
+  },
+  {
     Id: '3',
     Time: 'May 2021',
   },
-];
+]
 export const SparklineAreaData = [
   { x: 1, yval: 2 },
   { x: 2, yval: 6 },
   { x: 3, yval: 8 },
   { x: 4, yval: 5 },
   { x: 5, yval: 10 },
-
-];
+]
 
 export const lineCustomSeries = [
-  { dataSource: lineChartData[0],
+  {
+    dataSource: lineChartData[0],
     xName: 'x',
     yName: 'y',
     name: 'Germany',
     width: '2',
     marker: { visible: true, width: 10, height: 10 },
-    type: 'Line' },
+    type: 'Line',
+  },
 
-  { dataSource: lineChartData[1],
+  {
+    dataSource: lineChartData[1],
     xName: 'x',
     yName: 'y',
     name: 'England',
     width: '2',
     marker: { visible: true, width: 10, height: 10 },
-    type: 'Line' },
+    type: 'Line',
+  },
 
-  { dataSource: lineChartData[2],
+  {
+    dataSource: lineChartData[2],
     xName: 'x',
     yName: 'y',
     name: 'India',
     width: '2',
     marker: { visible: true, width: 10, height: 10 },
-    type: 'Line' },
-
-];
-
+    type: 'Line',
+  },
+]
 
 export const contextMenuItems = [
   'AutoFit',
@@ -1580,9 +1587,7 @@ export const contextMenuItems = [
   'PrevPage',
   'LastPage',
   'NextPage',
-];
-
-
+]
 
 export const stackedChartData = [
   [
@@ -1603,29 +1608,27 @@ export const stackedChartData = [
     { x: 'Jun', y: 159.9 },
     { x: 'July', y: 159.9 },
   ],
-];
+]
 
 export const stackedCustomSeries = [
-
-  { dataSource: stackedChartData[0],
+  {
+    dataSource: stackedChartData[0],
     xName: 'x',
     yName: 'y',
     name: 'Budget',
     type: 'StackingColumn',
     background: 'blue',
-
   },
 
-  { dataSource: stackedChartData[1],
+  {
+    dataSource: stackedChartData[1],
     xName: 'x',
     yName: 'y',
     name: 'Expense',
     type: 'StackingColumn',
     background: 'red',
-
   },
-
-];
+]
 
 export const stackedPrimaryXAxis = {
   majorGridLines: { width: 0 },
@@ -1636,7 +1639,7 @@ export const stackedPrimaryXAxis = {
   lineStyle: { width: 0 },
   labelIntersectAction: 'Rotate45',
   valueType: 'Category',
-};
+}
 
 export const stackedPrimaryYAxis = {
   lineStyle: { width: 0 },
@@ -1648,7 +1651,7 @@ export const stackedPrimaryYAxis = {
   minorGridLines: { width: 1 },
   minorTickLines: { width: 0 },
   labelFormat: '{value}',
-};
+}
 
 export const kanbanData = [
   {
@@ -2001,7 +2004,7 @@ export const kanbanData = [
     Color: '#E64A19',
     ClassName: 'e-bug, e-release, e-nancy-davloio',
   },
-];
+]
 
 export const financialChartData = [
   {
@@ -4292,7 +4295,7 @@ export const financialChartData = [
     close: 158.67,
     volume: 27939544,
   },
-];
+]
 export const PyramidData = [
   { x: 'Sweet Treats', y: 120, text: '120 cal' },
   { x: 'Milk, Youghnut, Cheese', y: 435, text: '435 cal' },
@@ -4300,4 +4303,4 @@ export const PyramidData = [
   { x: 'Meat, Poultry, Fish', y: 475, text: '475 cal' },
   { x: 'Fruits', y: 520, text: '520 cal' },
   { x: 'Bread, Rice, Pasta', y: 930, text: '930 cal' },
-];
+]

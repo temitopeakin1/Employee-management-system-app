@@ -16,7 +16,7 @@ import {
 
 import { useStateContext } from "../../contexts/ContextProvider";
 
-const Doughnut = ({ id, data, legendVisibility, height }) => {
+const Donot = ({id, legendVisibility, height, data }) => {
   const { currentMode } = useStateContext();
 
   return (
@@ -24,7 +24,7 @@ const Doughnut = ({ id, data, legendVisibility, height }) => {
       id={id}
       legendSettings={{
         visible: legendVisibility,
-        toggleVisibility: false,
+        toggleVisibility: true,
         position: "Right",
         height: "50%",
         width: "20%",
@@ -79,4 +79,4 @@ const Doughnut = ({ id, data, legendVisibility, height }) => {
   );
 };
 
-export default Doughnut;
+export default Donot;

@@ -60,8 +60,6 @@ const Employees = () => {
   const [kebabMenuY, setKebabMenuY] = useState(0)
   const [showSuccessDialog, setShowSuccessDialog] = useState(false)
 
-  // Define error states for form fields
-  // const [firstNameError, setFirstNameError] = useState('')
 
   useEffect(() => {
     const storedEmployeesData = localStorage.getItem('employeesData')
@@ -75,7 +73,7 @@ const Employees = () => {
   }, [employeesData])
 
   useEffect(() => {
-    getEmployeesData()
+    getEmployeesData();
   }, [])
 
   async function getEmployeesData() {
@@ -83,14 +81,14 @@ const Employees = () => {
       const { data, error } = await supabase
         .from('employees')
         .select('*')
-        .limit(10)
+        .limit(50)
       if (error) {
-        console.error('Error fetching employee data:', error)
+        console.error('Error fetching employee data:', Error)
       } else if (data) {
         setEmployeesData(data)
       }
     } catch (error) {
-      console.error('Error fetching employee data:', error)
+      console.error('Error fetching employee data:', Error)
     }
   }
 
@@ -147,7 +145,8 @@ const Employees = () => {
             .toLowerCase()
             .includes(searchQuery.toLowerCase()) ||
           employee.lastName.toLowerCase().includes(searchQuery.toLowerCase()),
-      )
+          console.log(getFilteredData)
+      );
     } else {
       return employeesData.filter(
         (employee) =>
@@ -161,7 +160,7 @@ const Employees = () => {
       )
     }
   }
-
+// handle kebab menu clicks
   const handleKebabMenuClick = (event, rowData) => {
     event.preventDefault()
     const cell = event.target.closest('.e-rowcell')
@@ -275,6 +274,9 @@ const Employees = () => {
     { Id: '7', Role: 'Product Owner' },
     { Id: '8', Role: 'HR Manager' },
     { Id: '9', Role: 'Administrative Officer' },
+    { Id: '10', Role: 'DevOps Engineer' },
+    { Id: '11', Role: 'Social Media Manager' },
+    { Id: '12', Role: 'Solutions Architect' },
   ]
 
   const department = [
@@ -468,15 +470,14 @@ const Employees = () => {
           </div>
           <GridComponent
             dataSource={getFilteredData()}
-            enableHover={false}
+            enableHover={true}
             width="auto"
             allowPaging
             allowSorting
-            pageSettings={{ pageCount: 12 }}
+            pageSettings={{ pageCount: 5 }}
             selectionSettings={selectionsettings}
             // toolbar={toolbarOptions}
-            className="custom-grid"
-            style={{ border: 'none' }}
+            
           >
             <ColumnsDirective>
               <ColumnDirective
@@ -485,7 +486,9 @@ const Employees = () => {
                 width="90"
                 template={(rowData) => (
                   <div>
-                    <div className="font-bold text-14">{rowData.employeeId}</div>
+                    <div className="font-bold text-14">
+                      {rowData.employeeId}
+                    </div>
                   </div>
                 )}
               />
@@ -717,7 +720,7 @@ const Employees = () => {
                 </h2>
                 <div className="w-full max-w-lg">
                   <div className="flex flex-wrap -mx-3 mb-6">
-                    <div className="w-full px-3 -mt-6">
+                    <div className="w-full px-3 mt-1">
                       <label htmlFor="client">
                         Client
                         <input
@@ -730,7 +733,7 @@ const Employees = () => {
                       </label>
                     </div>
                   </div>
-                  <div className="form-row -mt-12">
+                  <div className="form-row mt-1">
                     <div className="w-full md:w-1/2 px-3 mb-3 md:mb-0">
                       <label htmlFor="datepicker" className="form-label">
                         Contract Start Date
@@ -757,7 +760,7 @@ const Employees = () => {
                     </div>
                   </div>
 
-                  <div className="w-full px-3 mt-6">
+                  <div className="w-full px-3 mt-1">
                     <label htmlFor="designation">
                       Designation
                       <DropDownListComponent
@@ -769,7 +772,7 @@ const Employees = () => {
                       />
                     </label>
                   </div>
-                  <div className="w-full px-3 mt-6">
+                  <div className="w-full px-3 mt-1">
                     <label htmlFor="department">
                       Department
                       <DropDownListComponent
@@ -781,7 +784,7 @@ const Employees = () => {
                       />
                     </label>
                   </div>
-                  <div className="w-full px-3 mt-6">
+                  <div className="w-full px-3 mt-1">
                     <label htmlFor="salary">
                       Salary Renumeration
                       <input
@@ -792,7 +795,7 @@ const Employees = () => {
                       />
                     </label>
                   </div>
-                  <div className="w-full px-3 mb-6">
+                  <div className="w-full px-3 mb-1">
                     <label htmlFor="empType">
                       Employment Type
                       <DropDownListComponent
@@ -804,9 +807,9 @@ const Employees = () => {
                       />
                     </label>
                   </div>
-                  <div className="btn">
-                    <button onClick={handleSubmit}>Add Employee</button>
-                  </div>
+                  <button onClick={handleSubmit} className="button">
+                    Add Employee
+                  </button>
                 </div>
               </div>
             )}
@@ -823,8 +826,8 @@ const Employees = () => {
                 style={{ height: '80px', width: '120px' }}
               />
               <button
-                className="btn-primary text-12 bg-"
-                style={{ marginLeft: '13.5rem', marginTop: '-80px' }}
+                className="btn-primary"
+                style={{ marginLeft: '13.5rem', borderColor: 'white', marginTop: '-80px', color: 'gray', backgroundColor: 'transparent' }}
                 onClick={handleCancelDialog}
               >
                 X

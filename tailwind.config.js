@@ -1,4 +1,4 @@
-//@type {import('tailwindcss').Config}
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   darkMode: 'class',
@@ -6,11 +6,17 @@ module.exports = {
     fontFamily: {
       display: ['Montserrat', 'sans-serif'],
       body: ['Montserrat', 'sans-serif'],
+      satoshi: ['satoshi, sans-serif'],
+      title: ['Manrope', 'sans-serif']
     },
     extend: {
       fontSize: {
         8: '8px',
         12: '12px',
+        14: '14px',
+        25: '25px',
+        45: '45px',
+        50: '50px',
         sm: '0.85rem',
       },
       fontWeight: {
