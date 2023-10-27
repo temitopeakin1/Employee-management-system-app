@@ -8,14 +8,21 @@ import {
   Page,
   Toolbar,
 } from '@syncfusion/ej2-react-grids'
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
-import { Doughnut } from 'react-chartjs-2'
+import {
+  Chart as ChartJS,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  ArcElement,
+  Tooltip,
+  Legend,
+} from 'chart.js'
+import { Doughnut, Bar } from 'react-chartjs-2'
 import Navbar from '../components/Navbar'
 import { FiPhone } from 'react-icons/fi'
 import Greeting from '../components/Greeting'
 import red_icon from '../assets/red_icon.png'
 import green_icon from '../assets/green_icon.png'
-
 
 const Dashboard = ({ Dashboard }) => {
   const [averageSalary, setAverageSalary] = useState(0)
@@ -59,7 +66,14 @@ const Dashboard = ({ Dashboard }) => {
     }
   }, [employeesData])
 
-  ChartJS.register(ArcElement, Tooltip, Legend)
+  ChartJS.register(
+    ArcElement,
+    Tooltip,
+    Legend,
+    BarElement,
+    CategoryScale,
+    LinearScale,
+  )
 
   // calculate the kpi's
   const targetTotalEmployees = 80
@@ -86,49 +100,73 @@ const Dashboard = ({ Dashboard }) => {
   // Create labels and data arrays for the chart
   const labels = Object.keys(departmentCounts)
   const data = Object.values(departmentCounts)
-
   const chartColors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF']
+
+  const departmentNames = Object.keys(departmentCounts)
+  const departmentData = departmentNames.map(
+    (department) => departmentCounts[department],
+  );
 
   // Construct the dataset with dynamic data
   const dataset = {
-    data: data,
-    backgroundColor: chartColors.slice(0, labels.length),
-    hoverBackgroundColor: chartColors.slice(0, labels.length),
+    labels: departmentNames, 
+    data: departmentData, 
+    backgroundColor: chartColors.slice(0, departmentNames.length),
+    hoverBackgroundColor: chartColors.slice(0, departmentNames.length),
   }
-
+  // for the donught chart
   const chartData = {
-    labels: labels,
+    labels: departmentNames,
     datasets: [dataset],
-  }
-
+  } 
+  // donought chart
   const options = {
     responsive: true,
     maintainAspectRatio: false,
-    cutout: 47 
+    cutout: 85,
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
   }
 
-  //   // filter employee lsit
-  //   const getFilteredData = () => {
-  //   // conditionals on the dashboard for the employees list
-  //   if (selectedDepartment === "All Employees") {
-  //     return employeesData.filter(
-  //       (employee) => employee.firstName
-  //       .toLowerCase()
-  //       .includes(searchQuery.toLowerCase()) ||
-  //       employee.lastName.toLowerCase().includes(searchQuery.toLowerCase())
-  //     )
-  //   } else {
-  //     return employeesData.filter(
-  //       (employee) => (employees.firstName
-  //         .toLowerCase()
-  //         .includes(searchQuery.toLowerCase()) ||
-  //        employee.lastName
-  //        .toLowerCase()
-  //        .includes(searchQuery.toLowerCase())) &&
-  //        employee.department === selectedDepartment
-  //     )
-  //   }
-  // }
+  const barChartData = {
+    labels: departmentNames,
+    datasets: [dataset],
+  }
+
+  //bar chart logic
+  const barOptions = {
+    indexAxis: 'y',
+    scales: {
+      x: {
+        title: {
+          beginAtZero: true,
+          display: true,
+          text: 'Performance',
+        },
+        
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Department',
+        },
+
+        ticks: {
+          callback: (value, index) => {
+            return value;
+          },
+        },
+      },
+    },
+    // plugins: {
+    //   legend: {
+    //     display: false,
+    //   },
+    // },
+  }
 
   return (
     <div className="justify-center">
@@ -250,12 +288,38 @@ const Dashboard = ({ Dashboard }) => {
               Mancount Per Department
             </p>
             <div className="flex-grow border-t border-gray-200 -mx-4 my-2"></div>
-            <div style={{ width: '50', height: '50' }}>
-              <Doughnut
-                data={chartData}
-                options={options}
-               
-              />
+            <div className="flex pt-4 pb-2">
+              <div
+                className="chart-container"
+                style={{ width: '270px', height: '200px' }}
+              >
+                <Doughnut data={chartData} options={options} />
+              </div>
+              <div className="table-container mt-6">
+                <table className="w-full">
+                  <thead className="text-gray-500 text-12 font-title px-20">
+                    <tr>
+                      <th className="header-cell">DEPARTMENT</th>
+                      <th className="header-cell">NEW</th>
+                      <th className="header-cell">TOTAL</th>
+                    </tr>
+                  </thead>
+                  <div className="flex-grow border-t border-gray-200 -mx-4"></div>
+                  <tbody className="font-semibold text-12 font-title ml-12 ">
+                    {labels.map((label, index) => (
+                      <tr key={index}>
+                        <td>{label}</td>
+                        <td>
+                          {/* Replace this with the corresponding 'New' data */}
+                        </td>
+                        <td>
+                          {/* Replace this with the corresponding 'Total' data */}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
@@ -266,6 +330,12 @@ const Dashboard = ({ Dashboard }) => {
               Average Performance
             </p>
             <div className="flex-grow border-t border-gray-200 my-2 -mx-5"></div>
+            <div
+              className="chart-container"
+              style={{ width: '400px', height: '320px' }}
+            >
+              <Bar data={barChartData} barOptions={barOptions} />
+            </div>
           </div>
           <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg ml-4 mr-4 p-4 rounded-sm h-64">
             <p className="font-semibold text-l font-title">Salaries</p>

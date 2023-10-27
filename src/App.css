@@ -111,6 +111,10 @@ span {
   background-color: #f44336; /* Define the color for the Human Resources department */
 }
 
+.header-cell {
+  padding: .2rem 4rem; 
+}
+
 .contract-status {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 12px;
