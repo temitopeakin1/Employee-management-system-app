@@ -6,7 +6,6 @@ import {
   ColumnDirective,
   Search,
   Page,
-  Toolbar,
 } from '@syncfusion/ej2-react-grids'
 import {
   Chart as ChartJS,
@@ -17,16 +16,37 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js'
-import { Doughnut, Bar } from 'react-chartjs-2'
+import { dropdownData } from '../data/dummy'
+import { useStateContext } from '../contexts/ContextProvider'
+import DonutChart from '../components/Charts/DonutChart'
+import BarChart from '../components/Charts/BarChart'
 import Navbar from '../components/Navbar'
 import { FiPhone } from 'react-icons/fi'
 import Greeting from '../components/Greeting'
 import red_icon from '../assets/red_icon.png'
 import green_icon from '../assets/green_icon.png'
+import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns'
+
+const DropDown = ({ currentMode }) => (
+  <div className="w-28 px-4 -mt-2.5">
+    <DropDownListComponent
+      id="time"
+      fields={{ text: 'Time', value: 'Id' }}
+      style={{
+        borderColor: 'transparent',
+        color: currentMode === 'Dark' && 'white',
+      }}
+      value="1"
+      dataSource={dropdownData}
+      popupHeight="200px"
+      popupWidth="120px"
+    />
+  </div>
+)
 
 const Dashboard = ({ Dashboard }) => {
+  const { currentColor, currentMode } = useStateContext()
   const [averageSalary, setAverageSalary] = useState(0)
-  const toolbarOptions = ['Search']
   // const [selectedDepartment, setSelectedDepartment] = useState('All Employees')
   const selectionsettings = { persistSelection: true }
 
@@ -100,17 +120,17 @@ const Dashboard = ({ Dashboard }) => {
   // Create labels and data arrays for the chart
   const labels = Object.keys(departmentCounts)
   const data = Object.values(departmentCounts)
-  const chartColors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF']
+  const chartColors = ['#FF6384', '#F08337', '#4BC0C0', '#FF0000', '#088F8F']
 
   const departmentNames = Object.keys(departmentCounts)
   const departmentData = departmentNames.map(
     (department) => departmentCounts[department],
-  );
+  )
 
   // Construct the dataset with dynamic data
   const dataset = {
-    labels: departmentNames, 
-    data: departmentData, 
+    labels: departmentNames,
+    data: departmentData,
     backgroundColor: chartColors.slice(0, departmentNames.length),
     hoverBackgroundColor: chartColors.slice(0, departmentNames.length),
   }
@@ -118,7 +138,7 @@ const Dashboard = ({ Dashboard }) => {
   const chartData = {
     labels: departmentNames,
     datasets: [dataset],
-  } 
+  }
   // donought chart
   const options = {
     responsive: true,
@@ -128,44 +148,65 @@ const Dashboard = ({ Dashboard }) => {
       legend: {
         display: false,
       },
+      tooltips: {
+        enabled: true, // Make sure tooltips are enabled
+      },
     },
   }
 
   const barChartData = {
     labels: departmentNames,
-    datasets: [dataset],
+    datasets: [
+      {
+        data: departmentData,
+        backgroundColor: '#F08337',
+      },
+    ],
   }
 
-  //bar chart logic
-  const barOptions = {
+  // bar chart logic (horizontal)
+  const ybaroptions = {
     indexAxis: 'y',
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  }
+
+  //bar chart logic (vertical)
+  const baroptions = {
     scales: {
       x: {
         title: {
           beginAtZero: true,
-          display: true,
+          display: false,
           text: 'Performance',
         },
-        
       },
       y: {
         title: {
-          display: true,
+          display: false,
           text: 'Department',
         },
 
         ticks: {
           callback: (value, index) => {
-            return value;
+            return value
           },
         },
       },
     },
-    // plugins: {
-    //   legend: {
-    //     display: false,
-    //   },
-    // },
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+    elements: {
+      bar: {
+        backgroundColor: '#F08337',
+      },
+    },
   }
 
   return (
@@ -284,31 +325,31 @@ const Dashboard = ({ Dashboard }) => {
 
         <div className="w-full">
           <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg ml-4 mr-4 p-4 rounded-sm h-auto">
-            <p className="font-semibold text-l font-title">
+            <p className="font-semibold text-l font-title -mt-1.5">
               Mancount Per Department
             </p>
-            <div className="flex-grow border-t border-gray-200 -mx-4 my-2"></div>
+            <div className="flex-grow border-t border-gray-200 -mx-4 my-1"></div>
             <div className="flex pt-4 pb-2">
               <div
                 className="chart-container"
                 style={{ width: '270px', height: '200px' }}
               >
-                <Doughnut data={chartData} options={options} />
+                <DonutChart data={chartData} options={options} />
               </div>
-              <div className="table-container mt-6">
+              <div className="table-container mt-6 p-6">
                 <table className="w-full">
-                  <thead className="text-gray-500 text-12 font-title px-20">
-                    <tr>
-                      <th className="header-cell">DEPARTMENT</th>
-                      <th className="header-cell">NEW</th>
-                      <th className="header-cell">TOTAL</th>
+                  <thead className="text-gray-500 text-12 font-title">
+                    <tr className="header-cell">
+                      <th>DEPARTMENT</th>
+                      <th className="px-16">NEW</th>
+                      <th className="px-8">TOTAL</th>
                     </tr>
                   </thead>
-                  <div className="flex-grow border-t border-gray-200 -mx-4"></div>
+                  <div className="flex-grow border-t border-gray-400 -mx-64 -ml-1"></div>
                   <tbody className="font-semibold text-12 font-title ml-12 ">
                     {labels.map((label, index) => (
                       <tr key={index}>
-                        <td>{label}</td>
+                        <td className="department-cell">{label}</td>
                         <td>
                           {/* Replace this with the corresponding 'New' data */}
                         </td>
@@ -326,26 +367,30 @@ const Dashboard = ({ Dashboard }) => {
 
         <div className="grid grid-cols-2 mt-3 gap-.2">
           <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg ml-4 mr-4 p-4 rounded-sm h-64 ">
-            <p className="font-semibold text-l font-title">
-              Average Performance
-            </p>
-            <div className="flex-grow border-t border-gray-200 my-2 -mx-5"></div>
-            <div
-              className="chart-container"
-              style={{ width: '400px', height: '320px' }}
-            >
-              <Bar data={barChartData} barOptions={barOptions} />
+            <div className="heading flex justify-between">
+              <p className="font-semibold text-l font-title -mt-1.5">
+                Average Performance
+              </p>
+              <DropDown currentMode={currentMode} />
             </div>
+            <div className="flex-grow border-t border-gray-200 my-1 -mx-5"></div>
+            <BarChart data={barChartData} options={ybaroptions} />
           </div>
           <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg ml-4 mr-4 p-4 rounded-sm h-64">
-            <p className="font-semibold text-l font-title">Salaries</p>
-            <div className="flex-grow border-t border-gray-200 my-2 -mx-5"></div>
+            <div className="heading flex justify-between">
+              <p className="font-semibold text-l font-title -mt-1.5">
+                Salaries
+              </p>
+              <DropDown currentMode={currentMode} />
+            </div>
+            <div className="flex-grow border-t border-gray-200 my-1 -mx-5"></div>
+            <BarChart data={barChartData} options={baroptions} />
           </div>
         </div>
         <div className="justify-center">
-          <div className="h-300 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg mt-3 ml-4 mr-4 p-4 rounded-sm">
-            <div className="m-10 md:m-5 pt-5 p-2 md:p-2 bg-white rounded-xl">
-              <div className="md:m-5 -mt-4 space-x-2">
+          <div className="h-300 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg mt-3 ml-4 mr-4 p-4 rounded-2xl">
+            <div className="m-10 md:m-5 pt-5 p-2 md:p-2 bg-white rounded-3xl">
+              <div className="pl-.5 pr-.5">
                 {departmentFilters.map((department) => (
                   <button
                     key={department}
@@ -358,14 +403,12 @@ const Dashboard = ({ Dashboard }) => {
               </div>
               <GridComponent
                 dataSource={employeesData}
-                enableHover={false}
+                enableHover={true}
                 width="auto"
                 allowPaging
                 allowSorting
-                allowSearching={true}
                 pageSettings={{ pageCount: 5 }}
                 selectionSettings={selectionsettings}
-                toolbar={toolbarOptions}
                 className="custom-grid"
               >
                 <ColumnsDirective>
@@ -384,7 +427,7 @@ const Dashboard = ({ Dashboard }) => {
                   <ColumnDirective
                     field="fullName"
                     headerText="Name"
-                    width="150"
+                    width="220"
                     template={(rowData) => (
                       <div>
                         <div className="text font-semibold">
@@ -419,7 +462,7 @@ const Dashboard = ({ Dashboard }) => {
                     textAlign="left"
                   />
                 </ColumnsDirective>
-                <Inject services={[Search, Page, Toolbar]} />
+                <Inject services={[Page]} />
               </GridComponent>
             </div>
           </div>

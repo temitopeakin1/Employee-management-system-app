@@ -68,7 +68,7 @@ const Register = () => {
         <div className="pl-18">
           <img src={logo} alt="Logo" style={{ height: '35px' }} />
           <p className="text-45 font-semibold mt-4 pr-50">
-            Artificial Intelligence
+          <span className="gradient-text">Artificial Intelligence</span>
             <br />
             Solution for your
             <br />
@@ -81,13 +81,15 @@ const Register = () => {
         </div>
       </div>
       <div className="flex-1 bg-white text-black p-10 flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl mb-4 mt-8">
-            <strong>Let's get started with creating an account</strong>
+        <div className="text">
+          <h2 className="text-2xl mb-4 font-satoshi font-semibold ml-.5 mt-8">
+            Let's get started with
           </h2>
+          <h2 className="text-2xl mb-4 font-satoshi font-semibold ml-.5 -mt-4">
+          creating account</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label htmlFor="name" className="block font-semibold">
+              <label htmlFor="name" className="font-satoshi text-gray-400">
                 Name
               </label>
               <input
@@ -104,7 +106,7 @@ const Register = () => {
               )}
             </div>
             <div className="mb-4">
-              <label htmlFor="email" className="block font-semibold">
+              <label htmlFor="email" className="font-satoshi text-gray-400">
                 Email
               </label>
               <input
@@ -121,7 +123,7 @@ const Register = () => {
               )}
             </div>
             <div className="mb-4">
-              <label htmlFor="password" className="block font-semibold">
+              <label htmlFor="password" className="font-satoshi text-gray-400">
                 Password
               </label>
               <div className="flex">
@@ -138,7 +140,7 @@ const Register = () => {
                 <button
                   type="button"
                   onClick={handlePasswordVisibility}
-                  className="absolute p-2 mt-1 ml-80"
+                  className="absolute mt-3 ml-16 pl-70"
                   style={{ color: 'black' }}
                 >
                   {passwordVisibility ? (
@@ -153,7 +155,7 @@ const Register = () => {
               )}
             </div>
             <div className="mb-4">
-              <label htmlFor="repeatPassword" className="block font-semibold">
+              <label htmlFor="repeatPassword" className="font-satoshi text-gray-400">
                 Repeat Password
               </label>
               <div className="flex">
@@ -169,7 +171,7 @@ const Register = () => {
                 <button
                   type="button"
                   onClick={handleRepeatPasswordVisibility}
-                  className='absolute p-2 mt-1 ml-80'
+                  className='absolute mt-3 ml-16 pl-70'
                   style={{ color: 'black' }}
                 >
                   {passwordVisibility ? (
@@ -183,16 +185,16 @@ const Register = () => {
                 <div className="text-red-500 text-sm">
                   {errors.repeatPassword}
                 </div>
-              )},
+              )}
             </div>
             <div className="mb-4 flex flex-col">
               <button
                 onClick={handleSubmit}
-                className="bg-orange-500 text-white p-2 w-2/3 rounded-md"
+                className="bg-orange-500 text-white p-2 w-2/3 -mt-2 rounded-md"
               >
                 Register
               </button>
-              <p className="text-sm mt-1 p-2 w-2/3">
+              <p className="text-sm mt-1 p-2 w-2/3 text-center">
                 Already have an account?{' '}
                 <Link
                   to="/login"
@@ -201,7 +203,7 @@ const Register = () => {
                   Login here
                 </Link>
               </p>
-              <p className="text-sm mt-3 p-2 w-2/3 ">
+              <p className="text-sm mr-12 mt-8 font-copy">
                 &copy;Copyright 2023 All rights reserved,
                 <Link to="#" className="text-orange-500 text-sm font-semibold">
                   Term & Condition{' '}

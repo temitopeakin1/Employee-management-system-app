@@ -111,9 +111,6 @@ span {
   background-color: #f44336; /* Define the color for the Human Resources department */
 }
 
-.header-cell {
-  padding: .2rem 4rem; 
-}
 
 .contract-status {
   font-family: "Plus Jakarta Sans", sans-serif;
@@ -290,11 +287,12 @@ input {
   color: gray;
   font-size: 0.85rem;
   font-weight: 800;
+  
 }
 
 .custom-grid .e-gridheader .e-headercell.department-column {
   text-align: right;
-  padding-right: -4rem; /* Adjust the left padding as needed */
+  padding-right: -2rem; /* Adjust the left padding as needed */
 }
 
 .search-input-container {
@@ -398,4 +396,11 @@ input {
 
 .bold-icon {
   font-weight: bold;
+}
+
+.gradient-text {
+  background: linear-gradient(to right, #f28c3c, white);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }

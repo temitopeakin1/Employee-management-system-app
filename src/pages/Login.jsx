@@ -5,7 +5,6 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 
 const Login = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false)
- 
 
   const [formData, setFormData] = useState({
     email: '',
@@ -19,8 +18,6 @@ const Login = () => {
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target
-
-  
 
     // updating the check box
     const newValue = type === 'checkbox' ? checked : value
@@ -62,7 +59,7 @@ const Login = () => {
         <div className="pl-18">
           <img src={logo} alt="Logo" style={{ height: '35px' }} />
           <p className="text-45 font-semibold mt-4 pr-50">
-            Artificial Intelligence
+            <span className="gradient-text">Artificial Intelligence</span>
             <br />
             Solution for your
             <br />
@@ -75,13 +72,16 @@ const Login = () => {
         </div>
       </div>
       <div className="flex-1 bg-white text-black p-10 flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl mb-4 mt-8">
-            <strong>Let's Login to your Hampshire Heights Account</strong>
+        <div className="text">
+          <h2 className="text-2xl mb-4 font-satoshi font-semibold ml-.5 mt-24">
+            Let's Login to your
+          </h2>
+          <h2 className="text-2xl mb-4 font-satoshi font-semibold ml-.5 -mt-4">
+            Hampshire Heights account
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label htmlFor="email" className="block font-semibold">
+              <label htmlFor="email" className="font-satoshi text-gray-400">
                 Email
               </label>
               <input
@@ -97,12 +97,12 @@ const Login = () => {
               )}
             </div>
             <div className="mb-4">
-              <label htmlFor="password" className="block font-semibold">
+              <label htmlFor="password" className="font-satoshi text-gray-400">
                 Password
               </label>
               <div className="flex">
                 <input
-                type={passwordVisibility ? 'text' : 'password'}
+                  type={passwordVisibility ? 'text' : 'password'}
                   name="password"
                   id="password"
                   value={formData.password}
@@ -113,7 +113,7 @@ const Login = () => {
                 <button
                   type="button"
                   onClick={handlePasswordVisibility}
-                  className="absolute mt-3 ml-80 pl-12"
+                  className="absolute mt-3 ml-16 pl-70"
                   style={{ color: 'black' }}
                 >
                   {passwordVisibility ? (
@@ -141,7 +141,7 @@ const Login = () => {
               </label>
               <Link
                 to="/forgot-password"
-                className="text-orange-500 font-semibold inline-block mr-48"
+                className="text-orange-500 font-semibold inline-block mr-40"
                 style={{ whiteSpace: 'nowrap' }}
               >
                 Forgot password?
@@ -155,7 +155,7 @@ const Login = () => {
               >
                 Login
               </button>
-              <p className="text-sm mt-1 p-2 w-2/3">
+              <p className="text-sm mt-1 p-2 w-2/3 text-center">
                 Don't have an account?{' '}
                 <a
                   href="/register"
@@ -164,18 +164,18 @@ const Login = () => {
                   Register here
                 </a>
               </p>
-              <p className="text-sm mt-8 p-2 w-2/3 ">
-                &copy;Copyright 2023 All rights reserved,
-                <Link to="#" className="text-orange-500 text-sm font-semibold">
-                  Term & Condition{' '}
-                </Link>{' '}
-                |{' '}
-                <Link to="#" className="text-orange-500 text-sm font-semibold">
-                  Privacy & Policy
-                </Link>
-              </p>
             </div>
           </form>
+          <p className="text-sm pb-4 mt-8 mr-12 font-copy">
+            &copy;Copyright 2023 All rights reserved,
+            <Link to="#" className="text-orange-500 text-sm font-semibold">
+              Term & Condition{' '}
+            </Link>{' '}
+            |{' '}
+            <Link to="#" className="text-orange-500 text-sm font-semibold">
+              Privacy & Policy
+            </Link>
+          </p>
         </div>
       </div>
     </div>

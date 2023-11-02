@@ -60,7 +60,6 @@ const Employees = () => {
   const [kebabMenuY, setKebabMenuY] = useState(0)
   const [showSuccessDialog, setShowSuccessDialog] = useState(false)
 
-
   useEffect(() => {
     const storedEmployeesData = localStorage.getItem('employeesData')
     if (storedEmployeesData) {
@@ -73,7 +72,7 @@ const Employees = () => {
   }, [employeesData])
 
   useEffect(() => {
-    getEmployeesData();
+    getEmployeesData()
   }, [])
 
   async function getEmployeesData() {
@@ -145,8 +144,8 @@ const Employees = () => {
             .toLowerCase()
             .includes(searchQuery.toLowerCase()) ||
           employee.lastName.toLowerCase().includes(searchQuery.toLowerCase()),
-          console.log(getFilteredData)
-      );
+        console.log(getFilteredData),
+      )
     } else {
       return employeesData.filter(
         (employee) =>
@@ -160,7 +159,7 @@ const Employees = () => {
       )
     }
   }
-// handle kebab menu clicks
+  // handle kebab menu clicks
   const handleKebabMenuClick = (event, rowData) => {
     event.preventDefault()
     const cell = event.target.closest('.e-rowcell')
@@ -462,7 +461,7 @@ const Employees = () => {
               <button
                 key={department}
                 onClick={() => setSelectedDepartment(department)}
-                className="px-2 -py-24 bg-transparent font-semibold text-gray-400 text-sm department-filter"
+                className="px-2 -ml-5 -py-24 bg-transparent font-semibold text-gray-400 text-sm department-filter"
               >
                 {department}
               </button>
@@ -477,7 +476,7 @@ const Employees = () => {
             pageSettings={{ pageCount: 5 }}
             selectionSettings={selectionsettings}
             // toolbar={toolbarOptions}
-            
+            className="custom-grid"
           >
             <ColumnsDirective>
               <ColumnDirective
@@ -495,7 +494,7 @@ const Employees = () => {
               <ColumnDirective
                 field="fullName"
                 headerText="Name"
-                width="150"
+                width="220"
                 template={(rowData) => (
                   <div>
                     <div className="text-sm font-semibold">
@@ -827,7 +826,13 @@ const Employees = () => {
               />
               <button
                 className="btn-primary"
-                style={{ marginLeft: '13.5rem', borderColor: 'white', marginTop: '-80px', color: 'gray', backgroundColor: 'transparent' }}
+                style={{
+                  marginLeft: '13.5rem',
+                  borderColor: 'white',
+                  marginTop: '-80px',
+                  color: 'gray',
+                  backgroundColor: 'transparent',
+                }}
                 onClick={handleCancelDialog}
               >
                 X

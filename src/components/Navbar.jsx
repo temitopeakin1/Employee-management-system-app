@@ -6,7 +6,7 @@ import { TooltipComponent } from '@syncfusion/ej2-react-popups'
 import avatar4 from '../data/avatar4.jpg'
 import { ThemeSettings, Notification, UserProfile } from '.'
 import { useStateContext } from '../contexts/ContextProvider'
-
+import { Link } from 'react-router-dom'
 
 const NavButton = ({ title, customFunc, icon, color }) => (
   <TooltipComponent content={title} position="BottomCenter">
@@ -21,7 +21,7 @@ const NavButton = ({ title, customFunc, icon, color }) => (
   </TooltipComponent>
 )
 
-const Navbar = ({pageTitle, userImage}) => {
+const Navbar = ({ pageTitle, userImage, showBreadcrumbs, breadcrumbs }) => {
   const {
     setCurrentColor,
     setCurrentMode,
@@ -34,13 +34,13 @@ const Navbar = ({pageTitle, userImage}) => {
     screenSize,
   } = useStateContext()
 
-  const [showNotification, setShowNotification] = useState(false);
+  const [showNotification, setShowNotification] = useState(false)
 
   const toggleNotification = () => {
     // Toggle the visibility of the notification
-    setShowNotification(!showNotification);
-  };
-  
+    setShowNotification(!showNotification)
+  }
+
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth)
     window.addEventListener('resize', handleResize)
@@ -68,16 +68,35 @@ const Navbar = ({pageTitle, userImage}) => {
   return (
     <div className="bg-white w-full flex justify-between p-1 px-4 py-4md:ml-2 md:mr-6 relative">
       <div className="flex">
-      <p
-      style={{
-        fontFamily: "'Plus Jakarta Sans', sans-serif",
-        fontWeight: 600,
-        fontSize: '22px',
-      }}
-      className="font-semibold text-2xl mr-5 mt-4 pt-1"
-    >
-      {pageTitle}
-    </p>
+        <p
+          style={{
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontWeight: 600,
+            fontSize: '22px',
+          }}
+          className="font-semibold text-2xl mr-5 mt-4 pt-1"
+        >
+          {pageTitle}
+        </p>
+      </div>
+      <div className="breadcrumb-navigation mt-12 -ml-52 px-1 py-1">
+        {showBreadcrumbs &&
+          breadcrumbs.map((breadcrumb, index) => (
+            <span key={index}>
+              {breadcrumb.link ? (
+                <Link to={breadcrumb.link} className="text-gray-800 font-title font-semibold">
+                  {breadcrumb.label}
+                </Link>
+              ) : (
+                <span className="text-gray-800 font-title font-semibold">
+                  {breadcrumb.label}
+                </span>
+              )}
+              {index < breadcrumbs.length - 1 && (
+                <span className="breadcrumb-divider px-2 text-gray-800 font-semibold">{' > '}</span>
+              )}
+            </span>
+          ))}
       </div>
       <div className="flex ml-auto mt-3">
         <NavButton
@@ -97,19 +116,19 @@ const Navbar = ({pageTitle, userImage}) => {
             className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
             onClick={() => handleClick('userProfile')}
           >
-          {userImage ? (
-            <img
-              className="rounded-full w-8 h-8"
-              src={userImage}
-              alt="user-profile"
-            />
-          ) : (
-            <img
-              className="rounded-full w-8 h-8"
-              src={avatar4}
-              alt="user-profile"
-            />
-          )}
+            {userImage ? (
+              <img
+                className="rounded-full w-8 h-8"
+                src={userImage}
+                alt="user-profile"
+              />
+            ) : (
+              <img
+                className="rounded-full w-8 h-8"
+                src={avatar4}
+                alt="user-profile"
+              />
+            )}
             <MdKeyboardArrowDown className="text-gray-800 text-sm" />
           </div>
         </TooltipComponent>

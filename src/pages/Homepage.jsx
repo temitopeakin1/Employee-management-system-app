@@ -14,7 +14,7 @@ const Homepage = () => {
         <div className="pl-18">
           <img src={logo} alt="Logo" style={{ height: '35px' }} />
           <p className="text-45 font-semibold mt-4 pr-50">
-            Artificial Intelligence
+          <span className="gradient-text">Artificial Intelligence</span>
             <br />
             Solution for your
             <br />
@@ -27,8 +27,9 @@ const Homepage = () => {
         </div>
       </div>
       <div className="flex-1 bg-white text-black p-10 flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl mb-4">Welcome to Hampshire Heights</h2>
+        <div className="text">
+          <h2 className="text-2xl mb-4 font-satoshi font-semibold ml-4">Welcome to Hampshire</h2>
+          <h2 className="text-2xl mb-4 font-satoshi font-semibold ml-4 -mt-4">Heights.</h2>
           <div>
             <Link to="/register"
               className="flex items-center text-12 font-bold py-2 px-4 rounded"

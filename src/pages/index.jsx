@@ -1,7 +1,14 @@
 export { default as Dashboard } from './Dashboard';
 export { default as Employees } from './Employees';
-export { default as Calendar } from '../components/Calendar';
-export { default as Pyramid } from '../components/Charts/Pyramid';
+export { default as Calendar } from './Calendar';
+export { default as Departments } from './Departments';
+export { default as Contracts } from './Contracts';
+export { default as Conversations } from './Conversations';
+export { default as Invoice } from './Invoice';
+export { default as Settings } from './Settings';
+
+
+
 
 
 

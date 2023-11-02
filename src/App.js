@@ -4,9 +4,10 @@ import { Sidebar } from './components'
 import Homepage from './pages/Homepage'
 import Register from './pages/Register'
 import Login from './pages/Login'
-import { Dashboard, Calendar, Employees } from './pages'
+import { Dashboard, Calendar, Employees, Departments, Contracts, Conversations, Invoice, Settings } from './pages'
 import './App.css'
 import { useStateContext } from './contexts/ContextProvider'
+
 
 const App = () => {
   const { setCurrentColor, setCurrentMode, currentMode } = useStateContext()
@@ -60,17 +61,19 @@ const AppContent = ({ currentMode }) => {
         >
           <div>
             <Routes>
-              {/* home Page (default route) */}
+              {/* HomePage (default route) */}
               <Route path='/' element={<Homepage />} />
               <Route path='/register' element={<Register />} />
               <Route path='/login' element={<Login />} />
-              {/* dashboard */}
-              <Route path='/dashboard' element={<Dashboard />} />
-              {/* pages */}
+             {/* pages */}
+              <Route path='/dashboard' element={<Dashboard />} />     
               <Route path='/employees' element={<Employees />} />
-
-              {/* apps */}
+              <Route path='/departments' element={<Departments />} />
               <Route path='/calendar' element={<Calendar />} />
+              <Route path='/contracts' element={<Contracts />} />
+              <Route path='/conversations' element={<Conversations />} />
+              <Route path='/invoice' element={<Invoice />} />
+              <Route path='/settings' element={<Settings />} />
             </Routes>
           </div>
         </div>

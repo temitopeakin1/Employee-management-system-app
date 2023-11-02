@@ -7,7 +7,8 @@ module.exports = {
       display: ['Montserrat', 'sans-serif'],
       body: ['Montserrat', 'sans-serif'],
       satoshi: ['satoshi, sans-serif'],
-      title: ['Manrope', 'sans-serif']
+      title: ['Manrope', 'sans-serif'],
+      copy: ['Plus Jakarta Sans', 'sans-serif']
     },
     extend: {
       fontSize: {
