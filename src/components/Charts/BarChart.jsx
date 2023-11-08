@@ -17,7 +17,7 @@ const BarChart = ({ data, options }) => {
   return (
     <div
       className="chart-container"
-      style={{ width: '400px', height: '320px' }}
+      style={{ width: '400px', height: '500px' }}
     >
       <Bar data={data} options={options} />
     </div>

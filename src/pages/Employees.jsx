@@ -59,6 +59,7 @@ const Employees = () => {
   const [kebabMenuX, setKebabMenuX] = useState(0)
   const [kebabMenuY, setKebabMenuY] = useState(0)
   const [showSuccessDialog, setShowSuccessDialog] = useState(false)
+  
 
   useEffect(() => {
     const storedEmployeesData = localStorage.getItem('employeesData')
@@ -407,10 +408,10 @@ const Employees = () => {
               <p
                 style={{
                   fontFamily: 'Plus Jakarta Sans, sans-serif',
-                  fontWeight: 600,
+                  fontWeight: '600',
                   fontSize: '22px',
                 }}
-                className="font-semibold text-2xl mr-5 -mt-4"
+                className="font-bold text-2xl mr-5 -mt-6 pt-1"
               >
                 Employees
               </p>
@@ -443,8 +444,8 @@ const Employees = () => {
               </div>
               <button
                 onClick={toggleModal}
-                className="bg-orange-500 text-white font-bold py-1 px-8 -mt-2 ml-4 pt-1 rounded"
-                style={{ zIndex: 100 }}
+                className="bg-orange-500 text-white font-bold px-8 -mt-4 ml-32 pt-1 rounded"
+                style={{ zIndex: 100, fontSize: '14px' }}
                 disabled={addEmployee}
               >
                 Add Employee
@@ -475,7 +476,6 @@ const Employees = () => {
             allowSorting
             pageSettings={{ pageCount: 5 }}
             selectionSettings={selectionsettings}
-            // toolbar={toolbarOptions}
             className="custom-grid"
           >
             <ColumnsDirective>

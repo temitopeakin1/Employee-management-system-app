@@ -21,7 +21,14 @@ const NavButton = ({ title, customFunc, icon, color }) => (
   </TooltipComponent>
 )
 
-const Navbar = ({ pageTitle, userImage, showBreadcrumbs, breadcrumbs }) => {
+const Navbar = ({
+  pageTitle,
+  userImage,
+  showBreadcrumbs,
+  breadcrumbs,
+  showReportButton,
+  clickReport,
+}) => {
   const {
     setCurrentColor,
     setCurrentMode,
@@ -70,21 +77,25 @@ const Navbar = ({ pageTitle, userImage, showBreadcrumbs, breadcrumbs }) => {
       <div className="flex">
         <p
           style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
-            fontWeight: 600,
+            fontFamily: 'Plus Jakarta Sans, sans-serif',
+            fontWeight: '600',
             fontSize: '22px',
           }}
-          className="font-semibold text-2xl mr-5 mt-4 pt-1"
+          className="font-bold text-2xl mr-5 mt-3 pt-1"
         >
           {pageTitle}
         </p>
       </div>
+      {/* conditional rendering for breadcrumbs button*/}
       <div className="breadcrumb-navigation mt-12 -ml-52 px-1 py-1">
         {showBreadcrumbs &&
           breadcrumbs.map((breadcrumb, index) => (
             <span key={index}>
               {breadcrumb.link ? (
-                <Link to={breadcrumb.link} className="text-gray-800 font-title font-semibold">
+                <Link
+                  to={breadcrumb.link}
+                  className="text-gray-800 font-title font-semibold"
+                >
                   {breadcrumb.label}
                 </Link>
               ) : (
@@ -93,11 +104,26 @@ const Navbar = ({ pageTitle, userImage, showBreadcrumbs, breadcrumbs }) => {
                 </span>
               )}
               {index < breadcrumbs.length - 1 && (
-                <span className="breadcrumb-divider px-2 text-gray-800 font-semibold">{' > '}</span>
+                <span className="breadcrumb-divider px-2 text-gray-800 font-semibold">
+                  {' > '}
+                </span>
               )}
             </span>
           ))}
       </div>
+
+      {/* conditional rendering for report button*/}
+      {showReportButton && (
+        <button
+          onClick={clickReport}
+          className="bg-blue-500 text-white hover:bg-blue-600 px-4 py-1 rounded-md 0mr-96"
+          style={{ marginTop: '-2px', borderRadius: "50px" , paddingTop: ".002px", paddingBottom: "1px"}}
+        >
+          Company Report
+        </button>
+      )}
+      {/* conditional rendering for employees button*/}
+
       <div className="flex ml-auto mt-3">
         <NavButton
           title="Settings"
@@ -111,6 +137,7 @@ const Navbar = ({ pageTitle, userImage, showBreadcrumbs, breadcrumbs }) => {
           color={currentColor}
           icon={<RiNotification3Line />}
         />
+
         <TooltipComponent content="Profile">
           <div
             className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"

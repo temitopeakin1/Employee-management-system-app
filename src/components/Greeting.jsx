@@ -9,11 +9,11 @@ const Greeting = () => {
       const date = new Date()
       const hours = date.getHours()
       if (hours >= 5 && hours < 12) {
-        setGreeting('Good Morning')
+        setGreeting('Good morning')
       } else if (hours >= 12 && hours < 17) {
-        setGreeting('Good Afternoon')
+        setGreeting('Good afternoon')
       } else {
-        setGreeting('Good Night')
+        setGreeting('Good night')
       }
     }
 

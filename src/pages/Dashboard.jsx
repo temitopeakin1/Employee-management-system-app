@@ -127,6 +127,13 @@ const Dashboard = ({ Dashboard }) => {
     (department) => departmentCounts[department],
   )
 
+  const departmentAbbreviations = {
+    'Software Engineering': 'SWE',
+    'Administrative': 'Admin',
+    'Human Resources': 'HR',
+    // Add more department names and their abbreviations as needed
+  };
+
   // Construct the dataset with dynamic data
   const dataset = {
     labels: departmentNames,
@@ -160,6 +167,7 @@ const Dashboard = ({ Dashboard }) => {
       {
         data: departmentData,
         backgroundColor: '#F08337',
+        barThickness: 18,
       },
     ],
   }
@@ -350,12 +358,8 @@ const Dashboard = ({ Dashboard }) => {
                     {labels.map((label, index) => (
                       <tr key={index}>
                         <td className="department-cell">{label}</td>
-                        <td>
-                          {/* Replace this with the corresponding 'New' data */}
-                        </td>
-                        <td>
-                          {/* Replace this with the corresponding 'Total' data */}
-                        </td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     ))}
                   </tbody>
@@ -384,7 +388,30 @@ const Dashboard = ({ Dashboard }) => {
               <DropDown currentMode={currentMode} />
             </div>
             <div className="flex-grow border-t border-gray-200 my-1 -mx-5"></div>
-            <BarChart data={barChartData} options={baroptions} />
+            <div className="flex">
+              <BarChart data={barChartData} options={baroptions} />
+              {/* Display Average Salary, Salary Paid, and Total Payout */}
+              <div className="salaries-info ml-2 mt-2 py-1">
+                <div className="font-semibold text-14 font-title ">
+                  {averageSalary}
+                </div>
+                <div className="text-gray-500 text-12 font-title pb-2">
+                  Avg. salary
+                </div>
+                <div className="font-semibold text-14 font-title">
+                  1,000,000
+                </div>
+                <div className="text-gray-500 text-12 font-title pb-2">
+                  Salary paid
+                </div>
+                <div className="font-semibold text-14 font-title">
+                  1,000,000
+                </div>
+                <div className="text-gray-500 text-12 font-title">
+                  Total payout
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div className="justify-center">
@@ -433,7 +460,7 @@ const Dashboard = ({ Dashboard }) => {
                         <div className="text font-semibold">
                           {rowData.firstName} {rowData.lastName}
                         </div>
-                        <div className="font-bold text-gray-400">
+                        <div className="font-copy font-semibold text-gray-400">
                           {rowData.email}
                         </div>
                       </div>
@@ -443,13 +470,32 @@ const Dashboard = ({ Dashboard }) => {
                     field="designation"
                     headerText="Position"
                     width="200"
+                    template={(rowData) => (
+                      <div>
+                        <div className="font-copy font-semibold">
+                          {rowData.designation}
+                        </div>
+                      </div>
+                    )}
                   />
-                  <ColumnDirective field="department" headerText="Department" />
+                  <ColumnDirective
+                    field="department"
+                    headerText="Department"
+                    template={(rowData) => (
+                      <div>
+                        <div className="font-copy font-semibold">
+                          {' '}
+                          {/* Apply the same class here as in the "ID" column */}
+                          {rowData.department}
+                        </div>
+                      </div>
+                    )}
+                  />
                   <ColumnDirective
                     field="phoneNumber"
                     headerText="Phone Number"
                     template={(rowData) => (
-                      <div className="flex items-center">
+                      <div className="flex font-copy text-12 font-semibold items-center">
                         <FiPhone className="phone-icon mr-2" />
                         {rowData.phoneNumber}
                       </div>
@@ -460,6 +506,21 @@ const Dashboard = ({ Dashboard }) => {
                     headerText="Status"
                     width="120"
                     textAlign="left"
+                    template={(rowData) => {
+                      let statusClass = ''
+                      if (rowData.empType === 'Contract') {
+                        statusClass = 'contract-status'
+                      } else if (rowData.empType === 'Intern') {
+                        statusClass = 'intern-status'
+                      } else if (rowData.empType === 'FullTime') {
+                        statusClass = 'fulltime-status'
+                      } else if (rowData.empType === 'PartTime') {
+                        statusClass = 'parttime-status'
+                      }
+                      return (
+                        <div className={statusClass}>{rowData.empType}</div>
+                      )
+                    }}
                   />
                 </ColumnsDirective>
                 <Inject services={[Page]} />

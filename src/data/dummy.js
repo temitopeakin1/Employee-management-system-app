@@ -509,7 +509,7 @@ export const links = [
         icon: <AiOutlineCalendar />,
       },
       {
-        name: 'Invoice',
+        name: 'Payroll',
         icon: <FaFileInvoice />,
       },
       {

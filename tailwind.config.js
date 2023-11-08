@@ -24,7 +24,7 @@ module.exports = {
         bold: '700',
       },
       backgroundColor: {
-        'main-bg': '#EEF5F5',
+        'main-bg': '#F9F9F9',
         'main-dark-bg': '#20232A',
         'secondary-dark-bg': '#33373E',
         'light-gray': '#F7F7F7',

@@ -4,9 +4,10 @@ import { Sidebar } from './components'
 import Homepage from './pages/Homepage'
 import Register from './pages/Register'
 import Login from './pages/Login'
-import { Dashboard, Calendar, Employees, Departments, Contracts, Conversations, Invoice, Settings } from './pages'
+import { Dashboard, Calendar, Employees, Departments, Contracts, Conversations, Payroll, Settings } from './pages'
 import './App.css'
 import { useStateContext } from './contexts/ContextProvider'
+
 
 
 const App = () => {
@@ -72,7 +73,7 @@ const AppContent = ({ currentMode }) => {
               <Route path='/calendar' element={<Calendar />} />
               <Route path='/contracts' element={<Contracts />} />
               <Route path='/conversations' element={<Conversations />} />
-              <Route path='/invoice' element={<Invoice />} />
+              <Route path='/Payroll' element={<Payroll />} />
               <Route path='/settings' element={<Settings />} />
             </Routes>
           </div>

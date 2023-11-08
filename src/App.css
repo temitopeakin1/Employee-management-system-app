@@ -1,4 +1,6 @@
 @import url("https://cdn.syncfusion.com/ej2/material.css");
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200&display=swap');
+
 
 .sidebar {
   box-shadow: rgb(113 122 131 / 11%) 0px 7px 30px 0px;
@@ -72,7 +74,6 @@ span {
   align-items: center;
   margin-top: 3.5rem;
 }
-
 .form-row {
   display: flex;
   justify-content: center;
@@ -111,6 +112,9 @@ span {
   background-color: #f44336; /* Define the color for the Human Resources department */
 }
 
+.contract-heading {
+  font-size: 22px
+}
 
 .contract-status {
   font-family: "Plus Jakarta Sans", sans-serif;
@@ -140,6 +144,12 @@ span {
   border: none;
   border-radius: 3px;
   font-weight: 600;
+}
+
+.increased-width-height {
+  font-size: 16px;
+  height: 100px;
+  width: 100%;
 }
 
 .fulltime-status {
@@ -404,3 +414,6 @@ input {
   background-clip: text;
   color: transparent;
 }
+
+
+
