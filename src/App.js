@@ -9,7 +9,6 @@ import './App.css'
 import { useStateContext } from './contexts/ContextProvider'
 
 
-
 const App = () => {
   const { setCurrentColor, setCurrentMode, currentMode } = useStateContext()
 
@@ -30,7 +29,7 @@ const App = () => {
 }
 
 const AppContent = ({ currentMode }) => {
-  const location = useLocation()
+  let location = useLocation()
 
   // Check if the current route is the home page, register, or login
   const isHomepage = location.pathname === '/'

@@ -1,7 +1,5 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
-// import { MdOutlineCancel } from 'react-icons/md';
-// import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import { links } from '../data/dummy'
 import { useStateContext } from '../contexts/ContextProvider'
 import logo from '../assets/logo.png'
@@ -47,8 +45,8 @@ const Sidebar = () => {
               </div>
             ))}
           </div>
-          <p className="text-white-400 white:text-12 mt-20 text-white">
-            <a href="https://hhgcl.com">© Hampshire heights 2023</a>
+          <p className="text-white font-copy text-12 mt-10">
+            <a href="https://hhgcl.com">© Hampshire Heights 2023</a>
           </p>
         </>
       )}

@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import logo from '../assets/logo.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
+import { BiArrowBack } from 'react-icons/bi'
 
 const Register = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false)
-  const [repeatPasswordVisibility, setRepeatPasswordVisibility] = useState(false)
+  const [repeatPasswordVisibility, setRepeatPasswordVisibility] = useState(
+    false,
+  )
 
   const [formData, setFormData] = useState({
     name: '',
@@ -32,7 +35,7 @@ const Register = () => {
   const handleRepeatPasswordVisibility = () => {
     setRepeatPasswordVisibility(!repeatPasswordVisibility)
   }
-// validations for register page 
+  // validations for register page
   const handleSubmit = (e) => {
     e.preventDefault()
     const newErrors = {}
@@ -68,7 +71,7 @@ const Register = () => {
         <div className="pl-18">
           <img src={logo} alt="Logo" style={{ height: '35px' }} />
           <p className="text-45 font-semibold mt-4 pr-50">
-          <span className="gradient-text">Artificial Intelligence</span>
+            <span className="gradient-text">Artificial Intelligence</span>
             <br />
             Solution for your
             <br />
@@ -80,13 +83,18 @@ const Register = () => {
           </p>
         </div>
       </div>
+
       <div className="flex-1 bg-white text-black p-10 flex items-center justify-center">
+        <div className="-mt-96 ml-2">
+          <BiArrowBack onClick={() => navigate(-1)} style={{cursor: 'pointer'}} />
+        </div>
         <div className="text">
           <h2 className="text-2xl mb-4 font-satoshi font-semibold ml-.5 mt-8">
             Let's get started with
           </h2>
           <h2 className="text-2xl mb-4 font-satoshi font-semibold ml-.5 -mt-4">
-          creating account</h2>
+            creating account
+          </h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label htmlFor="name" className="font-satoshi text-gray-400">
@@ -155,7 +163,10 @@ const Register = () => {
               )}
             </div>
             <div className="mb-4">
-              <label htmlFor="repeatPassword" className="font-satoshi text-gray-400">
+              <label
+                htmlFor="repeatPassword"
+                className="font-satoshi text-gray-400"
+              >
                 Repeat Password
               </label>
               <div className="flex">
@@ -171,7 +182,7 @@ const Register = () => {
                 <button
                   type="button"
                   onClick={handleRepeatPasswordVisibility}
-                  className='absolute mt-3 ml-16 pl-70'
+                  className="absolute mt-3 ml-16 pl-70"
                   style={{ color: 'black' }}
                 >
                   {passwordVisibility ? (

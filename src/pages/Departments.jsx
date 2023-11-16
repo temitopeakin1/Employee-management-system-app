@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import person from '../assets/person.png'
 import round from '../assets/round.png'
 import download from '../assets/download.png'
+import { BsPeopleFill } from 'react-icons/bs'
 import { supabase } from '../supabaseClient'
 
 const Department = ({ Department }) => {
@@ -88,17 +89,16 @@ const Department = ({ Department }) => {
             ))}
           </div>
           <div className="flex-grow border border-gray-200 mx-8 my-1 md:m-5 p-4 md:p-8 bg-white rounded-sm h-auto">
-            <div className="flex">
+            <div className="flex justify-between">
               <img src={round} alt="round" className="ml-2 mt-1.2" />
               <div className="flex-container -ml-2">
                 <h2 className="-mt-4 pl-8 pt-4 font-copy font-bold text-lg">
                   {selectedDepartment}
                 </h2>
-                <div className="flex -mt-2">
-                  <img src={person} alt="Person" className="ml-8 mt-4" />
+                <div className="flex mt-2 ml-8">
+                 <BsPeopleFill />
                   <h2
-                    className="ml-2 text-sm text-gray-400"
-                    style={{ marginTop: '10px' }}
+                    className="ml-2 -mt-.9 text-sm text-gray-400"
                   >
                     {totalInDept} Total employees in this department{' '}
                   </h2>

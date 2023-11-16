@@ -588,7 +588,7 @@ const Employees = () => {
           </GridComponent>
         </div>
       </div>
-
+      {/* trigger employee form  */}
       {isModalVisible && (
         <div className="modal">
           <div className="modal-content">
