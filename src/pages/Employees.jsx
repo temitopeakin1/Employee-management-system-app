@@ -472,9 +472,9 @@ const Employees = () => {
             dataSource={getFilteredData()}
             enableHover={true}
             width="auto"
-            allowPaging
+            allowPaging={true}
             allowSorting
-            pageSettings={{ pageCount: 5 }}
+            pageSettings={{ pageCount: 3, pageSize: 11}}
             selectionSettings={selectionsettings}
             className="custom-grid"
           >

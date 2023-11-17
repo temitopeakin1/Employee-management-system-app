@@ -33,7 +33,13 @@ const Payroll = () => {
     console.log('click')
   }
 
-  const handleGenerateSlip = () => [console.log('click')]
+  const handleGenerateSlip = () => {
+    console.log('click')
+  }
+
+  const  handleKebabMenuClick = () => {
+    console.log('kebabmenu')
+  }
 
   useEffect(() => {
     const date = new Date()
@@ -230,7 +236,7 @@ const Payroll = () => {
               width="auto"
               allowPaging
               allowSorting
-              pageSettings={{ pageCount: 5 }}
+              pageSettings={{ pageCount: 5, pageSize: 11 }}
               selectionSettings={selectionsettings}
               className="custom-grid"
             >
@@ -324,6 +330,19 @@ const Payroll = () => {
                       <div className="bg-green-100 text-green-500 font-normal font-title font-semibold text-12 px-2 py-1 mb-1 rounded-sm md:mt-0">
                         Complete
                       </div>
+                    </div>
+                  )}
+                />
+                <ColumnDirective
+                  field="kebabMenu"
+                  headerText=""
+                  width="50"
+                  template={(rowData) => (
+                    <div
+                      className="kebab-menu-trigger font-bold text-gray-700"
+                      onClick={(e) => handleKebabMenuClick(e, rowData)}
+                    >
+                      ⋮
                     </div>
                   )}
                 />

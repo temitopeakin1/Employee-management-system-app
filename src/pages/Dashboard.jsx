@@ -434,7 +434,7 @@ const Dashboard = ({ Dashboard }) => {
                 width="auto"
                 allowPaging
                 allowSorting
-                pageSettings={{ pageCount: 5 }}
+                pageSettings={{ pageCount: 5, pageSize: 11 }}
                 selectionSettings={selectionsettings}
                 className="custom-grid"
               >
