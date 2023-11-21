@@ -127,12 +127,12 @@ const Dashboard = ({ Dashboard }) => {
     (department) => departmentCounts[department],
   )
 
-  const departmentAbbreviations = {
-    'Software Engineering': 'SWE',
-    'Administrative': 'Admin',
-    'Human Resources': 'HR',
-    // Add more department names and their abbreviations as needed
-  };
+  // const departmentAbbreviations = {
+  //   'Software Engineering': 'SWE',
+  //   'Administrative': 'Admin',
+  //   'Human Resources': 'HR',
+  //   // Add more department names and their abbreviations as needed
+  // };
 
   // Construct the dataset with dynamic data
   const dataset = {

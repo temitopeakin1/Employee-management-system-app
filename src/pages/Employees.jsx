@@ -469,7 +469,7 @@ const Employees = () => {
             ))}
           </div>
           <GridComponent
-            dataSource={getFilteredData()}
+            dataSource={getFilteredData() || []}
             enableHover={true}
             width="auto"
             allowPaging={true}

@@ -1,7 +1,5 @@
-import React, { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
-
-// create a context
 const StateContext = createContext();
 
 const initialState = {
@@ -33,7 +31,8 @@ export const ContextProvider = ({ children }) => {
   };
 
   const handleClick = (clicked) =>
-    setIsClicked({ ...initialState, [clicked]: true });
+    setIsClicked({ ...initialState, [clicked]: true }
+  );
 
   return (
     <StateContext.Provider

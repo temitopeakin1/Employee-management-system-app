@@ -12,6 +12,7 @@ import { Circle } from 'rc-progress'
 import { supabase } from '../supabaseClient'
 
 const Payroll = () => {
+  const [pageTitle, setPageTitle] = useState('Payroll')
   const selectionsettings = { persistSelection: true }
   const [searchQuery, setSearchQuery] = useState('')
   const [currentMonth, setCurrentMonth] = useState('')
@@ -33,11 +34,13 @@ const Payroll = () => {
     console.log('click')
   }
 
-  const handleGenerateSlip = () => {
-    console.log('click')
+  const handleGenerateSlip = (rowData) => {
+    setPageTitle('Payslip')
+    // setShowPayslip(true);
+    // setSelectedEmployee(rowData);
   }
 
-  const  handleKebabMenuClick = () => {
+  const handleKebabMenuClick = () => {
     console.log('kebabmenu')
   }
 
@@ -46,8 +49,13 @@ const Payroll = () => {
     date.setMonth(date.getMonth() - 1)
     const month = date.toLocaleString('default', { month: 'long' })
     setCurrentMonth(month)
-    fetchTotalSalary()
-  }, [])
+
+    // to set the total salary => total Payroll
+    let calculatedTotalSalary = employeesData
+      .map((employee) => parseInt(employee.salary) || 0)
+      .reduce((acc, salary) => acc + salary, 0)
+    setTotalSalary(calculatedTotalSalary)
+  }, [selectedDepartment, employeesData])
 
   // setting next payment date
   const getNextPaymentDate = () => {
@@ -95,7 +103,7 @@ const Payroll = () => {
   // filter employee list
   const getFilteredData = () => {
     if (selectedDepartment === 'All Employees') {
-      return employeesData.filter(
+      return employeesData?.filter(
         (employee) =>
           employee.firstName
             .toLowerCase()
@@ -117,6 +125,8 @@ const Payroll = () => {
     }
   }
 
+  const filteredData = getFilteredData()
+
   return (
     <div className="justify-center">
       <Navbar
@@ -130,14 +140,14 @@ const Payroll = () => {
               }}
               className="font-bold text-2xl md:mr-5 -mt-6 md:-mt-4 pt-1"
             >
-              Payroll
+              {pageTitle}
             </p>
             <div className="search-input-container">
               <input
                 type="text"
                 placeholder="Search..."
                 value={searchQuery}
-                onChanges={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 className="text-sm mb-3 ml-4 py-1 pl-8 pr-40 rounded focus:outline-none"
               />
               <div className="search-icon">
@@ -208,7 +218,9 @@ const Payroll = () => {
             <div className="ml-auto -mt-14 space-x-16 text-right justify-end flex">
               <div className="mt-2 font-satoshi text-center text-12">
                 <span className="text-gray-600">TOTAL PAYROLL</span>
-                <h2 className="text-dark font-bold text-sm">{totalSalary}</h2>
+                <h2 className="text-dark font-bold text-sm">
+                  NGN{totalSalary}
+                </h2>
               </div>
               <div className="mt-2 font-satoshi text-center text-12">
                 <span className="text-gray-600">NEXT PAYMENT</span>
@@ -230,124 +242,129 @@ const Payroll = () => {
                 </button>
               ))}
             </div>
-            <GridComponent
-              dataSource={employeesData}
-              enableHover={true}
-              width="auto"
-              allowPaging
-              allowSorting
-              pageSettings={{ pageCount: 5, pageSize: 11 }}
-              selectionSettings={selectionsettings}
-              className="custom-grid"
-            >
-              <ColumnsDirective>
-                <ColumnDirective
-                  field="id"
-                  width="90"
-                  headerText="ID"
-                  headerTemplate={() => (
-                    <div className="text-gray-470 font-medium">ID</div>
-                  )}
-                  template={(rowData) => (
-                    <div>
-                      <div className="font-bold text-14">
-                        {rowData.employeeId}
+            {filteredData && filteredData.length > 0 && (
+              <GridComponent
+                dataSource={filteredData}
+                enableHover={true}
+                width="auto"
+                allowPaging
+                allowSorting
+                pageSettings={{ pageCount: 5, pageSize: 11 }}
+                selectionSettings={selectionsettings}
+                className="custom-grid"
+              >
+                <ColumnsDirective>
+                  <ColumnDirective
+                    field="id"
+                    width="90"
+                    headerText="ID"
+                    headerTemplate={() => (
+                      <div className="text-gray-470 font-medium">ID</div>
+                    )}
+                    template={(rowData) => (
+                      <div>
+                        <div className="font-bold text-14">
+                          {rowData.employeeId}
+                        </div>
                       </div>
-                    </div>
-                  )}
-                />
-                <ColumnDirective
-                  field="fullName"
-                  width="150"
-                  headerText="Name"
-                  headerTemplate={() => (
-                    <div className="text-gray-470 font-medium">Name</div>
-                  )}
-                  template={(rowData) => (
-                    <div>
-                      <div className="text-sm font-semibold">
-                        {rowData.firstName} {rowData.lastName}
+                    )}
+                  />
+                  <ColumnDirective
+                    field="fullName"
+                    width="150"
+                    headerText="Name"
+                    headerTemplate={() => (
+                      <div className="text-gray-470 font-medium">Name</div>
+                    )}
+                    template={(rowData) => (
+                      <div>
+                        <div className="text-sm font-semibold">
+                          {rowData.firstName} {rowData.lastName}
+                        </div>
+                        <div className="text-gray-300 text-sm">
+                          {rowData.designation}
+                        </div>
                       </div>
-                      <div className="text-gray-300 text-sm">
-                        {rowData.designation}
+                    )}
+                  />
+                  <ColumnDirective
+                    field="designation"
+                    width="150"
+                    headerText="Position"
+                    headerTemplate={() => (
+                      <div className="text-gray-470 font-medium">Position</div>
+                    )}
+                  />
+                  <ColumnDirective
+                    field="salary"
+                    width="100"
+                    headerText="Gross Pay"
+                    headerTemplate={() => (
+                      <div className="text-gray-470 font-medium">Gross Pay</div>
+                    )}
+                  />
+                  <ColumnDirective
+                    field="salary"
+                    width="100"
+                    headerText="Total"
+                    headerTemplate={() => (
+                      <div className="text-gray-470 font-medium">Total</div>
+                    )}
+                  />
+                  <ColumnDirective
+                    field="Payslip"
+                    width="100"
+                    headerText="Payslip"
+                    headerTemplate={() => (
+                      <div className="text-gray-470 font-medium">Payslip</div>
+                    )}
+                    template={() => (
+                      <div className="flex flex-items justify-center">
+                        <button
+                          onClick={handleGenerateSlip}
+                          className="bg-orange-500 text-white text-12 font-thin px-4 pt-1 pb-1 rounded-md mt-2 md:mt-0"
+                        >
+                          Generate Slip
+                        </button>
                       </div>
-                    </div>
-                  )}
-                />
-                <ColumnDirective
-                  field="designation"
-                  width="150"
-                  headerText="Position"
-                  headerTemplate={() => (
-                    <div className="text-gray-470 font-medium">Position</div>
-                  )}
-                />
-                <ColumnDirective
-                  field="salary"
-                  width="100"
-                  headerText="Gross Pay"
-                  headerTemplate={() => (
-                    <div className="text-gray-470 font-medium">Gross Pay</div>
-                  )}
-                />
-                <ColumnDirective
-                  field="salary"
-                  width="100"
-                  headerText="Total"
-                  headerTemplate={() => (
-                    <div className="text-gray-470 font-medium">Total</div>
-                  )}
-                />
-                <ColumnDirective
-                  field="Payslip"
-                  width="100"
-                  headerText="Payslip"
-                  headerTemplate={() => (
-                    <div className="text-gray-470 font-medium">Payslip</div>
-                  )}
-                  template={(rowData) => (
-                    <div className="flex flex-items justify-center">
-                      <button
-                        className="bg-orange-500 text-white text-12 font-thin px-4 pt-1 pb-1 rounded-md mt-2 md:mt-0"
-                        onClick={() => handleGenerateSlip(rowData)}
+                    )}
+                  />
+                  <ColumnDirective
+                    field="Payment status"
+                    width="150"
+                    headerText="Payment status"
+                    headerTemplate={() => (
+                      <div className="text-gray-470 font-medium">
+                        Payment status
+                      </div>
+                    )}
+                    template={(rowData) => (
+                      <div className="flex flex-items justify-center">
+                        <div className="bg-green-100 text-green-500 font-normal font-title font-semibold text-12 px-2 py-1 mb-1 rounded-sm md:mt-0">
+                          Complete
+                        </div>
+                      </div>
+                    )}
+                  />
+                  <ColumnDirective
+                    field="kebabMenu"
+                    headerText=""
+                    width="50"
+                    template={(rowData) => (
+                      <div
+                        className="kebab-menu-trigger font-bold text-gray-700"
+                        onClick={(e) => handleKebabMenuClick(e, rowData)}
                       >
-                        Generate Slip
-                      </button>
-                    </div>
-                  )}
-                />
-                <ColumnDirective
-                  field="Payment status"
-                  width="150"
-                  headerText="Payment status"
-                  headerTemplate={() => (
-                    <div className="text-gray-470 font-medium">
-                      Payment status
-                    </div>
-                  )}
-                  template={(rowData) => (
-                    <div className="flex flex-items justify-center">
-                      <div className="bg-green-100 text-green-500 font-normal font-title font-semibold text-12 px-2 py-1 mb-1 rounded-sm md:mt-0">
-                        Complete
+                        ⋮
                       </div>
-                    </div>
-                  )}
-                />
-                <ColumnDirective
-                  field="kebabMenu"
-                  headerText=""
-                  width="50"
-                  template={(rowData) => (
-                    <div
-                      className="kebab-menu-trigger font-bold text-gray-700"
-                      onClick={(e) => handleKebabMenuClick(e, rowData)}
-                    >
-                      ⋮
-                    </div>
-                  )}
-                />
-              </ColumnsDirective>
-            </GridComponent>
+                    )}
+                  />
+                </ColumnsDirective>
+              </GridComponent>
+            )}
+            {(!filteredData || filteredData.length === 0) && (
+              <p>No data found.</p>
+            )}
           </div>
         </div>
       </div>
