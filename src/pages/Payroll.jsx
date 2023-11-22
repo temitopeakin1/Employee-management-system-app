@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useMemo } from 'react'
-import Navbar from '../components/Navbar'
-import print from '../assets/print.png'
-import upload from '../assets/upload.png'
-import { AiOutlineSearch } from 'react-icons/ai'
+import React, { useState, useEffect, useMemo } from 'react';
+import Navbar from '../components/Navbar';
+import { useNavigate } from 'react-router-dom';
+import print from '../assets/print.png';
+import upload from '../assets/upload.png';
+import { AiOutlineSearch } from 'react-icons/ai';
 import {
   GridComponent,
   ColumnsDirective,
@@ -12,13 +13,13 @@ import { Circle } from 'rc-progress'
 import { supabase } from '../supabaseClient'
 
 const Payroll = () => {
-  const [pageTitle, setPageTitle] = useState('Payroll')
+  const navigate = useNavigate()
   const selectionsettings = { persistSelection: true }
   const [searchQuery, setSearchQuery] = useState('')
   const [currentMonth, setCurrentMonth] = useState('')
   const [selectedDepartment, setSelectedDepartment] = useState('All Employees')
-  // const [employeesData, setEmployeesData] = useState([])
   const [totalSalary, setTotalSalary] = useState('')
+  const [selectedEmployee, setSelectedEmployee] = useState('')
 
   // retrieve employee data from local storage
   const employeesData = useMemo(() => {
@@ -33,13 +34,12 @@ const Payroll = () => {
   const printReport = () => {
     console.log('click')
   }
-
+  // function to generate slip
   const handleGenerateSlip = (rowData) => {
-    setPageTitle('Payslip')
-    // setShowPayslip(true);
-    // setSelectedEmployee(rowData);
+    setSelectedEmployee(rowData)
+    navigate('/Payslip')
   }
-
+  // kebab menu function
   const handleKebabMenuClick = () => {
     console.log('kebabmenu')
   }
@@ -100,30 +100,29 @@ const Payroll = () => {
     }
   }
 
-  // filter employee list
-  const getFilteredData = () => {
-    if (selectedDepartment === 'All Employees') {
-      return employeesData?.filter(
-        (employee) =>
-          employee.firstName
+ // filter employee list
+const getFilteredData = () => {
+  if (selectedDepartment === 'All Employees') {
+    return employeesData?.filter(
+      (employee) =>
+        employee.firstName
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()) ||
+        employee.lastName.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  } else {
+    return employeesData.filter(
+      (employee) =>
+        (employee.firstName
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()) ||
+          employee.lastName
             .toLowerCase()
-            .includes(searchQuery.toLowerCase()) ||
-          employee.lastName.toLowerCase().includes(searchQuery.toLowerCase()),
-        console.log(getFilteredData),
-      )
-    } else {
-      return employeesData.filter(
-        (employee) =>
-          (employee.firstName
-            .toLowerCase()
-            .includes(searchQuery.toLowerCase()) ||
-            employee.lastName
-              .toLowerCase()
-              .includes(searchQuery.toLowerCase())) &&
-          employee.department === selectedDepartment,
-      )
-    }
+            .includes(searchQuery.toLowerCase())) &&
+        employee.department === selectedDepartment
+    );
   }
+};
 
   const filteredData = getFilteredData()
 
@@ -140,7 +139,7 @@ const Payroll = () => {
               }}
               className="font-bold text-2xl md:mr-5 -mt-6 md:-mt-4 pt-1"
             >
-              {pageTitle}
+              Payroll
             </p>
             <div className="search-input-container">
               <input
