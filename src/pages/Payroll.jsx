@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import Navbar from '../components/Navbar';
-import { useNavigate } from 'react-router-dom';
-import print from '../assets/print.png';
-import upload from '../assets/upload.png';
-import { AiOutlineSearch } from 'react-icons/ai';
+import React, { useState, useEffect, useMemo } from 'react'
+import Navbar from '../components/Navbar'
+import { useNavigate } from 'react-router-dom'
+import print from '../assets/print.png'
+import upload from '../assets/upload.png'
+import { AiOutlineSearch } from 'react-icons/ai'
 import {
   GridComponent,
   ColumnsDirective,
@@ -24,6 +24,7 @@ const Payroll = () => {
   // retrieve employee data from local storage
   const employeesData = useMemo(() => {
     const storedData = localStorage.getItem('employeesData')
+    console.log('employeesData:', storedData)
     return storedData ? JSON.parse(storedData) : []
   }, [])
 
@@ -34,10 +35,22 @@ const Payroll = () => {
   const printReport = () => {
     console.log('click')
   }
+
+  // format currency
+  const salaryFormatter = (totalSalary) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'NGN',
+      minimumFractionDigits: 2,
+    }).format(totalSalary)
+  }
+
   // function to generate slip
   const handleGenerateSlip = (rowData) => {
-    setSelectedEmployee(rowData)
-    navigate('/Payslip')
+    console.log('Generating slip for rowData:', rowData.employeeId)
+    console.log('Employee ID:', rowData.employeeId)
+    setSelectedEmployee(rowData.employeeId)
+    navigate('/Payslip', { state: { employeeId: rowData.employeeId } })
   }
   // kebab menu function
   const handleKebabMenuClick = () => {
@@ -47,8 +60,7 @@ const Payroll = () => {
   useEffect(() => {
     const date = new Date()
     date.setMonth(date.getMonth() - 1)
-    const month = date.toLocaleString('default', { month: 'long' })
-    setCurrentMonth(month)
+    setCurrentMonth(date.toLocaleString('default', { month: 'long' }))
 
     // to set the total salary => total Payroll
     let calculatedTotalSalary = employeesData
@@ -100,29 +112,29 @@ const Payroll = () => {
     }
   }
 
- // filter employee list
-const getFilteredData = () => {
-  if (selectedDepartment === 'All Employees') {
-    return employeesData?.filter(
-      (employee) =>
-        employee.firstName
-          .toLowerCase()
-          .includes(searchQuery.toLowerCase()) ||
-        employee.lastName.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  } else {
-    return employeesData.filter(
-      (employee) =>
-        (employee.firstName
-          .toLowerCase()
-          .includes(searchQuery.toLowerCase()) ||
-          employee.lastName
+  // filter employee list
+  const getFilteredData = () => {
+    if (selectedDepartment === 'All Employees') {
+      return employeesData?.filter(
+        (employee) =>
+          employee.firstName
             .toLowerCase()
-            .includes(searchQuery.toLowerCase())) &&
-        employee.department === selectedDepartment
-    );
+            .includes(searchQuery.toLowerCase()) ||
+          employee.lastName.toLowerCase().includes(searchQuery.toLowerCase()),
+      )
+    } else {
+      return employeesData.filter(
+        (employee) =>
+          (employee.firstName
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase()) ||
+            employee.lastName
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase())) &&
+          employee.department === selectedDepartment,
+      )
+    }
   }
-};
 
   const filteredData = getFilteredData()
 
@@ -218,7 +230,7 @@ const getFilteredData = () => {
               <div className="mt-2 font-satoshi text-center text-12">
                 <span className="text-gray-600">TOTAL PAYROLL</span>
                 <h2 className="text-dark font-bold text-sm">
-                  NGN{totalSalary}
+                 {salaryFormatter(totalSalary)}
                 </h2>
               </div>
               <div className="mt-2 font-satoshi text-center text-12">
@@ -268,6 +280,7 @@ const getFilteredData = () => {
                       </div>
                     )}
                   />
+
                   <ColumnDirective
                     field="fullName"
                     width="150"
@@ -317,10 +330,10 @@ const getFilteredData = () => {
                     headerTemplate={() => (
                       <div className="text-gray-470 font-medium">Payslip</div>
                     )}
-                    template={() => (
+                    template={(rowData) => (
                       <div className="flex flex-items justify-center">
                         <button
-                          onClick={handleGenerateSlip}
+                          onClick={() => handleGenerateSlip(rowData)}
                           className="bg-orange-500 text-white text-12 font-thin px-4 pt-1 pb-1 rounded-md mt-2 md:mt-0"
                         >
                           Generate Slip

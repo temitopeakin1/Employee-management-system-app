@@ -56,6 +56,15 @@ const Dashboard = ({ Dashboard }) => {
     return storedData ? JSON.parse(storedData) : []
   }, [])
 
+  // format currency
+  const salaryFormatter = (averageSalary) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'NGN',
+      minimumFractionDigits: 2,
+    }).format(averageSalary)
+  }
+
   // Calculate total employees and contract employees
   const totalEmployees = employeesData.length
   const totalContractEmployees = employeesData.filter(
@@ -284,7 +293,7 @@ const Dashboard = ({ Dashboard }) => {
                   Avg. Salary
                 </p>
                 <div className="flex">
-                  <p className="text font-semibold">{averageSalary}</p>
+                  <p className="text font-semibold">{salaryFormatter(averageSalary)}</p>
                   <img
                     src={green_icon}
                     alt="icon"

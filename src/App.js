@@ -72,8 +72,8 @@ const AppContent = ({ currentMode }) => {
               <Route path='/calendar' element={<Calendar />} />
               <Route path='/contracts' element={<Contracts />} />
               <Route path='/conversations' element={<Conversations />} />
-              <Route path='/Payroll' element={<Payroll />} />
-              <Route path='/Payslip' element={<Payslip />} />
+              <Route path='/payroll' element={<Payroll />} />
+              <Route path='/payslip' element={<Payslip />} />
               <Route path='/settings' element={<Settings />} />
             </Routes>
           </div>

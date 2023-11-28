@@ -29,7 +29,7 @@ const Register = () => {
   }
 
   const handlePasswordVisibility = () => {
-    setPasswordVisibility(!passwordVisibility)
+    setPasswordVisibility(!passwordVisibility);
   }
 
   const handleRepeatPasswordVisibility = () => {
@@ -86,7 +86,10 @@ const Register = () => {
 
       <div className="flex-1 bg-white text-black p-10 flex items-center justify-center">
         <div className="-mt-96 ml-2">
-          <BiArrowBack onClick={() => navigate(-1)} style={{cursor: 'pointer'}} />
+          <BiArrowBack
+            onClick={() => navigate(-1)}
+            style={{ cursor: 'pointer' }}
+          />
         </div>
         <div className="text">
           <h2 className="text-2xl mb-4 font-satoshi font-semibold ml-.5 mt-8">
