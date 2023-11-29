@@ -300,7 +300,7 @@ const Dashboard = ({ Dashboard }) => {
                     style={{
                       width: '15px',
                       height: '15px',
-                      marginLeft: '90px',
+                      marginLeft: '35px',
                       marginTop: '5px',
                     }}
                   />

@@ -24,6 +24,9 @@ import Navbar from '../components/Navbar'
 import { MdOutlineCancel } from 'react-icons/md'
 import dialog from '../assets/dialog.png'
 import comfy from '../assets/comfy.png'
+import edit from '../assets/view.svg'
+import Vector from '../assets/Vector.svg'
+import document from '../assets/document.svg'
 import list from '../assets/list.png'
 import { supabase } from '../supabaseClient'
 // import Spinner from '../common/Spinner';
@@ -58,8 +61,8 @@ const Employees = () => {
   const [isKebabMenuOpen, setKebabMenuOpen] = useState(false)
   const [kebabMenuX, setKebabMenuX] = useState(0)
   const [kebabMenuY, setKebabMenuY] = useState(0)
+  const [currentRowData, setCurrentRowData] = useState(null)
   const [showSuccessDialog, setShowSuccessDialog] = useState(false)
-  
 
   useEffect(() => {
     const storedEmployeesData = localStorage.getItem('employeesData')
@@ -160,59 +163,92 @@ const Employees = () => {
       )
     }
   }
+
+  // logic to remove an employee from the cmployee ist
+  
+  const removeEmployee = async (employeeId) => {
+    try {
+      const { data, error } = await supabase
+        .from('employees')
+        .delete(employeeId)
+        .eq('employeeId', String(employeeId))
+      if (error) throw error
+      if (data != null) {
+        // Filter out the removed employee from the local state
+        const updatedEmployeesData = employeesData.filter(
+          (employee) => employee.employeeId !== employeeId,
+        )
+        setEmployeesData(updatedEmployeesData)
+
+        // Show success notification
+        setShowSuccessDialog(true)
+      }
+    } catch (error) {
+      console.error('Error removing employee:', error)
+    }
+  }
+  
+
   // handle kebab menu clicks
   const handleKebabMenuClick = (event, rowData) => {
     event.preventDefault()
     const cell = event.target.closest('.e-rowcell')
-    if (cell) {
+    if (cell && rowData && rowData.employeeId) {
       const cellRect = cell.getBoundingClientRect()
       setKebabMenuOpen((prevOpen) => !prevOpen) // Toggle the state
       setKebabMenuX(cellRect.left - 200)
       setKebabMenuY(cellRect.bottom)
+      setCurrentRowData(rowData)
     }
   }
 
   // Function to handle closing the kebab menu
   const closeKebabMenu = () => {
     setKebabMenuOpen(false)
+    setCurrentRowData(null)
   }
 
   // Render the kebab menu when it's open
-  const renderKebabMenu = () => {
+  const renderKebabMenu = (rowData) => {
     if (isKebabMenuOpen) {
       return (
         <div
-          className="kebab-menu-card absolute py-2 bg-white border rounded shadow-lg"
+          className="kebab-menu-card absolute bg-white border rounded-xl shadow-lg"
           style={{
             top: kebabMenuY,
             left: kebabMenuX,
             padding: '8px',
             zIndex: 100,
+            marginTop: '-30px',
+            marginLeft: '31px',
           }}
         >
-          <ul className="list-none">
+          <ul className="list-none rounded-xl">
             <li>
               <button
-                className="cursor-pointer bg-transparent text-black py-2 px-4 w-full text-left text-sm"
+                className="cursor-pointer bg-transparent font-satoshi text-black font-light py-2 px-4 w-full text-left text-12 flex items-center hover:bg-sky-700 hover:text-white"
                 onClick={viewProfile}
               >
+                <img src={edit} alt="View-employee" className="mr-2" />
                 View Profile
               </button>
             </li>
             <li>
               <button
-                className="cursor-pointer bg-transparent text-black py-2 px-4 w-full text-left text-sm"
+                className="cursor-pointer bg-transparent font-satoshi text-black font-light py-2 px-4 w-full text-left text-12 flex items-center hover:bg-sky-700 hover:text-white"
                 onClick={editEmployeeDetails}
               >
+                <img src={document} alt="Edit-employee" className="mr-2" />
                 Edit Employee Details
               </button>
             </li>
             <li>
               <button
-                className="cursor-pointer bg-transparent text-black py-2 px-4 w-full text-left text-sm"
-                onClick={viewAllEmployees}
+                className="cursor-pointer bg-transparent font-satoshi text-black font-light py-2 px-4 w-full text-left text-12 flex items-center hover:bg-sky-700 hover:text-white"
+                onClick={() => removeEmployee(rowData.employeeId)}
               >
-                View Employees
+                <img src={Vector} alt="Remove-employee" className="mr-2" />
+                Remove Employee
               </button>
             </li>
           </ul>
@@ -297,12 +333,6 @@ const Employees = () => {
   const handleNext = () => {
     setCurrentStep(currentStep + 1)
     if (currentStep === 1) {
-      // if (!firstName) {
-      //   setFirstNameError('Input first Name')
-      //   return
-      // } else {
-      //   setFirstNameError('')
-      // }
     }
   }
 
@@ -462,7 +492,7 @@ const Employees = () => {
               <button
                 key={department}
                 onClick={() => setSelectedDepartment(department)}
-                className="px-2 -ml-5 -py-24 bg-transparent font-semibold text-gray-400 text-sm department-filter"
+                className="px-2 -ml-5 -py-24 bg-transparent font-semibold text-gray-600 text-sm department-filter"
               >
                 {department}
               </button>
@@ -474,7 +504,7 @@ const Employees = () => {
             width="auto"
             allowPaging={true}
             allowSorting
-            pageSettings={{ pageCount: 3, pageSize: 11}}
+            pageSettings={{ pageCount: 3, pageSize: 11 }}
             selectionSettings={selectionsettings}
             className="custom-grid"
           >

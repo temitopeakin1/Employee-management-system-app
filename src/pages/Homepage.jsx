@@ -31,7 +31,7 @@ const Homepage = () => {
           <h2 className="text-2xl mb-4 font-satoshi font-semibold ml-4">Welcome to Hampshire</h2>
           <h2 className="text-2xl mb-4 font-satoshi font-semibold ml-4 -mt-4">Heights.</h2>
           <div>
-            <Link to="/register"
+            <Link to="/login"
               className="flex items-center text-12 font-bold py-2 px-4 rounded"
             >
               <img src={subtract} alt="Subtract" className="w-6 h-6 mr-6" />

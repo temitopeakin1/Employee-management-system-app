@@ -29,7 +29,7 @@ const Register = () => {
   }
 
   const handlePasswordVisibility = () => {
-    setPasswordVisibility(!passwordVisibility);
+    setPasswordVisibility(!passwordVisibility)
   }
 
   const handleRepeatPasswordVisibility = () => {
@@ -85,18 +85,13 @@ const Register = () => {
       </div>
 
       <div className="flex-1 bg-white text-black p-10 flex items-center justify-center">
-        <div className="-mt-96 ml-2">
-          <BiArrowBack
-            onClick={() => navigate(-1)}
-            style={{ cursor: 'pointer' }}
-          />
-        </div>
         <div className="text">
-          <h2 className="text-2xl mb-4 font-satoshi font-semibold ml-.5 mt-8">
-            Let's get started with
-          </h2>
-          <h2 className="text-2xl mb-4 font-satoshi font-semibold ml-.5 -mt-4">
-            creating account
+            <BiArrowBack
+              onClick={() => navigate(-1)}
+              style={{ cursor: 'pointer', marginRight: '10px' }}
+            />
+            <h2 className="text-2xl mb-4 font-satoshi font-semibold ml-.5 mt-4">
+            Let's get started with <br/>creating an account
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">

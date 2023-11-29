@@ -1,12 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Navbar from '../components/Navbar'
 import print from '../assets/print.png'
 import { supabase } from '../supabaseClient'
 import { useLocation } from 'react-router-dom'
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
+import jsPDF from 'jspdf'
+import html2canvas from 'html2canvas'
+
 
 const Payslip = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const location = useLocation()
   const employeeId = location?.state?.employeeId
   const [salary, setSalary] = useState('')
@@ -18,10 +21,43 @@ const Payslip = () => {
   const [lastName, setLastName] = useState('')
   const [fullName, setFullName] = useState('')
   const [department, setDepartment] = useState('')
+  const [payslipNumber, setPaySlipNumber] = useState()
+  const [loader, setLoader] = useState(false)
 
-  const downloadPayslip = () => {
-    console.log('click')
-  }
+
+  // const downloadPDF = () => {
+  //   const capture = document.querySelector('.payslip');
+  //   setLoader(true);
+  //   html2canvas(capture).then((canvas) => {
+  //     const imgData = canvas.toDataURL('img/png');
+  //     const doc = new jsPDF('p', 'mn', 'a4');
+  //     const componentWidth = doc.internalPageSize.getWidth();
+  //     const componentHeight = doc.internalPageSize.getHeight();
+  //     doc.addImage(imgData, 'PNG', 0, 0, componentWidth, componentHeight);
+  //     setLoader(false);
+  //     doc.save('payslip.pdf');
+  //   })
+  // }
+
+  const downloadPDF = async () => {
+    const input = document.querySelector('.payslip');
+    setLoader(true);
+  
+    try {
+      const canvas = await html2canvas(input);
+      const imgWidth = 208;
+      const imgHeight = canvas.height * imgWidth / canvas.width;
+      const imgData = canvas.toDataURL('img/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+      pdf.save('payslip.pdf');
+      setLoader(false);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      setLoader(false);
+    }
+  };
+  
 
   useEffect(() => {
     const fetchEmployeeSalary = async () => {
@@ -83,6 +119,14 @@ const Payslip = () => {
     fetchEmployeeDetails()
   }, [employeeId])
 
+  useEffect(() => {
+    const generatedNumber = Math.floor(Math.random() * 90000) + 10000
+    setPaySlipNumber(generatedNumber)
+
+    // Save to local storage
+    localStorage.setItem('paySlipNumber', JSON.stringify(generatedNumber))
+  }, [])
+
   // format the year
   const getYear = () => {
     const currentDate = new Date()
@@ -99,12 +143,111 @@ const Payslip = () => {
     }).format(salary)
   }
 
+  useEffect(() => {
+    // Trigger downloadPDF after the component has been rendered
+    if (employeeId) {
+      downloadPDF();
+    }
+  }, [employeeId]);
+
   const employeeName = () => {
     const fullName = `${firstName || ''} ${lastName || ''}`
     return fullName.trim()
   }
 
-  const handlePrevPage = () => {}
+  // function to convert numbers to words
+  const numberToWords = (number) => {
+    const units = [
+      '',
+      'One',
+      'Two',
+      'Three',
+      'Four',
+      'Five',
+      'Six',
+      'Seven',
+      'Eight',
+      'Nine',
+    ]
+    const teens = [
+      '',
+      'Eleven',
+      'Twelve',
+      'Thirteen',
+      'Fourteen',
+      'Fifteen',
+      'Sixteen',
+      'Seventeen',
+      'Eighteen',
+      'Nineteen',
+    ]
+    const tens = [
+      '',
+      'Ten',
+      'Twenty',
+      'Thirty',
+      'Forty',
+      'Fifty',
+      'Sixty',
+      'Seventy',
+      'Eighty',
+      'Ninety',
+    ]
+
+    const convertChunkToWords = (chunk) => {
+      let words = ''
+
+      if (chunk >= 100) {
+        words += units[Math.floor(chunk / 100)] + ' Hundred '
+        chunk %= 100
+      }
+
+      if (chunk >= 11 && chunk <= 19) {
+        words += teens[chunk - 10] + ' '
+        return words
+      } else if (chunk >= 10 || chunk >= 20) {
+        words += tens[Math.floor(chunk / 10)] + ' '
+        chunk %= 10
+      }
+
+      if (chunk > 0) {
+        words += units[chunk] + ' '
+      }
+
+      return words
+    }
+
+    if (number === 0) {
+      return 'Zero'
+    }
+
+    let words = ''
+
+    if (number < 0) {
+      words += 'Negative '
+      number = Math.abs(number)
+    }
+
+    if (number >= 1e9) {
+      words += convertChunkToWords(Math.floor(number / 1e9)) + 'Billion '
+      number %= 1e9
+    }
+
+    if (number >= 1e6) {
+      words += convertChunkToWords(Math.floor(number / 1e6)) + 'Million '
+      number %= 1e6
+    }
+
+    if (number >= 1e3) {
+      words += convertChunkToWords(Math.floor(number / 1e3)) + 'Thousand '
+      number %= 1e3
+    }
+
+    words += convertChunkToWords(number)
+
+    return words.trim()
+  }
+
   return (
     <div className="justify-center text-center">
       <Navbar
@@ -120,21 +263,28 @@ const Payslip = () => {
             >
               Payslip
             </p>
-            <button
-              onClick={downloadPayslip}
-              className="bg-orange-500 text-white font-bold px-3 pt-1 pb-1 rounded-sm md:-mt-1"
-              style={{
-                fontSize: '14px',
-                marginLeft: '600px',
-                display: 'flex',
-                alignItems: 'center',
-                borderRadius: '50px',
-                // padding: '0.3rem 1.5rem',
-              }}
-            >
-              <img src={print} alt="Upload" className="mr-2" />
-              Download Payslip
-            </button>
+            <div className="payslip">
+              <button
+                onClick={downloadPDF}
+                disabled={!loader === false}
+                className="bg-orange-500 text-white font-bold px-3 pt-1 pb-1 rounded-sm md:-mt-1"
+                style={{
+                  fontSize: '14px',
+                  marginLeft: '580px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  borderRadius: '50px',
+                  padding: '0.3rem 1.5rem',
+                }}
+              >
+                <img src={print} alt="Upload" className="mr-2" />
+                {loader ? (
+                  <span>Downloading</span>
+                ) : (
+                  <span>Download Payslip</span>
+                )}
+              </button>
+            </div>
           </div>
         }
       />
@@ -153,7 +303,9 @@ const Payslip = () => {
               </div>
             </div>
             <div className="px-4 -mt-52 text-right">
-              <div className="font-bold mt-1 font-title">Payslip</div>
+              <div className="font-bold mt-1 font-title">
+                Payslip #{payslipNumber}
+              </div>
               <div className="text-gray-500 font-title text-sm mt-4 -mb-8">
                 Salary Month: {currentMonth} {getYear()}
               </div>
@@ -273,16 +425,30 @@ const Payslip = () => {
               </tbody>
             </table>
           </div>
-          <div className="mt-2 px-2 font-title font-bold text-lg text-left">
-            Net Salary:{salaryFormatter(salary)}
+          <div
+            className="-mt-4 px-2 font-satoshi font-bold text-left"
+            style={{ fontSize: '14px' }}
+          >
+            Net Salary: {salaryFormatter(salary)}
+            <span
+              className="text-gray-600 font-copy px-1"
+              style={{ fontSize: '14px' }}>
+
+                    ( {numberToWords(Number(salary))} Naira only )
+            </span>
           </div>
         </div>
       </div>
       <button
-        onClick={() => navigate(-1)} className="mt-4 mb-8 px-36 pt-2 pb-2 font-satoshi font-normal" style={{
+        onClick={() => navigate(-1)}
+        className="mt-4 mb-8 px-36 pt-2 pb-2 font-satoshi font-normal"
+        style={{
           borderRadius: '14px',
-          fontSize: '16px'
-        }} >Go Back</button>
+          fontSize: '18px',
+        }}
+      >
+        Go Back
+      </button>
     </div>
   )
 }

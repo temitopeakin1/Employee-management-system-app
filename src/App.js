@@ -4,6 +4,7 @@ import { Sidebar } from './components'
 import Homepage from './pages/Homepage'
 import Register from './pages/Register'
 import Login from './pages/Login'
+import Forgotpassword from './pages/Forgotpassword'
 import { Dashboard, Calendar, Employees, Departments, Contracts, Conversations, Payroll, Payslip, Settings } from './pages'
 import './App.css'
 import { useStateContext } from './contexts/ContextProvider'
@@ -35,6 +36,7 @@ const AppContent = ({ currentMode }) => {
   const isHomepage = location.pathname === '/'
   const isRegister = location.pathname === '/register'
   const isLogin = location.pathname === '/login'
+  const isForgotpassword = location.pathname === '/forgotPassword'
 
   return (
     <div className={currentMode === 'Dark' ? 'dark' : ''}>
@@ -45,16 +47,16 @@ const AppContent = ({ currentMode }) => {
         ></div>
         <div
           className={
-            isHomepage || isRegister || isLogin
+            isHomepage || isRegister || isLogin || isForgotpassword
               ? 'w-0 dark:bg-secondary-dark-bg'
               : 'w-72 fixed sidebar dark:bg-secondary-dark-bg bg-brown'
           }
         >
-          {!isHomepage && !isRegister && !isLogin && <Sidebar />}
+          {!isHomepage && !isRegister && !isLogin && !isForgotpassword && <Sidebar />}
         </div>
         <div
           className={
-            isHomepage || isRegister || isLogin
+            isHomepage || isRegister || isLogin || isForgotpassword
               ? 'bg-main-bg dark:bg-main-dark-bg w-full min-h-screen flex-2'
               : 'dark:bg-main-dark-bg bg-main-bg min-h-screen md:ml-72 w-full'
           }
@@ -65,6 +67,7 @@ const AppContent = ({ currentMode }) => {
               <Route path='/' element={<Homepage />} />
               <Route path='/register' element={<Register />} />
               <Route path='/login' element={<Login />} />
+              <Route path='/forgotPassword' element={<Forgotpassword />} />
              {/* pages */}
               <Route path='/dashboard' element={<Dashboard />} />     
               <Route path='/employees' element={<Employees />} />

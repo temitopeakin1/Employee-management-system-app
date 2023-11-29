@@ -2,14 +2,22 @@ import React, { useState } from 'react'
 import logo from '../assets/logo.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
+import ForgotPasswordModal from '../components/ForgotPasswordModal'
 
-const Login = () => {
+const Forgotpassword = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false)
+  const [showModal, setShowModal] = useState(false);
 
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   })
+
+  // close modal
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
 
   const navigate = useNavigate()
   const [errors, setErrors] = useState({})
@@ -54,7 +62,7 @@ const Login = () => {
   }
 
   return (
-    <div className="flex h-screen">
+    <div className={`flex h-screen ${showModal ? 'blur' : ''}`}>
       <div className="flex-1 bg-black text-white p-10 flex items-center justify-center">
         <div className="pl-18">
           <img src={logo} alt="Logo" style={{ height: '35px' }} />
@@ -96,6 +104,7 @@ const Login = () => {
                 <div className="text-red-500 text-sm">{errors.email}</div>
               )}
             </div>
+
             <div className="mb-4">
               <label htmlFor="password" className="font-satoshi text-gray-400">
                 Password
@@ -147,7 +156,6 @@ const Login = () => {
                 Forgot password?
               </Link>
             </div>
-
             <div className="mb-4 flex flex-col">
               <button
                 onClick={handleSubmit}
@@ -178,8 +186,10 @@ const Login = () => {
           </p>
         </div>
       </div>
+      {showModal && <ForgotPasswordModal onCancel={handleCloseModal} />}
     </div>
   )
 }
 
-export default Login
+export default Forgotpassword
+
