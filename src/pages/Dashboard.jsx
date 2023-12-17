@@ -23,9 +23,12 @@ import BarChart from '../components/Charts/BarChart'
 import Navbar from '../components/Navbar'
 import { FiPhone } from 'react-icons/fi'
 import Greeting from '../components/Greeting'
+import Department from '../components/Department'
 import red_icon from '../assets/red_icon.png'
 import green_icon from '../assets/green_icon.png'
 import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns'
+
+
 
 const DropDown = ({ currentMode }) => (
   <div className="w-28 px-4 -mt-2.5">
@@ -110,14 +113,14 @@ const Dashboard = ({ Dashboard }) => {
   const totalEmployeesKPI = (presentTotalEmployees / targetTotalEmployees) * 100
 
   // filter the departments on the dashboard
-  const departmentFilters = [
-    'All Employees',
-    'Marketing',
-    'Accounting',
-    'Human Resources',
-    'IT Support',
-    'Software Engineering',
-  ]
+  // const departmentFilters = [
+  //   'All Employees',
+  //   'Marketing',
+  //   'Accounting',
+  //   'Human Resources',
+  //   'IT Support',
+  //   'Software Engineering',
+  // ]
 
   // Calculate the employee counts for each department
   const departmentCounts = {}
@@ -426,17 +429,7 @@ const Dashboard = ({ Dashboard }) => {
         <div className="justify-center">
           <div className="h-300 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg mt-3 ml-4 mr-4 p-4 rounded-2xl">
             <div className="m-10 md:m-5 pt-5 p-2 md:p-2 bg-white rounded-3xl">
-              <div className="pl-.5 pr-.5">
-                {departmentFilters.map((department) => (
-                  <button
-                    key={department}
-                    // onClick={() => setSelectedDepartment(department)}
-                    className="px-2 -py-24 bg-transparent font-semibold text-gray-400 text-sm department-filter"
-                  >
-                    {department}
-                  </button>
-                ))}
-              </div>
+             <Department />
               <GridComponent
                 dataSource={employeesData}
                 enableHover={true}

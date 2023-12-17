@@ -6,7 +6,7 @@ module.exports = {
     fontFamily: {
       display: ['Montserrat', 'sans-serif'],
       body: ['Montserrat', 'sans-serif'],
-      satoshi: ['satoshi, sans-serif'],
+      satoshi: ['Satoshi', 'sans-serif'],
       title: ['Manrope', 'sans-serif'],
       copy: ['Plus Jakarta Sans', 'sans-serif']
     },
@@ -15,6 +15,8 @@ module.exports = {
         8: '8px',
         12: '12px',
         14: '14px',
+        16: '16px',
+        24: '24px',
         25: '25px',
         45: '45px',
         50: '50px',
@@ -42,6 +44,8 @@ module.exports = {
       },
       width: {
         400: '400px',
+        550: '550px',
+        500: '500px',
         760: '760px',
         780: '780px',
         800: '800px',
@@ -52,6 +56,9 @@ module.exports = {
       height: {
         80: '80px',
         300: '300px',
+        400: '400px',
+        256: '256px',
+        512: '512px'
       },
       minHeight: {
         590: '590px',

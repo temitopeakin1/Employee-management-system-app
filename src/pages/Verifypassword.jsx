@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import logo from '../assets/logo.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
-import ForgotPasswordModal from '../components/ForgotPasswordModal'
+import VerifyPasswordModal from '../components/VerifyPasswordModal'
 
 const Forgotpassword = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false)
@@ -85,7 +85,7 @@ const Forgotpassword = () => {
           </p>
         </div>
       </div>
-      <ForgotPasswordModal />
+      <VerifyPasswordModal />
       <div className="flex-1 bg-white text-black p-10 flex items-center justify-center">
         <div className="text">
           <h2 className="text-2xl mb-4 font-satoshi font-semibold ml-.5 mt-24">

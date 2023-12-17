@@ -29,6 +29,7 @@ import Vector from '../assets/Vector.svg'
 import document from '../assets/document.svg'
 import list from '../assets/list.png'
 import { supabase } from '../supabaseClient'
+import { departmentFilters, designation, department, empType }from '../data/dummy'
 // import Spinner from '../common/Spinner';
 
 const Employees = () => {
@@ -63,6 +64,7 @@ const Employees = () => {
   const [kebabMenuY, setKebabMenuY] = useState(0)
   const [currentRowData, setCurrentRowData] = useState(null)
   const [showSuccessDialog, setShowSuccessDialog] = useState(false)
+
 
   useEffect(() => {
     const storedEmployeesData = localStorage.getItem('employeesData')
@@ -164,8 +166,7 @@ const Employees = () => {
     }
   }
 
-  // logic to remove an employee from the cmployee ist
-  
+  // logic to remove an employee from the employee list
   const removeEmployee = async (employeeId) => {
     try {
       const { data, error } = await supabase
@@ -290,43 +291,6 @@ const Employees = () => {
     setCurrentStep(1)
     toggleModal()
   }
-
-  const departmentFilters = [
-    'All Employees',
-    'Marketing',
-    'Accounting',
-    'Human Resources',
-    'IT Support',
-    'Software Engineering',
-  ]
-
-  const designation = [
-    { Id: '1', Role: 'Software Developer' },
-    { Id: '2', Role: 'Frontend Engineer' },
-    { Id: '3', Role: 'Backend Engineer' },
-    { Id: '4', Role: 'FullStack Developer' },
-    { Id: '5', Role: 'Product Designer' },
-    { Id: '6', Role: 'Scrum Master' },
-    { Id: '7', Role: 'Product Owner' },
-    { Id: '8', Role: 'HR Manager' },
-    { Id: '9', Role: 'Administrative Officer' },
-    { Id: '10', Role: 'DevOps Engineer' },
-    { Id: '11', Role: 'Social Media Manager' },
-    { Id: '12', Role: 'Solutions Architect' },
-  ]
-
-  const department = [
-    { Id: '1', Dept: 'Software Engineering', Color: 'software' },
-    { Id: '2', Dept: 'Administrative', Color: 'administrative' },
-    { Id: '3', Dept: 'Human Resources', Color: 'hr' },
-  ]
-
-  const empType = [
-    { type: '1', Emp: 'FullTime' },
-    { type: '2', Emp: 'Contract' },
-    { type: '3', Emp: 'PartTime' },
-    { type: '4', Emp: 'Intern' },
-  ]
 
   const handleSwitchView = (viewType) => {}
 

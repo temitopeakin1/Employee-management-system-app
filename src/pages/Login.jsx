@@ -5,11 +5,16 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 
 const Login = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false)
+  const [showModal, setShowModal] = useState(false);
 
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   })
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  }
 
   const navigate = useNavigate()
   const [errors, setErrors] = useState({})
@@ -141,6 +146,7 @@ const Login = () => {
               </label>
               <Link
                 to="/forgotPassword"
+                onClick={handleOpenModal}
                 className="text-orange-500 font-semibold inline-block mr-40"
                 style={{ whiteSpace: 'nowrap' }}
               >
