@@ -75,7 +75,7 @@ const VerifyPasswordModal = ({ showModal, onCancel }) => {
                 maxLength="1"
                 value={digit}
                 onChange={(e) => handleChange(index, e.target.value)}
-                onKeyUp={handleKeyUp}
+                // onKeyUp={handleKeyUp}
               />
             ))}
           </div>
