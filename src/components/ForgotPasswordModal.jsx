@@ -2,18 +2,20 @@ import React, { useState } from 'react'
 import logo from '../assets/logo.svg'
 import { useNavigate } from 'react-router-dom'
 
-const ForgotPasswordModal = ({ showModal, onCancel }) => {
+const ForgotPasswordModal = ({ isOpen, onCancel }) => {
   const navigate = useNavigate()
   const [errors, setErrors] = useState({})
   const [email, setEmail] = useState('')
+  const [showModal, setShowModal] = useState(false);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value)
     setErrors({})
   }
 
-  const handleCancelButton = () => {
-    onCancel(!showModal)
+  const handleCloseModal = () => {
+    setShowModal(!showModal);
+    console.log('Modal close')
   }
 
   const handleSubmit = (event) => {
@@ -53,7 +55,7 @@ const ForgotPasswordModal = ({ showModal, onCancel }) => {
                 fontWeight: '10',
                 backgroundColor: 'transparent',
               }}
-              onClick={handleCancelButton}
+              onClick={handleCloseModal}
               aria-label="Close"
             >
               X

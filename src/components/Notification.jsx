@@ -3,9 +3,9 @@ import { chatData } from '../data/dummy'
 import { useStateContext } from '../contexts/ContextProvider'
 
 const Notification = () => {
-  const { currentColor } = useStateContext()
-  const [showNotification, setShowNotification] = useState(true)
-  const notificationRef = useRef(null)
+  const { currentColor } = useStateContext();
+  const [showNotification, setShowNotification] = useState(true);
+  const notificationRef = useRef(null);
 
   const closeNotification = () => {
     setShowNotification(false)
@@ -17,7 +17,7 @@ const Notification = () => {
         notificationRef.current &&
         !notificationRef.current.contains(event.target)
       ) {
-        closeNotification()
+        closeNotification();
       }
     }
 

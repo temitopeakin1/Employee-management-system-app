@@ -4,9 +4,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import RecoverPasswordModal from '../components/RecoverPasswordModal'
 
-const Forgotpassword = () => {
+const Recoverpassword = () => {
+  const navigate = useNavigate()
   const [passwordVisibility, setPasswordVisibility] = useState(false)
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -14,20 +15,15 @@ const Forgotpassword = () => {
   })
 
   const handleOpenModal = () => {
-    setShowModal(true)
+    setShowModal(true);
   }
-
-  const handleCloseModal = () => {
-    setShowModal(false)
-  }
-
-  const navigate = useNavigate()
+  
   const [errors, setErrors] = useState({})
   // store image URL in a local storage
   localStorage.setItem('userImage', 'path-to-user-image.jpg')
 
   const handleChange = (event) => {
-    const { name, value, type, checked } = event.target
+    const { name, value, type, checked } = event.target.value
 
     // updating the check box
     const newValue = type === 'checkbox' ? checked : value
@@ -198,4 +194,4 @@ const Forgotpassword = () => {
   )
 }
 
-export default Forgotpassword
+export default Recoverpassword

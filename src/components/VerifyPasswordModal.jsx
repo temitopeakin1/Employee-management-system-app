@@ -5,12 +5,13 @@ import { Link } from 'react-router-dom'
 
 const VerifyPasswordModal = ({ showModal, onCancel }) => {
   const [email, setEmail] = useState('')
-  const [otpDigits, setOtpDigits] = useState("");
+  const [otpDigits, setOtpDigits] = useState('');
   const navigate = useNavigate()
   const handleCancelButton = () => {
     onCancel(!showModal)
   }
 
+  // state to set up the otp digits
   const handleChange = (index, value) => {
     const newOtpDigits = [...otpDigits];
     newOtpDigits[index] = value;
@@ -18,10 +19,10 @@ const VerifyPasswordModal = ({ showModal, onCancel }) => {
   };
 
    const handleSubmit = () => {
-    const otp = otpDigits.join('');
+    const otp = otpDigits.join(' ');
     console.log('Submitted OTP:', otp);
     // Add logic to handle the OTP submission
-    navigate('/verifyPassword');
+    navigate('/createPassword');
   };
 
   return (
