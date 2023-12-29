@@ -40,7 +40,7 @@ export const links = [
         icon: <IoIosContract />,
       },
       {
-        name: 'Conversations',
+        name: 'Tasks',
         icon: <SiStopstalk />,
       },
       {
@@ -88,6 +88,14 @@ export const themeColors = [
   },
 ]
 
+export const deptFilters = [
+  'Marketing',
+  'Accounting',
+  'Human Resources',
+  'IT Support',
+  'Software Engineering',
+]
+
 export const departmentFilters = [
   'All Employees',
   'Marketing',
@@ -131,15 +139,6 @@ export const deptData = [
   { x: 'Marketing', employees: 20 },
   { x: 'Human Resources', employees: 20 },
   { x: 'IT Support', employees: 20 },
-]
-
-export const depatmentFilters = [
-  'All Employees',
-  'Marketing',
-  'Accounting',
-  'Human Resources',
-  'IT Support',
-  'Software Engineering',
 ]
 
 export const chatData = [

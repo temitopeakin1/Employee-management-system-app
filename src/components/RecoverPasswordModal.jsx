@@ -13,7 +13,7 @@ const RecoverPasswordModal = ({ isOpen, onCancel }) => {
   };
 
   const handleSubmit = () => {
-    navigate('/verifyPassword')
+    navigate('/verifyPassword');
   }
 
   return (

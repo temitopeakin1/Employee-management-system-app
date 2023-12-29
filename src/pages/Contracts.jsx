@@ -14,15 +14,15 @@ const Contracts = () => {
     { label: 'Sign' },
   ]
 
-  const [empName, setEmpName] = useState('')
-  const [company, setCompany] = useState('')
-  const [jobTitle, setJobTitle] = useState('')
-  const [contractEndDate, setContractEndDate] = useState([])
-  const [contractStartDate, setContractStartDate] = useState([])
-  const [projectName, setProjectName] = useState('')
-  const [currency, setCurrency] = useState('NGN')
-  const [scope, setScope] = useState('')
-  const [currentStep, setCurrentStep] = useState(1)
+  const [empName, setEmpName] = useState('');
+  const [company, setCompany] = useState('');
+  const [jobTitle, setJobTitle] = useState('');
+  const [contractEndDate, setContractEndDate] = useState([]);
+  const [contractStartDate, setContractStartDate] = useState([]);
+  const [projectName, setProjectName] = useState('');
+  const [currency, setCurrency] = useState('NGN');
+  const [scope, setScope] = useState('');
+  const [currentStep, setCurrentStep] = useState(1);
 
   const handleNext = () => {
     setCurrentStep(currentStep + 1)

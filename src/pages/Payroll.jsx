@@ -10,6 +10,7 @@ import {
   ColumnDirective,
 } from '@syncfusion/ej2-react-grids'
 import { Circle } from 'rc-progress'
+import { departmentFilters }from '../data/dummy'
 import { supabase } from '../supabaseClient'
 
 const Payroll = () => {
@@ -28,10 +29,11 @@ const Payroll = () => {
     return storedData ? JSON.parse(storedData) : []
   }, [])
 
+  // logic for share report
   const shareReport = () => {
     console.log('click')
   }
-
+// logic for print report
   const printReport = () => {
     console.log('click')
   }
@@ -63,11 +65,10 @@ const Payroll = () => {
     setCurrentMonth(date.toLocaleString('default', { month: 'long' }))
 
     // to set the total salary => total Payroll
-    let calculatedTotalSalary = employeesData
-      .map((employee) => parseInt(employee.salary) || 0)
+    let calculatedTotalSalary = employeesData.map((employee) => parseInt(employee.salary) || 0)
       .reduce((acc, salary) => acc + salary, 0)
     setTotalSalary(calculatedTotalSalary)
-  }, [selectedDepartment, employeesData])
+  }, [selectedDepartment, employeesData]);
 
   // setting next payment date
   const getNextPaymentDate = () => {
@@ -77,15 +78,6 @@ const Payroll = () => {
     const formattedDate = `01 ${month} ${currentYear}`
     return formattedDate
   }
-
-  const departmentFilters = [
-    'All Employees',
-    'Marketing',
-    'Accounting',
-    'Human Resources',
-    'IT Support',
-    'Software Engineering',
-  ]
 
   const fetchTotalSalary = async () => {
     try {
@@ -384,4 +376,4 @@ const Payroll = () => {
   )
 }
 
-export default Payroll
+export default Payroll;

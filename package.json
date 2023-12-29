@@ -33,10 +33,17 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll --coverage",
     "eject": "react-scripts eject",
     "deploy": "npm run build"
   },
+  "jest": {
+    "coverageThreshold": {
+        "global": {
+            "lines": 80
+        }
+    }
+},
   "eslintConfig": {
     "extends": [
       "react-app",

@@ -17,7 +17,6 @@ import Navbar from '../components/Navbar'
 import { scheduleData } from '../data/dummy'
 
 
-// eslint-disable-next-line react/destructuring-assignment
 const PropertyPane = (props) => <div className="mt-5">{props.children}</div>
 
 const Scheduler = ({ Calender }) => {
@@ -29,7 +28,6 @@ const Scheduler = ({ Calender }) => {
   }
 
   const onDragStart = (arg) => {
-    // eslint-disable-next-line no-param-reassign
     arg.navigation.enable = true
   }
 

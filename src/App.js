@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-import { Sidebar } from './components'
+import { Sidebar, ThemeSettings } from './components'
 import Homepage from './pages/Homepage'
 import Register from './pages/Register'
 import Login from './pages/Login'
@@ -13,7 +13,7 @@ import {
   Employees,
   Departments,
   Contracts,
-  Conversations,
+  Tasks,
   Payroll,
   Payslip,
   Settings,
@@ -26,6 +26,7 @@ const App = () => {
     setCurrentColor,
     setCurrentMode,
     currentMode,
+    activeMenu,
     themeSettings,
     setThemeSettings,
   } = useStateContext()
@@ -60,6 +61,8 @@ const AppContent = ({ currentMode, toggleTheme }) => {
   const isForgotpassword = location.pathname === '/forgotPassword'
   const isRecoverpassword = location.pathname === '/recoverPassword'
   const isVerifypassword = location.pathname === '/verifyPassword'
+
+  const isSmallScreen = window.innerWidth <= 768
 
   return (
     <div className={currentMode === 'dark' ? 'dark' : ''}>
@@ -98,10 +101,11 @@ const AppContent = ({ currentMode, toggleTheme }) => {
               ? 'bg-main-bg dark:bg-main-dark-bg w-full min-h-screen flex-2'
               : 'dark:bg-main-dark-bg bg-main-bg min-h-screen md:ml-72 w-full'
           }
+         
         >
           <div>
             <Routes>
-              {/* HomePage (default route) */}
+              {/* index, register, login, forgotpassword, recoverpassword, verifypassword route */}
               <Route path="/" element={<Homepage />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
@@ -114,7 +118,7 @@ const AppContent = ({ currentMode, toggleTheme }) => {
               <Route path="/departments" element={<Departments />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/contracts" element={<Contracts />} />
-              <Route path="/conversations" element={<Conversations />} />
+              <Route path="/tasks" element={<Tasks />} />
               <Route path="/payroll" element={<Payroll />} />
               <Route path="/payslip" element={<Payslip />} />
               <Route path="/settings" element={<Settings />} />
