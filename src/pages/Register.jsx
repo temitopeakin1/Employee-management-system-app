@@ -146,7 +146,7 @@ const Register = () => {
                 <button
                   type="button"
                   onClick={handlePasswordVisibility}
-                  className="absolute mt-3 ml-16 pl-70"
+                  className="absolute mt-2 ml-16 pl-70"
                   style={{ color: 'black' }}
                 >
                   {passwordVisibility ? (
@@ -180,7 +180,7 @@ const Register = () => {
                 <button
                   type="button"
                   onClick={handleRepeatPasswordVisibility}
-                  className="absolute mt-3 ml-16 pl-70"
+                  className="absolute mt-2 ml-16 pl-70"
                   style={{ color: 'black' }}
                 >
                   {passwordVisibility ? (
