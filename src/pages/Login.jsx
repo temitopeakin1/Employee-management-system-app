@@ -4,8 +4,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 
 const Login = () => {
-  const [passwordVisibility, setPasswordVisibility] = useState(false)
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -37,9 +38,11 @@ const Login = () => {
     console.log('setpassword')
   }
 
+  // handle submit events
   const handleSubmit = (event) => {
     event.preventDefault()
     const newErrors = {}
+    
 
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required'
@@ -50,7 +53,7 @@ const Login = () => {
     if (!formData.password) {
       newErrors.password = 'Password is required'
     }
-
+// route to the dashboard once it validates the input
     if (Object.keys(newErrors).length === 0) {
       navigate('/dashboard')
     }
@@ -115,18 +118,18 @@ const Login = () => {
                   className="border border-gray-300 p-2 w-2/3 rounded-md pr-10"
                 />
 
-                <button
-                  type="button"
+                <btn
+                  type="btn"
                   onClick={handlePasswordVisibility}
-                  className="absolute mt-2 ml-16 pl-70"
-                  style={{ color: 'black' }}
+                  className="absolute ml-72 pl-4 mt-2.5"
+                  style={{ color: '#000000' }}
                 >
                   {passwordVisibility ? (
                     <AiOutlineEye />
                   ) : (
                     <AiOutlineEyeInvisible />
                   )}
-                </button>
+                </btn>
               </div>
               {errors.password && (
                 <div className="text-red-500 text-sm">{errors.password}</div>
