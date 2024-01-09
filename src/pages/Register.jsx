@@ -85,7 +85,7 @@ const Register = () => {
       </div>
 
       <div className="flex-1 bg-white text-black p-10 flex items-center justify-center">
-        <div className="text">
+        <div className="icon">
             <BiArrowBack
               onClick={() => navigate(-1)}
               style={{ cursor: 'pointer', marginRight: '10px' }}
@@ -105,7 +105,7 @@ const Register = () => {
                 placeholder="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="border border-gray-300 p-2 w-2/3 rounded-md"
+                className="border border-gray-300 p-2 w-2/3 rounded-md text-14 font-satoshi"
               />
               {errors.name && (
                 <div className="text-red-500 text-sm">{errors.name}</div>
@@ -122,7 +122,7 @@ const Register = () => {
                 placeholder="Your email address"
                 value={formData.email}
                 onChange={handleChange}
-                className="border border-gray-300 p-2 w-2/3 rounded-md"
+                className="border border-gray-300 p-2 w-2/3 rounded-md text-14 font-satoshi"
               />
               {errors.email && (
                 <div className="text-red-500 text-sm">{errors.email}</div>
@@ -140,7 +140,7 @@ const Register = () => {
                   placeholder="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="border border-gray-300 p-2 w-2/3 rounded-md pr-10"
+                  className="border border-gray-300 p-2 w-2/3 rounded-md text-14 font-satoshi"
                 />
 
                 <btn
@@ -175,7 +175,7 @@ const Register = () => {
                   placeholder="Repeat Password"
                   value={formData.repeatPassword}
                   onChange={handleChange}
-                  className="border border-gray-300 p-2 w-2/3 rounded-md"
+                  className="border border-gray-300 p-2 w-2/3 rounded-md text-14 font-satoshi"
                 />
                 <btn
                   type="btn"
@@ -199,7 +199,7 @@ const Register = () => {
             <div className="mb-4 flex flex-col">
               <button
                 onClick={handleSubmit}
-                className="bg-orange-500 text-white p-2 w-2/3 -mt-2 rounded-md"
+                className="bg-orange-500 text-white p-2 w-2/3 -mt-2 rounded-md text-14 font-satoshi"
               >
                 Register
               </button>

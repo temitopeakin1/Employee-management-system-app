@@ -98,7 +98,7 @@ const Login = () => {
                 id="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="border border-gray-300 p-2 w-2/3 rounded-md"
+                className="border border-gray-300 p-2 w-2/3 rounded-md text-14 font-satoshi"
               />
               {errors.email && (
                 <div className="text-red-500 text-sm">{errors.email}</div>
@@ -113,9 +113,10 @@ const Login = () => {
                   type={passwordVisibility ? 'text' : 'password'}
                   name="password"
                   id="password"
+                  placeholder="Password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="border border-gray-300 p-2 w-2/3 rounded-md pr-10"
+                  className="border border-gray-300 p-2 w-2/3 rounded-md pr-10 text-14 font-satoshi"
                 />
 
                 <btn
