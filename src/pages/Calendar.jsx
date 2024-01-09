@@ -45,7 +45,7 @@ const Scheduler = ({ Calender }) => {
         <ScheduleComponent
           height="650px"
           ref={(schedule) => setScheduleObj(schedule)}
-          selectedDate={new Date(2021, 0, 10)}
+          selectedDate={new Date()}
           eventSettings={{ dataSource: scheduleData }}
           dragStart={onDragStart}
         >
@@ -64,7 +64,7 @@ const Scheduler = ({ Calender }) => {
               <tr style={{ height: '50px' }}>
                 <td style={{ width: '100%' }}>
                   <DatePickerComponent
-                    value={new Date(2021, 0, 10)}
+                    value={new Date()}
                     showClearButton={false}
                     placeholder="Current Date"
                     floatLabelType="Always"
