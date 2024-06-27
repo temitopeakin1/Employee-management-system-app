@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import logo from '../assets/logo.png'
+import logoo from '../assets/logoo.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
+import Privacy from "../components/shared/privacy"
 
 const Login = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
@@ -62,11 +63,11 @@ const Login = () => {
   }
 
   return (
-    <div className="flex h-screen">
+    <div className="flex flex-col md:flex-row h-screen">
       <div className="flex-1 bg-black text-white p-10 flex items-center justify-center">
-        <div className="pl-18">
-          <img src={logo} alt="Logo" style={{ height: '35px' }} />
-          <p className="text-45 font-semibold mt-4 pr-50">
+        <div className="pl-18 md:pl-18">
+          <img src={logoo} alt="Logo" style={{ height: '100px', width: '100px' }} />
+          <p className="text-45 font-semibold mt-2 pr-50">
             <span className="gradient-text">Artificial Intelligence</span>
             <br />
             Solution for your
@@ -74,7 +75,7 @@ const Login = () => {
             Business
           </p>
           <p className="text-sm mt-4">
-            Hampshire Heights creates products that let people do things
+            Dynasty tech creates products that let people do things
             differently
           </p>
         </div>
@@ -85,7 +86,7 @@ const Login = () => {
             Let's Login to your
           </h2>
           <h2 className="text-2xl mb-4 font-satoshi font-semibold ml-.5 -mt-4">
-            Hampshire Heights account
+            Dynasty Tech account
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
@@ -176,16 +177,7 @@ const Login = () => {
               </p>
             </div>
           </form>
-          <p className="text-sm pb-4 mt-8 mr-12 font-copy">
-            &copy;Copyright 2023 All rights reserved,
-            <Link to="#" className="text-orange-500 text-sm font-semibold">
-              Term & Condition{' '}
-            </Link>{' '}
-            |{' '}
-            <Link to="#" className="text-orange-500 text-sm font-semibold">
-              Privacy & Policy
-            </Link>
-          </p>
+         <Privacy />
         </div>
       </div>
     </div>

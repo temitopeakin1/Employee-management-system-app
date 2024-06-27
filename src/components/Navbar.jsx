@@ -40,8 +40,25 @@ const Navbar = ({
     setScreenSize,
     screenSize,
   } = useStateContext()
+  const [isSticky, setIsSticky] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
 
-  const [showNotification, setShowNotification] = useState(false)
+  const handleScroll = () => {
+    const offset = window.scrollY;
+    setIsSticky(offset > 0);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const navbarClasses = `bg-white w-full flex justify-between p-1 px-4 py-4md:ml-2 md:mr-6 relative ${
+    isSticky ? 'sticky-navbar sticky-navbar-transition' : ''
+  }`;
 
   const toggleNotification = () => {
     // Toggle the visibility of the notification
@@ -73,7 +90,7 @@ const Navbar = ({
   }, [screenSize, setActiveMenu])
 
   return (
-    <div className="bg-white w-full flex justify-between p-1 px-4 py-4md:ml-2 md:mr-6 relative">
+    <div className={navbarClasses}>
       <div className="flex">
         <p
           style={{
@@ -86,7 +103,7 @@ const Navbar = ({
           {pageTitle}
         </p>
       </div>
-      {/* conditional rendering for breadcrumbs button*/}
+      {/* conditional rendering for breadcrumbs button on the contract*/}
       <div className="breadcrumb-navigation mt-12 -ml-52 px-1 py-1">
         {showBreadcrumbs &&
           breadcrumbs.map((breadcrumb, index) => (

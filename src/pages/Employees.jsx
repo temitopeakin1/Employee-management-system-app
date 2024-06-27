@@ -838,7 +838,7 @@ const Employees = () => {
             </h1>
             <p className="text-12 text-center -mt-2">
               You have succesfully added {addedFirstName} {addedLastName} as an{' '}
-              <b>Hampshire Heights Employee</b>
+              <b>Dynasty Tech Employee</b>
             </p>
             <div className="flex space-x-4 mt-6 justify-center">
               <button className="btn-primary text-12">

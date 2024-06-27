@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import logo from '../assets/logo.svg'
+import logoo from '../assets/logoo.png'
 import { useNavigate } from 'react-router-dom'
 
 const ForgotPasswordModal = ({ isOpen, onCancel }) => {
@@ -41,9 +41,9 @@ const ForgotPasswordModal = ({ isOpen, onCancel }) => {
         <div class="bg-white p-4 w-500 h-512 rounded-2xl shadow-lg flex flex-col px-8">
           <div className="flex items-center">
             <img
-              src={logo}
+              src={logoo}
               alt="Logo"
-              style={{ height: '50px', marginTop: '50px' }}
+              style={{ height: '100px', width: '100px', marginTop: '50px' }}
             />
             <button
               type="button"

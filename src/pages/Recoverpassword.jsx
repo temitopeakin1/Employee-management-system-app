@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import logo from '../assets/logo.png'
+import logoo from '../assets/logoo.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import RecoverPasswordModal from '../components/RecoverPasswordModal'
@@ -67,8 +67,8 @@ const Recoverpassword = () => {
         }`}
       >
         <div className="pl-18">
-          <img src={logo} alt="Logo" style={{ height: '35px' }} />
-          <p className="text-45 font-semibold mt-4 pr-50">
+          <img src={logoo} alt="Logo" style={{ height: '100px', width: '100px' }} />
+          <p className="text-45 font-semibold mt-2 pr-50">
             <span className="gradient-text">Artificial Intelligence</span>
             <br />
             Solution for your
@@ -76,7 +76,7 @@ const Recoverpassword = () => {
             Business
           </p>
           <p className="text-sm mt-4">
-            Hampshire Heights creates products that let people do things
+            Dynasty Tech creates products that let people do things
             differently
           </p>
         </div>
@@ -88,7 +88,7 @@ const Recoverpassword = () => {
             Let's Login to your
           </h2>
           <h2 className="text-2xl mb-4 font-satoshi font-semibold ml-.5 -mt-4">
-            Hampshire Heights account
+            Dynasty Tech account
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">

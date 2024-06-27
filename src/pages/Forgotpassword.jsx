@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import logo from '../assets/logo.png'
+import logoo from '../assets/logoo.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import ForgotPasswordModal from '../components/ForgotPasswordModal'
+import Privacy from "../components/shared/privacy"
 
 const Forgotpassword = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false)
@@ -71,7 +72,7 @@ const Forgotpassword = () => {
         }`}
       >
         <div className="pl-18">
-          <img src={logo} alt="Logo" style={{ height: '35px' }} />
+          <img src={logoo} alt="Logo" style={{ height: '100px', width: '100px' }} />
           <p className="text-45 font-semibold mt-4 pr-50">
             <span className="gradient-text">Artificial Intelligence</span>
             <br />
@@ -80,7 +81,7 @@ const Forgotpassword = () => {
             Business
           </p>
           <p className="text-sm mt-4">
-            Hampshire Heights creates products that let people do things
+            Dynasty Tech creates products that let people do things
             differently
           </p>
         </div>
@@ -92,7 +93,7 @@ const Forgotpassword = () => {
             Let's Login to your
           </h2>
           <h2 className="text-2xl mb-4 font-satoshi font-semibold ml-.5 -mt-4">
-            Hampshire Heights account
+            Dynasty Tech account
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
@@ -182,16 +183,7 @@ const Forgotpassword = () => {
               </p>
             </div>
           </form>
-          <p className="text-sm pb-4 mt-8 mr-12 font-copy">
-            &copy;Copyright 2023 All rights reserved,
-            <Link to="#" className="text-orange-500 text-sm font-semibold">
-              Term & Condition{' '}
-            </Link>{' '}
-            |{' '}
-            <Link to="#" className="text-orange-500 text-sm font-semibold">
-              Privacy & Policy
-            </Link>
-          </p>
+         <Privacy />
         </div>
       </div>
     </div>

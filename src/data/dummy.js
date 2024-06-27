@@ -145,13 +145,13 @@ export const chatData = [
   {
     image: avatar4,
     message: 'dummy message!',
-    desc: 'hampshire notifications',
+    desc: 'Dynasty Tech notifications',
     time: '9:08 AM',
   },
   {
     image: avatar4,
     message: 'dummy message!',
-    desc: 'hampshire notifications',
+    desc: 'Dynasty Tech notifications',
     time: '9:08 AM',
   },
 ]

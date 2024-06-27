@@ -239,7 +239,7 @@ const Dashboard = ({ Dashboard }) => {
             <Greeting />
           </div>
           <p className="font-semibold text-title text-gray-500 text-14 mt-2">
-            Here's what is going on at Hampshire Heights
+            Here's what is going on at Dynasty Tech
           </p>
         </div>
       </div>

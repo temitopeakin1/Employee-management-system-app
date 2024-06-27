@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import logo from '../assets/logo.png'
+import logoo from '../assets/logoo.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { BiArrowBack } from 'react-icons/bi'
+import Privacy from "../components/shared/privacy"
 
 const Register = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false)
@@ -69,8 +70,8 @@ const Register = () => {
     <div className="flex h-screen">
       <div className="flex-1 bg-black text-white p-10 flex items-center justify-center">
         <div className="pl-18">
-          <img src={logo} alt="Logo" style={{ height: '35px' }} />
-          <p className="text-45 font-semibold mt-4 pr-50">
+          <img src={logoo} alt="Logo" style={{ height: '100px', width: '100px' }} />
+          <p className="text-45 font-semibold mt-2 pr-50">
             <span className="gradient-text">Artificial Intelligence</span>
             <br />
             Solution for your
@@ -78,7 +79,7 @@ const Register = () => {
             Business
           </p>
           <p className="text-sm mt-4">
-            Hampshire Heights creates products that let people do things
+            Dynasty Tech creates products that let people do things
             differently
           </p>
         </div>
@@ -212,16 +213,7 @@ const Register = () => {
                   Login here
                 </Link>
               </p>
-              <p className="text-sm mr-12 mt-8 font-copy">
-                &copy;Copyright 2023 All rights reserved,
-                <Link to="#" className="text-orange-500 text-sm font-semibold">
-                  Term & Condition{' '}
-                </Link>{' '}
-                |{' '}
-                <Link to="#" className="text-orange-500 text-sm font-semibold">
-                  Privacy & Policy
-                </Link>
-              </p>
+             <Privacy />
             </div>
           </form>
         </div>
