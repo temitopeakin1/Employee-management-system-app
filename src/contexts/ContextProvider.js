@@ -9,10 +9,11 @@ const initialState = {
   employeesData: [],
 };
 
+// children to take many context value
 export const ContextProvider = ({ children }) => {
   const [screenSize, setScreenSize] = useState(undefined);
   const [hoverColor, setHoverColor] = useState('orange')
-  const [currentColor, setCurrentColor] = useState("#0000FF");
+  const [currentColor, setCurrentColor] = useState("#000000");
   const [currentMode, setCurrentMode] = useState("light");
   const [themeSettings, setThemeSettings] = useState(false);
   const [activeMenu, setActiveMenu] = useState(true);
@@ -20,9 +21,9 @@ export const ContextProvider = ({ children }) => {
   const [employeesData, setEmployeesData] = useState([]);
 
 
-  const setMode = (e) => {  
-    setCurrentMode(e.target.value);
-    localStorage.setItem("themeMode", e.target.value);
+  const setMode = (mode) => {  
+    setCurrentMode(mode);
+    localStorage.setItem("themeMode", mode);
   };
 
   const setColor = (color) => {

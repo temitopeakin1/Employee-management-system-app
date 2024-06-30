@@ -358,10 +358,10 @@ input {
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(255, 165, 0);
+  background-color: #e37715;
   border-radius: 40px;
 }
 ::-webkit-scrollbar-track {

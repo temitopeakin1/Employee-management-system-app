@@ -23,9 +23,9 @@ const Sidebar = () => {
     <div className="ml-4 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto">
       {activeMenu && (
         <>
-          <div className="flex items-center justify-center">
+          <div className="flex flex-row">
             <Link to="/" className="mt-3">
-              <img src={logoo} alt="Logo" style={{ height: '150px', width: '150px' }} />
+              <img src={logoo} alt="Logo" style={{ height: '120px', width: '120px' }} />
             </Link>
           </div>
           <div className="mt-[-20px] ">
